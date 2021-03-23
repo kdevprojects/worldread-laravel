@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
+import { UserService } from './services/user.service';
 import { fadeAnimation } from './animations';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [fadeAnimation] // register the animation
+  animations: [fadeAnimation], // register the animation
 })
 export class AppComponent {
-  constructor() {}
-  
+  constructor(private userService: UserService) {}
+  ngOnInit(): void {
+    console.log(this.userService.getUser());
+  }
   onActivate(event: Event) {
     window.scrollTo(0, 0);
   }

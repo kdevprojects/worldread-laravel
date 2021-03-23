@@ -15,6 +15,5 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [UserController::class, 'index']);
-
 Route::get('/{any}', [AppController::class, 'index'])->where('any', '.*');
+Route::post('/user', [UserController::class, 'register']);

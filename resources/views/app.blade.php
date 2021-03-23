@@ -36,6 +36,8 @@
     @endif
     {{-- This'll load the development assets when in dev mode --}}
     @else
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/build/runtime.js" defer></script>
     <script src="/build/polyfills.js" defer></script>
     <script src="/build/styles.js" defer></script>

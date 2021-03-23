@@ -1,0 +1,161 @@
+<div class="container-fluid h-100">
+  <div class="row no-gutters h-100">
+    <div class="col-lg-6">
+      <div class="signup-bg"></div>
+    </div>
+    <div class="col-lg-6 h-100">
+      <section class="page-section h-100 bg-white">
+        <header class="section-header">
+          <h1 class="section-title text-center">Sign Up</h1>
+        </header>
+        <main>
+          <div class="row">
+            <div class="col-10 col-md-6 mx-auto">
+              <p *ngIf="showError" class="alert alert-danger">
+                An error occurred
+              </p>
+              <form [formGroup]="registerForm" (submit)="onSubmit()">
+                <div class="form-group">
+                  <label>Username:</label>
+                  <input
+                    name="username"
+                    class="form-control"
+                    formControlName="username"
+                    placeholder="Username"
+                  />
+                  <div
+                    *ngIf="
+                      username.invalid && (username.dirty || username.touched)
+                    "
+                    class="text-danger my-2"
+                  >
+                    <div *ngIf="username.errors.required">
+                      Username is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>First name:</label>
+                  <input
+                    name="username"
+                    class="form-control"
+                    formControlName="first_name"
+                    placeholder="First name"
+                  />
+                  <div
+                    *ngIf="
+                      first_name.invalid &&
+                      (first_name.dirty || first_name.touched)
+                    "
+                    class="text-danger my-2"
+                  >
+                    <div *ngIf="first_name.errors.required">
+                      First name is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Last name:</label>
+                  <input
+                    name="last_name"
+                    class="form-control"
+                    formControlName="last_name"
+                    placeholder="Last name"
+                  />
+                  <div
+                    *ngIf="
+                      last_name.invalid &&
+                      (last_name.dirty || last_name.touched)
+                    "
+                    class="text-danger my-2"
+                  >
+                    <div *ngIf="last_name.errors.required">
+                      Last name is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Email:</label>
+                  <input
+                    name="email"
+                    class="form-control"
+                    formControlName="email"
+                    placeholder="Email"
+                  />
+                  <div
+                    *ngIf="email.invalid && (email.dirty || email.touched)"
+                    class="text-danger my-2"
+                  >
+                    <div *ngIf="email.errors.email">Email is incorrect.</div>
+                    <div *ngIf="email.errors.required">Email is required.</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Password:</label>
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    formControlName="password"
+                    placeholder="password"
+                  />
+                  <div
+                    *ngIf="
+                      password.invalid && (password.dirty || password.touched)
+                    "
+                    class="text-danger my-2"
+                  >
+                    <div *ngIf="password.errors.required">
+                      Password is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Confirm Password:</label>
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    class="form-control"
+                    formControlName="password_confirmation"
+                    placeholder="Password confirmation"
+                  />
+                  <div
+                    *ngIf="
+                      password_confirmation.invalid &&
+                      (password_confirmation.dirty ||
+                        password_confirmation.touched)
+                    "
+                    class="text-danger my-2"
+                  >
+                    <div *ngIf="password_confirmation.errors.required">
+                      Password confirmation is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center pt-2">
+                  <button
+                    class="btn btn-primary"
+                    [disabled]="!registerForm.valid"
+                  >
+                    Sign Up
+                  </button>
+                  <p class="mt-5">
+                    Back to
+                    <a
+                      href="#"
+                      routerLink="/home"
+                      routerLinkActive="active"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                      >Homepage</a
+                    >
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </main>
+      </section>
+    </div>
+  </div>
+</div>

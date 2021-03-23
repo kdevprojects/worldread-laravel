@@ -4,6 +4,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { ErrorHandlerService } from '../services/error-handler.service';
 import { Repository } from '../services/repository.service';
 import { Story } from '../models/story.model';
+import { UserService } from '../services/user.service';
 import { fadeAnimation } from '../animations';
 
 @Component({
@@ -17,7 +18,8 @@ export class AdminComponent {
   constructor(
     private repo: Repository,
     public authService: AuthenticationService,
-    errorService: ErrorHandlerService
+    errorService: ErrorHandlerService,
+    public userService: UserService
   ) {
     errorService.errors.subscribe((error) => {
       this.lastError = error;
