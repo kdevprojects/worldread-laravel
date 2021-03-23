@@ -1,0 +1,24 @@
+import { Component, OnInit } from '@angular/core';
+
+import { Repository } from '../../services/repository.service';
+import { Story } from '../../models/story.model';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-story-editor',
+  templateUrl: './story-editor.component.html',
+  styleUrls: ['./story-editor.component.scss'],
+})
+export class StoryEditorComponent implements OnInit {
+  newStory: Story = new Story();
+  constructor(private repo: Repository, private router: Router) {}
+  ngOnInit(): void {
+  }
+  get story(): Story {
+    return this.repo.story;
+  }
+  saveStory() {
+    this.repo.createStory(this.newStory);
+    this.router.navigateByUrl('/members/overview');
+  }
+}

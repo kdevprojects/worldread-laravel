@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <section class="page-section">
+    <main>
+      <article class="clearfix pt-3 pb-5">
+        <header class="article-header">
+          <h2 class="article-title">
+            <a
+              href="#"
+              [routerLink]="['/stories', story?.storyId]"
+              rel="bookmark"
+              >{{ story?.title }}</a
+            >
+          </h2>
+          <div class="article-meta text-muted">
+            <div class="row">
+              <div class="col-12 col-md-8">
+                <span class="screen-reader-text">Published on </span>
+                <time class="article-date published">{{
+                  story?.published | date: "mediumDate"
+                }}</time>
+                <span class="screen-reader-text">, by </span>
+                <a href="#">{{ story?.author?.alias }}</a>
+              </div>
+              <div class="col-12 col-md-4">
+                <div class="text-body text-md-right mt-3 mt-md-0">
+                  {{ story?.comments?.length }}
+                  <i-feather name="message-square" class="mr-3"></i-feather>
+                  {{ story?.likes }}
+                  <i-feather name="heart"></i-feather>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="article-content">
+          <div class="row">
+            <div class="col-12">
+              <img
+                loading="lazy"
+                class="article-image img-fluid"
+                alt="{{ story?.title }}"
+                src="https://picsum.photos/435/288?random={{ story?.storyId }}"
+                width="435"
+                height="288"
+              />
+            </div>
+            <div class="col-12">
+              <div class="article-content-body">{{ story?.body }}</div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+  </section>
+</div>

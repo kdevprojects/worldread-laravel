@@ -1,0 +1,90 @@
+<div class="container-fluid h-100">
+  <div class="row no-gutters h-100">
+    <div class="col-lg-6">
+      <div class="signup-bg"></div>
+    </div>
+    <div class="col-lg-6 h-100">
+      <section class="page-section h-100 bg-white">
+        <header class="section-header">
+          <h1 class="section-title text-center">Sign Up</h1>
+        </header>
+        <main>
+          <div class="row">
+            <div class="col-10 col-md-6 mx-auto">
+              <p *ngIf="showError" class="alert alert-danger">
+                Invalid username or password
+              </p>
+              <form novalidate #authForm="ngForm">
+                <div class="form-group">
+                  <label>Username:</label>
+                  <input #name="ngModel"
+                         name="name"
+                         class="form-control"
+                         [(ngModel)]="authService.name"
+                         required />
+                  <div *ngIf="name.invalid" class="text-danger">
+                    Please enter your username
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Email:</label>
+                  <input #email="ngModel"
+                         name="email"
+                         class="form-control"
+                         [(ngModel)]="authService.email"
+                         required />
+                  <div *ngIf="email.invalid" class="text-danger">
+                    Please enter your email
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Password:</label>
+                  <input type="password"
+                         #password="ngModel"
+                         name="password"
+                         class="form-control"
+                         [(ngModel)]="authService.password"
+                         required />
+                  <div *ngIf="password.invalid" class="text-danger">
+                    Please enter your password
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Confirm Password:</label>
+                  <input type="password"
+                         #confirmPassword="ngModel"
+                         name="confirmPassword"
+                         class="form-control"
+                         [(ngModel)]="authService.confirmPassword"
+                         required />
+                  <div *ngIf="confirmPassword.invalid" class="text-danger">
+                    Please re-enter your password
+                  </div>
+                </div>
+                <div class="text-center pt-2">
+                  <button class="btn btn-primary"
+                          [disabled]="authForm.invalid"
+                          (click)="register()">
+                    Sign Up
+                  </button>
+                  <p class="mt-5">
+                    Back to
+                    <a
+                      href="#"
+                      routerLink="/home"
+                      routerLinkActive="active"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                      >Homepage</a
+                    >
+                  </p>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </main>
+      </section>
+    </div>
+  </div>
+</div>
+

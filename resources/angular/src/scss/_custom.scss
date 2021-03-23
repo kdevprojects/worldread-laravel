@@ -1,0 +1,25 @@
+router-outlet ~ * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+html,body {
+  height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-transform: initial;
+}
+
+.page-section {
+  padding: 5rem 0;
+}
+
+.section-header {
+  margin: 1rem 0 3rem;
+}
+
+.navbar {
+    text-transform: initial;
+}

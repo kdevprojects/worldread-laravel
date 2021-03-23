@@ -1,0 +1,4 @@
+<div [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
+  <img [src]="'/assets/img/signup-bg.jpg'" hidden>
+  <router-outlet #o="outlet" (activate)="onActivate($event)"></router-outlet>
+</div>
