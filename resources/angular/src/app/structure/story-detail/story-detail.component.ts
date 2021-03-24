@@ -1,21 +1,25 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Story } from '../../models/story.model';
+
 import { Repository } from '../../services/repository.service';
-import { Router, ActivatedRoute } from "@angular/router";
+import { Story } from '../../models/story.model';
 
 @Component({
   selector: 'app-story-detail',
   templateUrl: './story-detail.component.html',
-  styleUrls: ['./story-detail.component.scss']
+  styleUrls: ['./story-detail.component.scss'],
 })
 export class StoryDetailComponent implements OnInit {
-
-  constructor(private repo: Repository, router: Router, activeRoute: ActivatedRoute) {
-    let id = Number.parseInt(activeRoute.snapshot.params["id"]);
-    if (id) {
-      this.repo.getStory(id);
+  constructor(
+    private repo: Repository,
+    router: Router,
+    activeRoute: ActivatedRoute
+  ) {
+    let param = activeRoute.snapshot.params['param'];
+    if (param) {
+      this.repo.getStory(param);
     } else {
-      router.navigateByUrl("/");
+      router.navigateByUrl('/');
     }
   }
 
@@ -23,7 +27,5 @@ export class StoryDetailComponent implements OnInit {
     return this.repo.story;
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -24,9 +24,9 @@ export class Repository {
     this.getStories();
   }
 
-  getStory(id: number) {
+  getStory(param: any) {
     this.http
-      .get<Story>(`${storiesUrl}/${id}`)
+      .get<Story>(`${storiesUrl}/${param}`)
       .subscribe((s) => (this.story = s));
   }
 

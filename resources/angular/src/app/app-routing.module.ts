@@ -11,7 +11,7 @@ const routes: Routes = [
       import("./admin/admin.module").then(module => module.AdminModule),
   },
   { path: "stories", component: StoriesListComponent },
-  { path: "stories/:id", component: StoryDetailComponent },
+  { path: "stories/:param", component: StoryDetailComponent },
   { path: "**", redirectTo: 'stories' },
 ];
 

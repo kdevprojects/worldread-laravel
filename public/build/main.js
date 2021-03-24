@@ -141,7 +141,7 @@ function StoriesListComponent_article_7_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const story_r1 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](12, _c0, story_r1 == null ? null : story_r1.id));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](12, _c0, story_r1 == null ? null : story_r1.slug));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](story_r1 == null ? null : story_r1.title);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
@@ -1857,19 +1857,18 @@ const _c0 = function (a1) { return ["/stories", a1]; };
 class StoryDetailComponent {
     constructor(repo, router, activeRoute) {
         this.repo = repo;
-        let id = Number.parseInt(activeRoute.snapshot.params["id"]);
-        if (id) {
-            this.repo.getStory(id);
+        let param = activeRoute.snapshot.params['param'];
+        if (param) {
+            this.repo.getStory(param);
         }
         else {
-            router.navigateByUrl("/");
+            router.navigateByUrl('/');
         }
     }
     get story() {
         return this.repo.story;
     }
-    ngOnInit() {
-    }
+    ngOnInit() { }
 }
 StoryDetailComponent.ɵfac = function StoryDetailComponent_Factory(t) { return new (t || StoryDetailComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_repository_service__WEBPACK_IMPORTED_MODULE_1__["Repository"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"])); };
 StoryDetailComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: StoryDetailComponent, selectors: [["app-story-detail"]], decls: 34, vars: 14, consts: [[1, "container"], [1, "page-section"], [1, "clearfix", "pt-3", "pb-5"], [1, "article-header"], [1, "article-title"], ["href", "#", "rel", "bookmark", 3, "routerLink"], [1, "article-meta", "text-muted"], [1, "row"], [1, "col-12", "col-md-8"], [1, "screen-reader-text"], [1, "article-date", "published"], ["href", "#"], [1, "col-12", "col-md-4"], [1, "text-body", "text-md-right", "mt-3", "mt-md-0"], ["name", "message-square", 1, "mr-3"], ["name", "heart"], [1, "article-content"], [1, "col-12"], ["loading", "lazy", "width", "435", "height", "288", 1, "article-image", "img-fluid", 3, "alt", "src"], [1, "article-content-body"]], template: function StoryDetailComponent_Template(rf, ctx) { if (rf & 1) {
@@ -1930,7 +1929,7 @@ StoryDetailComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](12, _c0, ctx.story == null ? null : ctx.story.id));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](12, _c0, ctx.story == null ? null : ctx.story.slug));
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.story == null ? null : ctx.story.title);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
@@ -2066,7 +2065,7 @@ const routes = [
         loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./admin/admin.module */ "jkDv")).then(module => module.AdminModule),
     },
     { path: "stories", component: _structure_stories_list_stories_list_component__WEBPACK_IMPORTED_MODULE_1__["StoriesListComponent"] },
-    { path: "stories/:id", component: _structure_story_detail_story_detail_component__WEBPACK_IMPORTED_MODULE_2__["StoryDetailComponent"] },
+    { path: "stories/:param", component: _structure_story_detail_story_detail_component__WEBPACK_IMPORTED_MODULE_2__["StoryDetailComponent"] },
     { path: "**", redirectTo: 'stories' },
 ];
 class AppRoutingModule {
@@ -2110,9 +2109,9 @@ class Repository {
         this.filter.related = false;
         this.getStories();
     }
-    getStory(id) {
+    getStory(param) {
         this.http
-            .get(`${storiesUrl}/${id}`)
+            .get(`${storiesUrl}/${param}`)
             .subscribe((s) => (this.story = s));
     }
     getStories() {

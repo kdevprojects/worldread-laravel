@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StoryController;
-use App\Models\Story;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +26,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('stories', [StoryController::class, 'create']);
 });
 Route::get('stories', [StoryController::class, 'index']);
+Route::get('stories/{param}', [StoryController::class, 'show']);
 
