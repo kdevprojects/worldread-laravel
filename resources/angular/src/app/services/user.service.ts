@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 })
 export class UserService {
   private loggedChanged = new Subject<boolean>();
-  private user: any = null;
+  user: any = null;
 
   constructor(private http: HttpClient) {}
 
