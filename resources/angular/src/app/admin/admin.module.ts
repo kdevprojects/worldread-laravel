@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
-    // canActivateChild: [AuthenticationGuard],
+    canActivateChild: [AuthenticationGuard],
     children: [
       { path: 'overview', component: OverviewComponent },
       { path: 'create', component: StoryEditorComponent },

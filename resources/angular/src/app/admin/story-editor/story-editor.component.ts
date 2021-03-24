@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Repository } from '../../services/repository.service';
 import { Story } from '../../models/story.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-story-editor',
@@ -11,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class StoryEditorComponent implements OnInit {
   newStory: Story = new Story();
-  constructor(private repo: Repository, private router: Router) {}
+  constructor(private repo: Repository) {}
   ngOnInit(): void {
   }
   get story(): Story {
@@ -19,6 +18,6 @@ export class StoryEditorComponent implements OnInit {
   }
   saveStory() {
     this.repo.createStory(this.newStory);
-    this.router.navigateByUrl('/members/overview');
+    this.newStory = new Story();
   }
 }

@@ -10,7 +10,7 @@
           <h2 class="article-title">
             <a
               href="#"
-              [routerLink]="['/stories', story?.storyId]"
+              [routerLink]="['/stories', story?.id]"
               rel="bookmark"
               >{{ story?.title }}</a
             >
@@ -20,10 +20,10 @@
               <div class="col-12 col-md-8">
                 <span class="screen-reader-text">Published on </span>
                 <time
-                  class="article-date published">{{ story?.published | date: "mediumDate" }}</time
+                  class="article-date published">{{ story?.created_at | date: "mediumDate" }}</time
                 >
                 <span class="screen-reader-text">, by </span>
-                <a href="#">{{ story?.author?.alias }}</a>
+                <a href="#">{{ story?.author?.username }}</a>
               </div>
               <div class="col-12 col-md-4">
                 <div class="text-body text-md-right mt-3 mt-md-0">
@@ -43,7 +43,7 @@
                 loading="lazy"
                 class="article-image img-fluid"
                 alt="{{ story?.title }}"
-                src="https://picsum.photos/435/288?random={{ story?.storyId }}"
+                src="https://picsum.photos/435/288?random={{ story?.id }}"
                 width="435"
                 height="288"
               />

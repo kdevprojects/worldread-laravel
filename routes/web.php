@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +15,3 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/{any}', [AppController::class, 'index'])->where('any', '.*');
-Route::post('/user', [UserController::class, 'register']);

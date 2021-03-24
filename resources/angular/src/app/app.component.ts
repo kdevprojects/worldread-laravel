@@ -10,7 +10,7 @@ import { fadeAnimation } from './animations';
 export class AppComponent {
   constructor(private userService: UserService) {}
   ngOnInit(): void {
-    console.log(this.userService.getUser());
+    console.log(this.userService.isUserLoggedIn());
   }
   onActivate(event: Event) {
     window.scrollTo(0, 0);

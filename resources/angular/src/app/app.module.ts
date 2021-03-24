@@ -1,12 +1,13 @@
-import { AdminModule } from "./admin/admin.module";
+import { AdminModule } from './admin/admin.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandlerService } from "./services/error-handler.service";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { IconsModule } from "./icons/icons.module";
-import { ModelModule } from "./models/model.module";
+import { ErrorHandlerService } from './services/error-handler.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { IconsModule } from './icons/icons.module';
+import { ModelModule } from './models/model.module';
 import { NavbarComponent } from './structure/navbar/navbar.component';
 import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
@@ -17,7 +18,7 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
     AppComponent,
     StoriesListComponent,
     StoryDetailComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,11 +27,21 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
     IconsModule,
     AdminModule,
     PagesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [ErrorHandlerService,
-    { provide: HTTP_INTERCEPTORS,
-    useExisting: ErrorHandlerService, multi: true}],
-  bootstrap: [AppComponent]
+  providers: [
+    ErrorHandlerService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useExisting: ErrorHandlerService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useExisting: AuthInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

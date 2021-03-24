@@ -2,7 +2,9 @@ import { Filter } from '../helper';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { Story } from '../models/story.model';
+import { UserService } from './user.service';
 
 const storiesUrl = '/api/stories';
 
@@ -12,7 +14,11 @@ export class Repository {
   stories: Story[];
   filter: Filter = new Filter();
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+    private router: Router
+  ) {
     this.filter.category = '';
     this.filter.related = false;
     this.getStories();
@@ -35,12 +41,17 @@ export class Repository {
     this.http.get<Story[]>(url).subscribe((s) => (this.stories = s));
   }
 
-  register(name: string, email: string, password: string, confirmPassword: string): Observable<boolean> {
+  register(
+    name: string,
+    email: string,
+    password: string,
+    confirmPassword: string
+  ): Observable<boolean> {
     return this.http.post<boolean>('/api/account/register', {
-      userName: name,
+      username: name,
       email: email,
       password: password,
-      confirmPassword: confirmPassword
+      confirmPassword: confirmPassword,
     });
   }
 
@@ -61,15 +72,18 @@ export class Repository {
       summary: s.summary,
       body: s.body,
     };
-    this.http.post<number>(storiesUrl, data)
-      .subscribe(id => {
-        s.storyId = id;
-        this.stories.push(s);
-      });
+    this.http.post<number>(storiesUrl, data).subscribe((id) => {
+      s.id = id;
+      s.author = {
+        id: this.userService.getCurrentUser().id,
+        username: this.userService.getCurrentUser().username,
+      };
+      this.stories.push(s);
+      this.router.navigateByUrl('/members/overview');
+    });
   }
 
   deleteStory(id: number) {
-    this.http.delete(`${storiesUrl}/${id}`)
-      .subscribe(() => this.getStories());
+    this.http.delete(`${storiesUrl}/${id}`).subscribe(() => this.getStories());
   }
 }

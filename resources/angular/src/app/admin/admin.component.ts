@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthenticationService } from '../services/authentication.service';
 import { ErrorHandlerService } from '../services/error-handler.service';
-import { Repository } from '../services/repository.service';
-import { Story } from '../models/story.model';
 import { UserService } from '../services/user.service';
 import { fadeAnimation } from '../animations';
 
@@ -15,15 +12,18 @@ import { fadeAnimation } from '../animations';
 })
 export class AdminComponent {
   private lastError: string[];
+  public user: any;
   constructor(
-    private repo: Repository,
-    public authService: AuthenticationService,
     errorService: ErrorHandlerService,
     public userService: UserService
   ) {
     errorService.errors.subscribe((error) => {
       this.lastError = error;
     });
+  }
+
+  ngOnInit(): void {
+    this.userService.currentUserSubject.subscribe(event => {console.log(event);this.user = event;});
   }
 
   get error(): string[] {
