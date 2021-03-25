@@ -1,3 +1,4 @@
+import { Comment } from '../models/comment.model';
 import { Filter } from '../helper';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -7,11 +8,13 @@ import { Story } from '../models/story.model';
 import { UserService } from './user.service';
 
 const storiesUrl = '/api/stories';
+const commentsUrl = '/api/comments';
 
 @Injectable()
 export class Repository {
   story: Story;
   stories: Story[];
+  comments: Comment[];
   filter: Filter = new Filter();
 
   constructor(
@@ -80,6 +83,21 @@ export class Repository {
       };
       this.stories.push(s);
       this.router.navigateByUrl('/members/overview');
+    });
+  }
+
+  createComment(c: Comment) {
+    let data = {
+      on_story: c.on_story,
+      body: c.body,
+    };
+    this.http.post<number>(commentsUrl, data).subscribe((id) => {
+      c.id = id;
+      c.from_user = {
+        id: this.userService.getCurrentUser().id,
+        username: this.userService.getCurrentUser().username,
+      };
+      this.comments.push(c);
     });
   }
 

@@ -51,6 +51,9 @@
           </div>
         </div>
       </article>
+      <div *ngIf="story" >
+        <app-comment-editor [story]="story"></app-comment-editor>
+      </div>
     </main>
   </section>
 </div>

@@ -57,7 +57,7 @@ class User extends Authenticatable
     public function can_story()
     {
         $role = $this->role;
-        if ($role == 'author' || $role == 'admin') {
+        if ($role == 'member' || $role == 'admin') {
             return true;
         }
         return false;
