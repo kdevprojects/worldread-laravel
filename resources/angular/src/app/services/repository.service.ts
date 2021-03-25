@@ -30,7 +30,10 @@ export class Repository {
   getStory(param: any) {
     this.http
       .get<Story>(`${storiesUrl}/${param}`)
-      .subscribe((s) => (this.story = s));
+      .subscribe((s) => {
+        this.story = s;
+        this.getComments(s);
+      });
   }
 
   getStories() {
@@ -86,14 +89,20 @@ export class Repository {
     });
   }
 
-  createComment(c: Comment) {
+  getComments(s: Story) {
+    let url = `${storiesUrl}/${s.id}/comments`;
+    this.http.get<Comment[]>(url).subscribe((s) => (this.comments = s));
+  }
+
+  createComment(c: any) {
     let data = {
       on_story: c.on_story,
       body: c.body,
     };
     this.http.post<number>(commentsUrl, data).subscribe((id) => {
       c.id = id;
-      c.from_user = {
+      c.body= c.body,
+      c.author = {
         id: this.userService.getCurrentUser().id,
         username: this.userService.getCurrentUser().username,
       };

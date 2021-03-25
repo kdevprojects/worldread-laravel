@@ -27,8 +27,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 Route::get('stories', [StoryController::class, 'index']);
 Route::get('stories/{param}', [StoryController::class, 'show']);
+Route::get('stories/{id}/comments', [StoryController::class, 'comments']);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('comments', [CommentController::class, 'store']);
 });
-

@@ -2,7 +2,7 @@
 <div class="container">
   <section class="page-section">
     <main>
-      <article class="clearfix pt-3 pb-5">
+      <article class="clearfix pt-3">
         <header class="article-header">
           <h2 class="article-title">
             <a
@@ -51,9 +51,41 @@
           </div>
         </div>
       </article>
-      <div *ngIf="story" >
+
+      <hr />
+      <div *ngIf="story && userService.isUserLoggedIn()">
         <app-comment-editor [story]="story"></app-comment-editor>
+        <hr />
       </div>
+      <div *ngIf="comments.length > 0; else noComments">
+        <h3 class="mb-3">Comments({{ comments.length }})</h3>
+        <article
+          *ngFor="let comment of comments"
+          class="clearfix bg-gray p-3 mb-3"
+        >
+          <header class="comment-header">
+            <div class="comment-meta text-muted">
+              <div class="row">
+                <div class="col-12 col-md-12">
+                  <a href="#">{{ comment?.author?.username }}</a
+                  ><br />
+                  <time class="comment-date published">{{
+                    comment?.created_at | date: "MMM d, y, h:mm a" || "just now"
+                  }}</time>
+                </div>
+              </div>
+            </div>
+          </header>
+          <div class="comment-content">
+            <div class="row">
+              <div class="col-12 col-md-12">
+                {{ comment?.body }}
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <ng-template #noComments> There's no comments yet. </ng-template>
     </main>
   </section>
 </div>
