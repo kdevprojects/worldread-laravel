@@ -5,55 +5,58 @@
       <h1 class="section-title">Latest stories</h1>
     </header>
     <main>
-      <article *ngFor="let story of stories" class="clearfix pt-3 pb-5">
-        <header class="article-header">
-          <h2 class="article-title">
-            <a
-              href="#"
-              [routerLink]="['/stories', story?.slug]"
-              rel="bookmark"
-              >{{ story?.title }}</a
-            >
-          </h2>
-          <div class="article-meta text-muted">
-            <div class="row">
-              <div class="col-12 col-md-8">
-                <span class="screen-reader-text">Published on </span>
-                <time
-                  class="article-date published">{{ story?.created_at | date: "mediumDate" }}</time
-                >
-                <span class="screen-reader-text">, by </span>
-                <a href="#">{{ story?.author?.username }}</a>
-              </div>
-              <div class="col-12 col-md-4">
-                <div class="text-body text-md-right mt-3 mt-md-0">
-                  {{ story?.comments_count }}
-                  <i-feather name="message-square" class="mr-3"></i-feather>
-                  {{ story?.likes_count }}
-                  <i-feather name="heart"></i-feather>
+      <div *ngIf="stories?.length > 0; else noStories">
+        <article *ngFor="let story of stories" class="clearfix pt-3 pb-5">
+          <header class="article-header">
+            <h2 class="article-title">
+              <a
+                href="#"
+                [routerLink]="['/stories', story?.slug]"
+                rel="bookmark"
+                >{{ story?.title }}</a
+              >
+            </h2>
+            <div class="article-meta text-muted">
+              <div class="row">
+                <div class="col-12 col-md-8">
+                  <span class="screen-reader-text">Published on </span>
+                  <time class="article-date published">{{
+                    story?.created_at | date: "mediumDate"
+                  }}</time>
+                  <span class="screen-reader-text">, by </span>
+                  <a href="#">{{ story?.author?.username }}</a>
+                </div>
+                <div class="col-12 col-md-4">
+                  <div class="text-body text-md-right mt-3 mt-md-0">
+                    {{ story?.comments_count }}
+                    <i-feather name="message-square" class="mr-3"></i-feather>
+                    {{ story?.likes_count }}
+                    <i-feather name="heart"></i-feather>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </header>
-        <div class="article-content">
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <img
-                loading="lazy"
-                class="article-image img-fluid"
-                alt="{{ story?.title }}"
-                src="https://picsum.photos/435/288?random={{ story?.id }}"
-                width="435"
-                height="288"
-              />
+          </header>
+          <div class="article-content">
+            <div class="row">
+              <div class="col-12 col-md-4">
+                <img
+                  loading="lazy"
+                  class="article-image img-fluid"
+                  alt="{{ story?.title }}"
+                  src="https://picsum.photos/435/288?random={{ story?.id }}"
+                  width="435"
+                  height="288"
+                />
+              </div>
+              <div class="col-12 col-md-8">
+                <div class="article-content-summary">{{ story?.summary }}</div>
+              </div>
             </div>
-            <div class="col-12 col-md-8">
-              <div class="article-content-summary">{{ story?.summary }}</div>
-            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
+      <ng-template #noStories> There are no stories yet. </ng-template>
     </main>
   </section>
 </div>
