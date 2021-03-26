@@ -46,18 +46,18 @@ class User extends Authenticatable
 
     public function stories()
     {
-        return $this->hasMany('App\Models\Stories', 'author_id');
+        return $this->hasMany('App\Models\Story', 'author_id');
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Models\Comments', 'from_user');
+        return $this->hasMany('App\Models\Comment', 'from_user');
     }
 
     public function can_story()
     {
         $role = $this->role;
-        if ($role == 'author' || $role == 'admin') {
+        if ($role == 'member' || $role == 'admin') {
             return true;
         }
         return false;

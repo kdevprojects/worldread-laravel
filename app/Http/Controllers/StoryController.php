@@ -6,6 +6,7 @@ use App\Models\Story;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoryPostRequest;
 use Auth;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class StoryController extends Controller
 {
@@ -16,7 +17,7 @@ class StoryController extends Controller
      */
     public function index()
     {
-        return Story::with('author:id,username')->get()->toJson();
+        return Story::with('author:id,username')->withCount('comments')->get()->toJson();
     }
 
     /**
@@ -24,18 +25,9 @@ class StoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(StoryPostRequest $request)
+    public function create()
     {
-        $story = new Story([
-            'title' => $request->title,
-            'summary' => $request->summary,
-            'body' => $request->body,
-            'author_id' => Auth::user()->id
-        ]);
-        $story->save();
-        return response()->json([
-            'message' => 'success'
-        ]);
+
     }
 
     /**
@@ -44,9 +36,23 @@ class StoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoryPostRequest $request)
     {
-        //
+        try {
+            $story = new Story([
+                'title' => $request->title,
+                'summary' => $request->summary,
+                'body' => $request->body,
+                'author_id' => Auth::user()->id
+            ]);
+            $story->save();
+        } catch (\Exception $e) {
+            throw new HttpException(500, $e->getMessage());
+        }
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 
     /**
@@ -93,5 +99,16 @@ class StoryController extends Controller
     public function destroy(Story $story)
     {
         //
+    }
+
+    /**
+     * Display the specified story's comments.
+     *
+     * @param  \App\Models\Story  $story
+     * @return \Illuminate\Http\Response
+     */
+    public function comments($id)
+    {
+        return Story::find($id)->comments()->with('author')->get()->toJson();
     }
 }

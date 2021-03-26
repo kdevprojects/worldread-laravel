@@ -4,12 +4,18 @@ router-outlet ~ * {
   width: 100%;
 }
 
-html,body {
+html,
+body {
   height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    text-transform: initial;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: initial;
 }
 
 .page-section {
@@ -21,5 +27,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar {
-    text-transform: initial;
+  text-transform: initial;
+}
+
+.bg-gray {
+  background-color: #f7f7f9 !important;
+}
+
+hr {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }

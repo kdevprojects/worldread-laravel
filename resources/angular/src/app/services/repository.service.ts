@@ -1,3 +1,4 @@
+import { Comment } from '../models/comment.model';
 import { Filter } from '../helper';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -7,11 +8,13 @@ import { Story } from '../models/story.model';
 import { UserService } from './user.service';
 
 const storiesUrl = '/api/stories';
+const commentsUrl = '/api/comments';
 
 @Injectable()
 export class Repository {
   story: Story;
   stories: Story[];
+  comments: Comment[];
   filter: Filter = new Filter();
 
   constructor(
@@ -27,7 +30,10 @@ export class Repository {
   getStory(param: any) {
     this.http
       .get<Story>(`${storiesUrl}/${param}`)
-      .subscribe((s) => (this.story = s));
+      .subscribe((s) => {
+        this.story = s;
+        this.getComments(s);
+      });
   }
 
   getStories() {
@@ -80,6 +86,27 @@ export class Repository {
       };
       this.stories.push(s);
       this.router.navigateByUrl('/members/overview');
+    });
+  }
+
+  getComments(s: Story) {
+    let url = `${storiesUrl}/${s.id}/comments`;
+    this.http.get<Comment[]>(url).subscribe((s) => (this.comments = s));
+  }
+
+  createComment(c: any) {
+    let data = {
+      on_story: c.on_story,
+      body: c.body,
+    };
+    this.http.post<number>(commentsUrl, data).subscribe((id) => {
+      c.id = id;
+      c.body= c.body,
+      c.author = {
+        id: this.userService.getCurrentUser().id,
+        username: this.userService.getCurrentUser().username,
+      };
+      this.comments.push(c);
     });
   }
 

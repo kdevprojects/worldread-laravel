@@ -18,6 +18,6 @@ class Comment extends Model
 
     public function story()
     {
-        return $this->belongsTo('App\Models\Stories', 'on_story');
+        return $this->belongsTo('App\Models\Story', 'on_story');
     }
 }

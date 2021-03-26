@@ -15,7 +15,7 @@ class Story extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\Models\Comments', 'on_story');
+        return $this->hasMany('App\Models\Comment', 'on_story');
     }
 
     public function author()
