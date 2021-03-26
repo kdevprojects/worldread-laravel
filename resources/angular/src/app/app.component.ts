@@ -8,11 +8,8 @@ import { fadeAnimation } from './animations';
   animations: [fadeAnimation], // register the animation
 })
 export class AppComponent {
-  constructor(private userService: UserService) {}
-  ngOnInit(): void {
-    console.log(this.userService.isUserLoggedIn());
+  constructor(private userService: UserService) {
+    this.userService.reloadUserData();
   }
-  onActivate(event: Event) {
-    window.scrollTo(0, 0);
-  }
+  ngOnInit(): void {}
 }

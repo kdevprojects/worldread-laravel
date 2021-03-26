@@ -39,8 +39,11 @@
           role="button"
           aria-haspopup="true"
           aria-expanded="false"
-          > {{ user?.username || 'guest' }} </a
         >
+          <span *ngIf="userService.getCurrentUser() | async as user">
+            {{ user.username }}</span
+          >
+        </a>
         <div class="dropdown-menu">
           <a
             class="dropdown-item"
@@ -51,9 +54,7 @@
             >Profile</a
           >
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" (click)="userService.logout()"
-            >Log Out</a
-          >
+          <a class="dropdown-item" href="#" (click)="logout()">Log Out</a>
         </div>
       </li>
     </ul>

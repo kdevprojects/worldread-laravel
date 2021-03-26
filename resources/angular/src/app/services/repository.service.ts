@@ -73,8 +73,8 @@ export class Repository {
     this.http.post<number>(storiesUrl, data).subscribe((id) => {
       s.id = id;
       s.author = {
-        id: this.userService.getCurrentUser().id,
-        username: this.userService.getCurrentUser().username,
+        id: this.userService.currentUser.id,
+        username: this.userService.currentUser.username,
       };
       this.stories.push(s);
       this.router.navigateByUrl('/members/overview');
@@ -95,8 +95,8 @@ export class Repository {
       c.id = id;
       (c.body = c.body),
         (c.author = {
-          id: this.userService.getCurrentUser().id,
-          username: this.userService.getCurrentUser().username,
+          id: this.userService.currentUser.id,
+          username: this.userService.currentUser.username,
         });
       this.comments.push(c);
       this.story.comments_count++;

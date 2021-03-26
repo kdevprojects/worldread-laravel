@@ -6,17 +6,19 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
 
 const routes: Routes = [
   {
-    path: "members",
+    path: 'members',
     loadChildren: () =>
-      import("./admin/admin.module").then(module => module.AdminModule),
+      import('./admin/admin.module').then((module) => module.AdminModule),
   },
-  { path: "stories", component: StoriesListComponent },
-  { path: "stories/:param", component: StoryDetailComponent },
-  { path: "**", redirectTo: 'stories' },
+  { path: 'stories', component: StoriesListComponent },
+  { path: 'stories/:param', component: StoryDetailComponent },
+  { path: '**', redirectTo: 'stories' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

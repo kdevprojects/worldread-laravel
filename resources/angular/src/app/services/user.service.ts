@@ -9,40 +9,43 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  private loggedIn = new BehaviorSubject<any>(null);
-  currentUserSubject = new BehaviorSubject<any>(null);
-
+  private loggedIn$ = new BehaviorSubject<any>(null);
+  private currentUserSubject$ = new BehaviorSubject<User>(null);
+  public currentUser: User;
   constructor(private http: HttpClient, private router: Router) {}
 
   login(token: any): void {
     console.log('logging in...');
     localStorage.setItem('token', token);
-    console.log(localStorage.getItem('token'));
-    this.http.get('/api/user').subscribe(
-      (result) => {
-        this.currentUserSubject.next(result);
-        this.router.navigateByUrl('/members/overview');
-      },
-      (error) => {
-        this.logout();
-      }
-    );
-    this.loggedIn.next(true);
+    this.reloadUserData();
+    this.router.navigateByUrl('/members/overview');
   }
 
   logout(): void {
     console.log('logging out...');
     localStorage.removeItem('token');
-    this.currentUserSubject = null;
-    this.loggedIn.next(false);
+    this.currentUserSubject$.next(null);
+    this.loggedIn$.next(false);
   }
 
-  isUserLoggedIn(): any {
-    return this.loggedIn.getValue();
+  isUserLoggedIn(): boolean {
+    return this.loggedIn$.getValue();
   }
 
-  public getCurrentUser(): any {
-    console.log('getting user info...');
-    return this.currentUserSubject.getValue();
+  public getCurrentUser(): Observable<User> {
+    return this.currentUserSubject$.asObservable();
+  }
+
+  public reloadUserData(): void {
+    this.http.get('/api/user').subscribe(
+      (result) => {
+        this.currentUserSubject$.next(result);
+        this.currentUserSubject$.subscribe((u) => (this.currentUser = u));
+      },
+      (error) => {
+        this.logout();
+      }
+    );
+    this.loggedIn$.next(true);
   }
 }
