@@ -24,10 +24,22 @@
               </div>
               <div class="col-12 col-md-4">
                 <div class="text-body text-md-right mt-3 mt-md-0">
-                  {{ story?.comments?.length }}
-                  <i-feather name="message-square" class="mr-3"></i-feather>
-                  {{ story?.likes }}
-                  <i-feather name="heart"></i-feather>
+                  <button class="btn btn-link px-2" (click)="scroll(commentsArea)">
+                    {{ story?.comments_count }}
+                    <i-feather
+                      name="message-square"
+                      class="ml-1 py-0"
+                    ></i-feather>
+                  </button>
+                  <button
+                    appDebounceClick
+                    (debounceClick)="like()"
+                    [debounceTime]="1000"
+                    class="btn btn-link px-2 py-0"
+                  >
+                    {{ story?.likes_count }}
+                    <i-feather name="heart" class="ml-1"></i-feather>
+                  </button>
                 </div>
               </div>
             </div>
@@ -53,39 +65,42 @@
       </article>
 
       <hr />
-      <div *ngIf="story && userService.isUserLoggedIn()">
-        <app-comment-editor [story]="story"></app-comment-editor>
-        <hr />
-      </div>
-      <div *ngIf="comments.length > 0; else noComments">
-        <h3 class="mb-3">Comments({{ comments.length }})</h3>
-        <article
-          *ngFor="let comment of comments"
-          class="clearfix bg-gray p-3 mb-3"
-        >
-          <header class="comment-header">
-            <div class="comment-meta text-muted">
+      <div #commentsArea>
+        <div *ngIf="story && userService.isUserLoggedIn()">
+          <app-comment-editor [story]="story"></app-comment-editor>
+          <hr />
+        </div>
+        <div *ngIf="comments?.length > 0; else noComments">
+          <h3 class="mb-3">Comments({{ comments.length }})</h3>
+          <article
+            *ngFor="let comment of comments"
+            class="clearfix bg-gray p-3 mb-3"
+          >
+            <header class="comment-header">
+              <div class="comment-meta text-muted">
+                <div class="row">
+                  <div class="col-12 col-md-12 mb-3">
+                    <a href="#">{{ comment?.author?.username }}</a
+                    ><br />
+                    <time class="comment-date published">{{
+                      (comment?.created_at | date: "MMM d, y, h:mm a") ||
+                        "just now"
+                    }}</time>
+                  </div>
+                </div>
+              </div>
+            </header>
+            <div class="comment-content">
               <div class="row">
-                <div class="col-12 col-md-12 mb-3">
-                  <a href="#">{{ comment?.author?.username }}</a
-                  ><br />
-                  <time class="comment-date published">{{
-                    (comment?.created_at | date: "MMM d, y, h:mm a") || "just now"
-                  }}</time>
+                <div class="col-12 col-md-12">
+                  {{ comment?.body }}
                 </div>
               </div>
             </div>
-          </header>
-          <div class="comment-content">
-            <div class="row">
-              <div class="col-12 col-md-12">
-                {{ comment?.body }}
-              </div>
-            </div>
-          </div>
-        </article>
+          </article>
+        </div>
+        <ng-template #noComments> There's no comments yet. </ng-template>
       </div>
-      <ng-template #noComments> There's no comments yet. </ng-template>
     </main>
   </section>
 </div>

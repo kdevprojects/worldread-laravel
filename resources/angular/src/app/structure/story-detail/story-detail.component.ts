@@ -35,4 +35,13 @@ export class StoryDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  like(): void {
+    console.log('like');
+    this.repo.likeStory(this.story);
+  }
+
+  scroll(el: HTMLElement) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
 }

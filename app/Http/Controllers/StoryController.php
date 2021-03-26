@@ -17,7 +17,7 @@ class StoryController extends Controller
      */
     public function index()
     {
-        return Story::with('author:id,username')->withCount('comments')->get()->toJson();
+        return Story::with('author:id,username')->withCount('comments')->withCount('likes')->get()->toJson();
     }
 
     /**
@@ -64,7 +64,7 @@ class StoryController extends Controller
     public function show($param)
     {
         return Story::whereSlug($param)
-            ->orWhere('id', $param)->with('author:id,username')->firstOrFail()->toJson();
+            ->orWhere('id', $param)->with('author:id,username')->withCount('comments')->withCount('likes')->firstOrFail()->toJson();
     }
 
     /**

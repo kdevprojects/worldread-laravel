@@ -71,4 +71,9 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function likedPosts()
+    {
+        return $this->morphedByMany('App\Models\Story', 'likeable')->whereDeletedAt(null);
+    }
 }

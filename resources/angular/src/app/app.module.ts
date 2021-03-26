@@ -7,6 +7,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommentEditorComponent } from './structure/comment-editor/comment-editor.component';
+import { DebounceClickDirective } from './directives/debounce-click.directive';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IconsModule } from './icons/icons.module';
@@ -24,6 +25,7 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
     StoryDetailComponent,
     NavbarComponent,
     CommentEditorComponent,
+    DebounceClickDirective,
   ],
   imports: [
     BrowserModule,

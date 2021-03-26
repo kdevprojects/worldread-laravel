@@ -9180,5 +9180,16 @@ hr {
   margin-top: 3rem;
   margin-bottom: 3rem;
 }
+.btn-link svg {
+  transform: scale(1);
+  transition: all 0.2s ease-in-out;
+}
+.btn-link:focus, .btn-link:hover, .btn-link.focus {
+  text-decoration: none;
+  box-shadow: none;
+}
+.btn-link:hover svg {
+  transform: scale(1.1);
+}
 
 /*# sourceMappingURL=styles.css.map*/

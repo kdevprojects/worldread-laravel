@@ -10,6 +10,7 @@ export class Story {
     public author?: User,
     public comments?: Comment[],
     public comments_count?: number,
+    public likes_count?: number,
     public slug?: string,
     public created_at?: Date,
     public updated_at?: Date

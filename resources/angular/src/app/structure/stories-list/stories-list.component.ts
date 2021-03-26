@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Repository } from "../../services/repository.service";
 import { Story } from "../../models/story.model";
 
@@ -12,6 +13,7 @@ export class StoriesListComponent implements OnInit {
   constructor(private repo: Repository) { }
 
   ngOnInit(): void {
+    this.repo.getStories();
   }
 
   get stories(): Story[] {

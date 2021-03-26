@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,4 +33,8 @@ Route::get('stories/{id}/comments', [StoryController::class, 'comments']);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('comments', [CommentController::class, 'store']);
+});
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::post('likes/stories/{id}', [LikeController::class, 'likeStory']);
 });

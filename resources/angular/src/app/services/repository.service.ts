@@ -2,48 +2,40 @@ import { Comment } from '../models/comment.model';
 import { Filter } from '../helper';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Like } from '../models/like.model';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Story } from '../models/story.model';
 import { UserService } from './user.service';
+import { map } from 'rxjs/operators';
 
 const storiesUrl = '/api/stories';
 const commentsUrl = '/api/comments';
+const likesUrl = '/api/likes';
 
 @Injectable()
 export class Repository {
   story: Story;
   stories: Story[];
   comments: Comment[];
-  filter: Filter = new Filter();
 
   constructor(
     private http: HttpClient,
     private userService: UserService,
     private router: Router
   ) {
-    this.filter.category = '';
-    this.filter.related = false;
     this.getStories();
   }
 
   getStory(param: any) {
-    this.http
-      .get<Story>(`${storiesUrl}/${param}`)
-      .subscribe((s) => {
-        this.story = s;
-        this.getComments(s);
-      });
+    this.http.get<Story>(`${storiesUrl}/${param}`).subscribe((s) => {
+      this.story = s;
+      this.getComments(s);
+    });
   }
 
   getStories() {
-    let url = `${storiesUrl}?related=${this.filter.related}`;
-    if (this.filter.category) {
-      url += `&category=${this.filter.category}`;
-    }
-    if (this.filter.search) {
-      url += `&search=${this.filter.search}`;
-    }
+    let url = `${storiesUrl}`;
     this.http.get<Story[]>(url).subscribe((s) => (this.stories = s));
   }
 
@@ -101,13 +93,28 @@ export class Repository {
     };
     this.http.post<number>(commentsUrl, data).subscribe((id) => {
       c.id = id;
-      c.body= c.body,
-      c.author = {
-        id: this.userService.getCurrentUser().id,
-        username: this.userService.getCurrentUser().username,
-      };
+      (c.body = c.body),
+        (c.author = {
+          id: this.userService.getCurrentUser().id,
+          username: this.userService.getCurrentUser().username,
+        });
       this.comments.push(c);
+      this.story.comments_count++;
     });
+  }
+
+  likeStory(s: Story) {
+    let data = {
+      id: s.id,
+    };
+    this.http.post<any>(`${likesUrl}/stories/${s.id}`, data).subscribe(
+      (data) => {
+        if (data?.liked) {
+          this.story.likes_count++;
+        }
+      },
+      (err) => console.error(err)
+    );
   }
 
   deleteStory(id: number) {

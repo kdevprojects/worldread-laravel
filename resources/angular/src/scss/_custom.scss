@@ -38,3 +38,21 @@ hr {
   margin-top: 3rem;
   margin-bottom: 3rem;
 }
+
+.btn-link {
+  svg {
+    transform: scale(1);
+    transition: all 0.2s ease-in-out;
+  }
+  &:focus,
+  &:hover,
+  &.focus {
+    text-decoration: none;
+    box-shadow: none;
+  }
+  &:hover {
+    svg {
+      transform: scale(1.1);
+    }
+  }
+}
