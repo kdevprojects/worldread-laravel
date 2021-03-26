@@ -1,3 +1,5 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AdminModule } from './admin/admin.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -6,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommentEditorComponent } from './structure/comment-editor/comment-editor.component';
 import { ErrorHandlerService } from './services/error-handler.service';
-import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IconsModule } from './icons/icons.module';
 import { ModelModule } from './models/model.module';
@@ -32,7 +33,8 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
     AdminModule,
     PagesModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     ErrorHandlerService,

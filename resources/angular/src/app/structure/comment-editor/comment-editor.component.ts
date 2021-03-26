@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Comment } from '../../models/comment.model';
 import { Repository } from 'src/app/services/repository.service';
@@ -11,17 +12,25 @@ import { Story } from 'src/app/models/story.model';
 })
 export class CommentEditorComponent implements OnInit {
   @Input() story: Story;
-
+  commentForm: FormGroup;
+  showError: boolean = false;
   newComment: any = new Comment();
-  constructor(private repo: Repository) {}
+  constructor(private repo: Repository, private fb: FormBuilder) {}
   ngOnInit(): void {
-
+    this.commentForm = this.fb.group({
+      body: ['', [Validators.required]],
+    });
   }
-  saveComment() {
-    //console.log(this.story);
-    this.newComment.on_story = this.story.id;
-    console.log(this.newComment);
-    this.repo.createComment(this.newComment);
-    this.newComment = new Comment();
+  onSubmit() {
+    const formData = this.commentForm.getRawValue();
+    const data = {
+      on_story: this.story.id,
+      body: formData.body,
+    };
+    this.repo.createComment(data);
+    this.commentForm.reset();
+  }
+  get body() {
+    return this.commentForm.get('body');
   }
 }
