@@ -1,7 +1,9 @@
 /mysql
 /node_modules
+/public/build
 /public/hot
 /public/storage
+/resources/angular/src/environments
 /storage/*.key
 /vendor
 .env
