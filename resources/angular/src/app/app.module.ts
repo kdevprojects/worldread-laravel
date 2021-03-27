@@ -15,6 +15,7 @@ import { ModelModule } from './models/model.module';
 import { NavbarComponent } from './structure/navbar/navbar.component';
 import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
+import { ScrollProgressDirective } from './directives/scroll-progress.directive';
 import { StoriesListComponent } from './structure/stories-list/stories-list.component';
 import { StoryDetailComponent } from './structure/story-detail/story-detail.component';
 
@@ -26,6 +27,7 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
     NavbarComponent,
     CommentEditorComponent,
     DebounceClickDirective,
+    ScrollProgressDirective,
   ],
   imports: [
     BrowserModule,
