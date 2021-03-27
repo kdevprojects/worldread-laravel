@@ -1,0 +1,26 @@
+.profile-header {
+  padding: 10rem 0;
+  background-image: url(/build/assets/img/profile-header-2.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.profile-section {
+  padding: 3rem 0;
+  .article-title {
+  }
+  .article-meta {
+    margin-bottom: 1rem;
+  }
+
+  .article-content {
+    .article-image {
+      margin-bottom: 1rem;
+    }
+  }
+  aside {
+    .card {
+      margin-top: -10rem;
+    }
+  }
+}

@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +19,14 @@ use App\Http\Controllers\LikeController;
 |
 */
 
+// Authentication
 Route::middleware('auth:api')
     ->get('user', function (Request $request) {
         return $request->user();
     });
 Route::post('user', [UserController::class, 'register']);
 
+// Stories
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('stories', [StoryController::class, 'store']);
 });
@@ -31,10 +34,16 @@ Route::get('stories', [StoryController::class, 'index']);
 Route::get('stories/{param}', [StoryController::class, 'show']);
 Route::get('stories/{id}/comments', [StoryController::class, 'comments']);
 
+// Comments
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('comments', [CommentController::class, 'store']);
 });
 
+// Likes
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('likes/stories/{id}', [LikeController::class, 'likeStory']);
 });
+
+// Profiles
+Route::get('profiles/{param}', [ProfileController::class, 'show']);
+Route::get('profiles/{param}/stories', [ProfileController::class, 'stories']);

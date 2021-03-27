@@ -18,6 +18,7 @@ import { PagesModule } from './pages/pages.module';
 import { ScrollProgressDirective } from './directives/scroll-progress.directive';
 import { StoriesListComponent } from './structure/stories-list/stories-list.component';
 import { StoryDetailComponent } from './structure/story-detail/story-detail.component';
+import { ProfileComponent } from './structure/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
     CommentEditorComponent,
     DebounceClickDirective,
     ScrollProgressDirective,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

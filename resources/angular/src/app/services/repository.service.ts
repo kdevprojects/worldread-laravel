@@ -1,23 +1,25 @@
 import { Comment } from '../models/comment.model';
-import { Filter } from '../helper';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Like } from '../models/like.model';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Story } from '../models/story.model';
+import { User } from '../models/user.model';
 import { UserService } from './user.service';
 import { map } from 'rxjs/operators';
 
 const storiesUrl = '/api/stories';
 const commentsUrl = '/api/comments';
 const likesUrl = '/api/likes';
+const profilesUrl = '/api/profiles';
 
 @Injectable()
 export class Repository {
   story: Story;
   stories: Story[];
+  profileStories: Story[];
   comments: Comment[];
+  profile: User;
 
   constructor(
     private http: HttpClient,
@@ -37,6 +39,11 @@ export class Repository {
   getStories() {
     let url = `${storiesUrl}`;
     this.http.get<Story[]>(url).subscribe((s) => (this.stories = s));
+  }
+
+  getProfileStories(param: any) {
+    let url = `${profilesUrl}/${param}/stories`;
+    this.http.get<Story[]>(url).subscribe((s) => (this.profileStories = s));
   }
 
   register(
@@ -119,5 +126,11 @@ export class Repository {
 
   deleteStory(id: number) {
     this.http.delete(`${storiesUrl}/${id}`).subscribe(() => this.getStories());
+  }
+
+  getProfile(param: any) {
+    this.http.get<User>(`${profilesUrl}/${param}`).subscribe((p) => {
+      this.profile = p;
+    });
   }
 }

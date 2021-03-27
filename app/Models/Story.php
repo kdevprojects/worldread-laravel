@@ -41,4 +41,10 @@ class Story extends Model
         $like = $this->likes()->whereUserId(Auth::user()->id)->first();
         return (!is_null($like)) ? true : false;
     }
+
+    public function commentsCount()
+    {
+        return $this->comments()->count();
+    }
+
 }

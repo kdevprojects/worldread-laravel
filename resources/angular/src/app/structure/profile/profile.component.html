@@ -1,0 +1,102 @@
+<app-navbar></app-navbar>
+<div class="profile-header"></div>
+
+<div class="container">
+  <section class="profile-section">
+    <div class="row">
+      <div class="col-lg-4">
+        <aside>
+          <div class="card border-light shadow mb-5">
+            <div class="card-body py-5">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img
+                  src="https://picsum.photos/150/150"
+                  alt=""
+                  class="rounded-circle"
+                  width="150"
+                  style="clip-path: circle(75px at center)"
+                />
+                <div class="mt-3">
+                  <h4>{{ profile?.username }}</h4>
+                  <p class="text-secondary mb-2">
+                    {{ profile?.first_name + " " + profile?.last_name }}
+                  </p>
+                  <p class="text-muted small">
+                    {{ profile?.email }}
+                  </p>
+                  <p class="mb-5"><em>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.</em>
+                  </p>
+                  <button class="btn btn-primary mx-1">Follow</button>
+                  <button class="btn btn-outline-primary mx-1">Message</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="col-lg-7 ml-auto">
+        <main>
+          <div *ngIf="stories?.length > 0; else noStories">
+            <article *ngFor="let story of stories" class="clearfix pt-3 pb-5">
+              <header class="article-header">
+                <h2 class="article-title">
+                  <a
+                    href="#"
+                    [routerLink]="['/stories', story?.slug]"
+                    rel="bookmark"
+                    >{{ story?.title }}</a
+                  >
+                </h2>
+                <div class="article-meta text-muted">
+                  <div class="row">
+                    <div class="col-12 col-md-8 small">
+                      <span class="screen-reader-text">Published on </span>
+                      <time class="article-date published">{{
+                        story?.created_at | date: "mediumDate"
+                      }}</time>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="text-body text-md-right mt-3 mt-md-0">
+                        {{ story?.comments_count }}
+                        <i-feather
+                          name="message-square"
+                          class="mr-3"
+                        ></i-feather>
+                        {{ story?.likes_count }}
+                        <i-feather name="heart"></i-feather>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </header>
+              <div class="article-content">
+                <div class="row">
+                  <div class="col-12 col-md-4">
+                    <img
+                      loading="lazy"
+                      class="article-image img-fluid"
+                      alt="{{ story?.title }}"
+                      src="https://picsum.photos/435/288?random={{ story?.id }}"
+                      width="435"
+                      height="288"
+                    />
+                  </div>
+                  <div class="col-12 col-md-8">
+                    <div class="article-content-summary">
+                      {{ story?.summary }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <ng-template #noStories> There are no stories yet. </ng-template>
+        </main>
+      </div>
+    </div>
+  </section>
+</div>

@@ -14,8 +14,10 @@ export class ScrollProgressDirective {
       document.body.scrollTop;
     const height =
       this.hostElement.nativeElement.scrollHeight -
-      this.hostElement.nativeElement.offsetTop;
+      this.hostElement.nativeElement.offsetTop -
+      event.target.documentElement.clientHeight / 3;
     const scrolled = (winScroll / height) * 100;
-    document.getElementById('scrollBar').style.width = scrolled + '%';
+    document.getElementById('scrollBar').style.width =
+      (scrolled <= 100 ? scrolled : '100') + '%';
   }
 }
