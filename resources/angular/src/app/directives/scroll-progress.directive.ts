@@ -1,10 +1,10 @@
-import { Directive, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appScrollProgress]',
 })
 export class ScrollProgressDirective {
-  constructor() {}
+  constructor(private hostElement: ElementRef) {}
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event) {
@@ -12,11 +12,7 @@ export class ScrollProgressDirective {
       event.target.documentElement.scrollTop ||
       event.currentTarget.scrollTop ||
       document.body.scrollTop;
-    const height =
-      (event.target.documentElement.scrollHeight ||
-        event.currentTarget.scrollHeight) -
-      (event.target.documentElement.clientHeight ||
-        event.currentTarget.clientHeight);
+    const height = this.hostElement.nativeElement.scrollHeight;
     const scrolled = (winScroll / height) * 100;
     document.getElementById('scrollBar').style.width = scrolled + '%';
   }

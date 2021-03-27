@@ -963,20 +963,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 
 class ScrollProgressDirective {
-    constructor() { }
+    constructor(hostElement) {
+        this.hostElement = hostElement;
+    }
     onWindowScroll(event) {
         const winScroll = event.target.documentElement.scrollTop ||
             event.currentTarget.scrollTop ||
             document.body.scrollTop;
-        const height = (event.target.documentElement.scrollHeight ||
-            event.currentTarget.scrollHeight) -
-            (event.target.documentElement.clientHeight ||
-                event.currentTarget.clientHeight);
+        const height = this.hostElement.nativeElement.scrollHeight;
         const scrolled = (winScroll / height) * 100;
         document.getElementById('scrollBar').style.width = scrolled + '%';
     }
 }
-ScrollProgressDirective.ɵfac = function ScrollProgressDirective_Factory(t) { return new (t || ScrollProgressDirective)(); };
+ScrollProgressDirective.ɵfac = function ScrollProgressDirective_Factory(t) { return new (t || ScrollProgressDirective)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])); };
 ScrollProgressDirective.ɵdir = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineDirective"]({ type: ScrollProgressDirective, selectors: [["", "appScrollProgress", ""]], hostBindings: function ScrollProgressDirective_HostBindings(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("scroll", function ScrollProgressDirective_scroll_HostBindingHandler($event) { return ctx.onWindowScroll($event); }, false, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵresolveWindow"]);
     } } });
