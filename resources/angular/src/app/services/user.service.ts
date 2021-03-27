@@ -9,7 +9,7 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  private loggedIn$ = new BehaviorSubject<any>(null);
+  private loggedIn$ = new BehaviorSubject<any>(false);
   private currentUserSubject$ = new BehaviorSubject<User>(null);
   public currentUser: User;
   constructor(private http: HttpClient, private router: Router) {}
@@ -41,6 +41,7 @@ export class UserService {
       (result) => {
         this.currentUserSubject$.next(result);
         this.currentUserSubject$.subscribe((u) => (this.currentUser = u));
+        this.loggedIn$.next(true);
       },
       (error) => {
         this.logout();
