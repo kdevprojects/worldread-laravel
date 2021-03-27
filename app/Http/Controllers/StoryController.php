@@ -17,7 +17,7 @@ class StoryController extends Controller
      */
     public function index()
     {
-        return Story::with('author:id,username')->withCount('comments')->withCount('likes')->get()->toJson();
+        return Story::with('author:id,username')->withCount('comments')->withCount('likes')->orderBy('created_at', 'DESC')->get()->toJson();
     }
 
     /**
@@ -109,6 +109,6 @@ class StoryController extends Controller
      */
     public function comments($id)
     {
-        return Story::find($id)->comments()->with('author')->get()->toJson();
+        return Story::find($id)->comments()->with('author')->orderBy('created_at', 'ASC')->get()->toJson();
     }
 }

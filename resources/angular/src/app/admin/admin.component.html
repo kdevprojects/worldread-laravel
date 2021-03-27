@@ -39,8 +39,21 @@
           role="button"
           aria-haspopup="true"
           aria-expanded="false"
-          > {{ user?.username || 'guest' }} </a
         >
+          <img
+            src="https://picsum.photos/30/30"
+            alt=""
+            style="
+              height: 30px;
+              width: 30px;
+              margin-right: 0.5rem;
+              clip-path: circle(15px at center);
+            "
+          />
+          <span *ngIf="userService.getCurrentUser() | async as user">
+            {{ user.username }}</span
+          >
+        </a>
         <div class="dropdown-menu">
           <a
             class="dropdown-item"
@@ -51,9 +64,7 @@
             >Profile</a
           >
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" (click)="userService.logout()"
-            >Log Out</a
-          >
+          <a class="dropdown-item" href="#" (click)="logout()">Log Out</a>
         </div>
       </li>
     </ul>
@@ -72,6 +83,17 @@
             <a
               class="nav-link"
               href="#"
+              routerLink="/"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              Homepage
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#"
               routerLink="/members/overview"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"
@@ -83,7 +105,7 @@
       </div>
     </nav>
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">

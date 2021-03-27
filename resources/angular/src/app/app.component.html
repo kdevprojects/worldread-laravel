@@ -1,4 +1,7 @@
+<div class="progress-container">
+  <div class="progress-bar" id="scrollBar"></div>
+</div>
 <div [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
-  <img [src]="'/assets/img/signup-bg.jpg'" hidden>
-  <router-outlet #o="outlet" (activate)="onActivate($event)"></router-outlet>
+  <img [src]="'/assets/img/signup-bg.jpg'" hidden />
+  <router-outlet #o="outlet"></router-outlet>
 </div>
