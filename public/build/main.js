@@ -970,7 +970,8 @@ class ScrollProgressDirective {
         const winScroll = event.target.documentElement.scrollTop ||
             event.currentTarget.scrollTop ||
             document.body.scrollTop;
-        const height = this.hostElement.nativeElement.scrollHeight;
+        const height = this.hostElement.nativeElement.scrollHeight -
+            this.hostElement.nativeElement.offsetTop;
         const scrolled = (winScroll / height) * 100;
         document.getElementById('scrollBar').style.width = scrolled + '%';
     }
