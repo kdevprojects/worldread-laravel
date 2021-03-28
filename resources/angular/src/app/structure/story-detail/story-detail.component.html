@@ -80,7 +80,7 @@
               <div class="comment-meta text-muted">
                 <div class="row">
                   <div class="col-12 col-md-12 mb-3">
-                    <a href="#">{{ comment?.author?.username }}</a
+                    <a href="#" [routerLink]="['/profiles', comment?.author?.username]">{{ comment?.author?.username }}</a
                     ><br />
                     <time class="comment-date published small">{{
                       (comment?.created_at | date: "MMM d, y, h:mm a") ||
