@@ -11,13 +11,13 @@ import { Injectable } from '@angular/core';
 export class AuthenticationGuard {
   constructor(
     private router: Router,
-    private userService: AuthService
+    private authService: AuthService
   ) {}
   canActivateChild(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    if (this.userService.isUserLoggedIn()) {
+    if (this.authService.isUserLoggedIn()) {
       return true;
     } else {
       this.router.navigateByUrl('/admin/login');

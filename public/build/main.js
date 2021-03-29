@@ -1010,7 +1010,7 @@ __webpack_require__.r(__webpack_exports__);
 class AppComponent {
     constructor(userService) {
         this.userService = userService;
-        this.userService.reloadUserData();
+        //this.userService.reloadUserData();
     }
     ngOnInit() { }
 }

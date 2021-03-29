@@ -5,7 +5,7 @@ import { WelcomeAdminComponent } from './welcome-admin/welcome-admin.component';
 
 const routes: Routes = [
   {
-    path: 'administration',
+    path: 'admin',
     loadChildren: () =>
       import('./admin/admin.module').then((module) => module.AdminModule),
   },

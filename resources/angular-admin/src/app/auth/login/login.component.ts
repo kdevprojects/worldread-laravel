@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AuthService } from '../auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -34,15 +36,21 @@ export class LoginComponent implements OnInit {
       grant_type: 'password',
       client_id: environment.oauth_client_id,
       client_secret: environment.oauth_client_secret,
-      scope: '*',
+      scope: 'admin',
     };
 
     this.http.post('/oauth/token', data).subscribe(
       (result: any) => {
+        console.log('success');
+        console.log(result);
+        //localStorage.setItem('token', result.access_token);
+        this.authService.login(result.access_token);
         this.loginForm.reset();
-        this.router.navigate(['/members/overview']);
+        this.router.navigate(['/admin/overview']);
       },
       (error) => {
+        console.log('error');
+        console.log(error);
         this.showError = true;
       }
     );

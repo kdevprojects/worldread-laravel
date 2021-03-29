@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from '../auth/auth.service';
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -9,12 +11,9 @@ export class AdminComponent {
   private lastError: string[];
   public isMenuCollapsed = true;
 
-  constructor(
-  ) {
-  }
+  constructor(public authService: AuthService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   get error(): string[] {
     return this.lastError;
@@ -22,5 +21,8 @@ export class AdminComponent {
 
   clearError() {
     this.lastError = null;
+  }
+  logout() {
+    this.authService.logout();
   }
 }

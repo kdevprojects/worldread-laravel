@@ -4,7 +4,7 @@
   <a
     class="navbar-brand"
     href="#"
-    routerLink="/"
+    routerLink=""
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
     >Readible Admin</a
@@ -18,12 +18,31 @@
   </button>
 
   <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true"
-          >Features</a
+        <a
+          class="nav-link"
+          [routerLink]="'members'"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="isMenuCollapsed = true"
+          >Members</a
         >
       </li>
+      <li class="nav-item"><a class="nav-link text-danger" href="#" (click)="logout()">Log Out</a></li>
     </ul>
   </div>
 </nav>
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="py-5">
+        <div class="alert alert-danger mb-3" *ngIf="error != null">
+          <p *ngFor="let e of error">{{ e }}</p>
+          <button class="btn btn-danger" (click)="clearError()">OK</button>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</main>
