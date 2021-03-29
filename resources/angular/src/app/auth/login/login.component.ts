@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       grant_type: 'password',
       client_id: environment.oauth_client_id,
       client_secret: environment.oauth_client_secret,
-      scope: '*',
+      scope: 'member',
     };
 
     this.http.post('/oauth/token', data).subscribe(

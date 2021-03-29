@@ -22,7 +22,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -52,6 +52,12 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany('App\Models\Comment', 'from_user');
+    }
+
+    public function role()
+    {
+        $role = $this->role;
+        return $role;
     }
 
     public function can_story()

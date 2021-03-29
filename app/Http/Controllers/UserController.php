@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRegisterRequest;
 class UserController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return User::all()->toJson();
+    }
     public function user(Request $request)
     {
         return $request->user();

@@ -26,5 +26,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
+
+        // Mandatory to define Scope
+        Passport::tokensCan([
+            'admin' => 'Add/Edit/Delete Competitions',
+            'member' => 'List Competitions',
+        ]);
+
+        Passport::setDefaultScope([
+            'member'
+        ]);
     }
 }
