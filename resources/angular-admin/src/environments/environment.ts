@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost/api',
+  oauth_client_id: '1',
+  oauth_client_secret: 'HI0BkKrSKcpna0GA7oJjQerNSWF6ihhPP0HS9YYV'
 };
 
 /*

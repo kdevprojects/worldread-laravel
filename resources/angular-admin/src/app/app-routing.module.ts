@@ -1,14 +1,15 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { NgModule } from '@angular/core';
+import { WelcomeAdminComponent } from './welcome-admin/welcome-admin.component';
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: 'administration',
     loadChildren: () =>
       import('./admin/admin.module').then((module) => module.AdminModule),
   },
-  { path: '**', redirectTo: 'admin' },
+  { path: 'admin', component: WelcomeAdminComponent },
 ];
 @NgModule({
   imports: [
