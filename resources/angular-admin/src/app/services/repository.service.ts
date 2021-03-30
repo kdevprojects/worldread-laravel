@@ -1,5 +1,6 @@
 import { AuthService } from '../auth/auth.service';
 import { Comment } from '../models/comment.model';
+import { Competition } from '../models/competition.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -13,6 +14,7 @@ const commentsUrl = '/api/comments';
 const likesUrl = '/api/likes';
 const profilesUrl = '/api/profiles';
 const usersUrl = '/api/users';
+const competitionsUrl = '/api/competitions';
 
 @Injectable()
 export class Repository {
@@ -22,6 +24,7 @@ export class Repository {
   comments: Comment[];
   profile: User;
   members: User[];
+  competitions: Competition[];
 
   constructor(
     private http: HttpClient,
@@ -139,5 +142,10 @@ export class Repository {
   getMembers() {
     let url = `${usersUrl}`;
     this.http.get<User[]>(url).subscribe((u) => (this.members = u));
+  }
+
+  getCompetitions() {
+    let url = `${competitionsUrl}`;
+    this.http.get<Competition[]>(url).subscribe((c) => (this.competitions = c));
   }
 }

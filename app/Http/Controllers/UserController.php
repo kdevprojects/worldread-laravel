@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all()->toJson();
+        return User::where('role','=','member')->orderBy('created_at', 'DESC')->get()->toJson();
     }
     public function user(Request $request)
     {
