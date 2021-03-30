@@ -7,6 +7,7 @@ use App\Http\Controllers\StoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AuthController;
 use App\Models\User;
 
 /*
@@ -26,10 +27,13 @@ Route::middleware('auth:api')
         return $request->user();
     });
 Route::post('user', [UserController::class, 'register']);
+Route::post('auth/login', [AuthController::class, 'login']);
 
 // Stories
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('stories', [StoryController::class, 'store']);
+    Route::middleware(['scope:member'])->group(function () {
+        Route::post('stories', [StoryController::class, 'store']);
+    });
 });
 Route::get('stories', [StoryController::class, 'index']);
 Route::get('stories/{param}', [StoryController::class, 'show']);
@@ -37,12 +41,16 @@ Route::get('stories/{id}/comments', [StoryController::class, 'comments']);
 
 // Comments
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('comments', [CommentController::class, 'store']);
+    Route::middleware(['scope:member'])->group(function () {
+        Route::post('comments', [CommentController::class, 'store']);
+    });
 });
 
 // Likes
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('likes/stories/{id}', [LikeController::class, 'likeStory']);
+    Route::middleware(['scope:member'])->group(function () {
+        Route::post('likes/stories/{id}', [LikeController::class, 'likeStory']);
+    });
 });
 
 // Profiles
@@ -50,8 +58,8 @@ Route::get('profiles/{param}', [ProfileController::class, 'show']);
 Route::get('profiles/{param}/stories', [ProfileController::class, 'stories']);
 
 // Admin
-Route::middleware(['auth:api', 'role'])->group(function() {
-    Route::middleware(['scope:admin'])->group(function() {
+Route::middleware(['auth:api', 'role'])->group(function () {
+    Route::middleware(['scope:admin'])->group(function () {
         Route::get('users', [UserController::class, 'index']);
     });
 });

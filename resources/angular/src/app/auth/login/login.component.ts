@@ -39,11 +39,10 @@ export class LoginComponent implements OnInit {
       scope: 'member',
     };
 
-    this.http.post('/oauth/token', data).subscribe(
+    this.http.post('/api/auth/login', data).subscribe(
       (result: any) => {
         console.log('success');
         console.log(result);
-        //localStorage.setItem('token', result.access_token);
         this.userService.login(result.access_token);
         this.loginForm.reset();
         this.router.navigate(['/members/overview']);

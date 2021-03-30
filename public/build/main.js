@@ -157,7 +157,7 @@ const environment = {
     production: false,
     apiUrl: 'http://localhost/api',
     oauth_client_id: 1,
-    oauth_client_secret: 'HI0BkKrSKcpna0GA7oJjQerNSWF6ihhPP0HS9YYV',
+    oauth_client_secret: 'ufmJhw9CrgcuSq714w4ZgFuEFuOOqEprLge9NtvY',
 };
 /*
  * For easier debugging in development mode, you can import the following file
@@ -1841,10 +1841,9 @@ class LoginComponent {
             client_secret: _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].oauth_client_secret,
             scope: 'member',
         };
-        this.http.post('/oauth/token', data).subscribe((result) => {
+        this.http.post('/api/auth/login', data).subscribe((result) => {
             console.log('success');
             console.log(result);
-            //localStorage.setItem('token', result.access_token);
             this.userService.login(result.access_token);
             this.loginForm.reset();
             this.router.navigate(['/members/overview']);
