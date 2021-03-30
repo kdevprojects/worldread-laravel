@@ -11,6 +11,7 @@ import { LoginGuard } from '../auth/login.guard';
 import { NgModule } from '@angular/core';
 import { OverviewComponent } from './overview/overview.component';
 import { RegisterComponent } from '../auth/register/register.component';
+import { SharedModule } from '../shared/shared.module';
 import { SignUpComponent } from '../auth/sign-up/sign-up.component';
 import { StoryEditorComponent } from './story-editor/story-editor.component';
 
@@ -32,11 +33,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [AdminComponent, OverviewComponent, StoryEditorComponent],
   imports: [
-    RouterModule,
-    FormsModule,
     RouterModule.forChild(routes),
-    CommonModule,
-    AuthModule,
+    AuthModule, SharedModule
   ],
 })
 export class AdminModule {}

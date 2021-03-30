@@ -9183,6 +9183,9 @@ hr {
 .btn {
   border-width: 2px;
 }
+.btn-link {
+  text-transform: none;
+}
 .btn-link svg {
   transform: scale(1);
   transition: all 0.2s ease-in-out;

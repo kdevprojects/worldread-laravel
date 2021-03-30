@@ -13,6 +13,8 @@ import { fadeAnimation } from '../animations';
 })
 export class AdminComponent {
   private lastError: string[];
+  public isMenuCollapsed = true;
+
   constructor(
     errorService: ErrorHandlerService,
     public userService: UserService

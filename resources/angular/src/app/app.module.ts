@@ -15,10 +15,11 @@ import { ModelModule } from './models/model.module';
 import { NavbarComponent } from './structure/navbar/navbar.component';
 import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
+import { ProfileComponent } from './structure/profile/profile.component';
 import { ScrollProgressDirective } from './directives/scroll-progress.directive';
+import { SharedModule } from './shared/shared.module';
 import { StoriesListComponent } from './structure/stories-list/stories-list.component';
 import { StoryDetailComponent } from './structure/story-detail/story-detail.component';
-import { ProfileComponent } from './structure/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ProfileComponent } from './structure/profile/profile.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule
   ],
   providers: [
     ErrorHandlerService,

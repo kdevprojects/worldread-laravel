@@ -26,6 +26,7 @@ export class UserService {
     localStorage.removeItem('token');
     this.currentUserSubject$.next(null);
     this.loggedIn$.next(false);
+    this.router.navigateByUrl('/');
   }
 
   isUserLoggedIn(): boolean {

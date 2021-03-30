@@ -10,10 +10,11 @@ import { LoginGuard } from '../auth/login.guard';
 import { NgModule } from '@angular/core';
 import { RegisterComponent } from './register/register.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
-  imports: [RouterModule, FormsModule, CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [RouterModule, FormsModule, CommonModule, ReactiveFormsModule, HttpClientModule, SharedModule],
   declarations: [AuthenticationComponent, SignUpComponent, LoginComponent, RegisterComponent],
   providers: [AuthenticationService, AuthenticationGuard, LoginGuard],
   exports: [AuthenticationComponent],

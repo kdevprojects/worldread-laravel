@@ -11,15 +11,12 @@
     <button
       class="navbar-toggler"
       type="button"
-      data-toggle="collapse"
-      data-target="#navbarResponsive"
-      aria-controls="navbarResponsive"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
+      (click)="isMenuCollapsed = !isMenuCollapsed"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a
@@ -86,7 +83,9 @@
                 *ngIf="password.invalid && (password.dirty || password.touched)"
                 class="text-danger my-2"
               >
-                <div *ngIf="password.errors.required">Password is required.</div>
+                <div *ngIf="password.errors.required">
+                  Password is required.
+                </div>
               </div>
             </div>
             <div class="text-center pt-2">

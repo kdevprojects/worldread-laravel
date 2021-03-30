@@ -14,6 +14,8 @@ import { environment } from '../../../environments/environment';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   showError: boolean = false;
+  public isMenuCollapsed = true;
+
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,

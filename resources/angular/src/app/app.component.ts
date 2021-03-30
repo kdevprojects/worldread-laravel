@@ -9,7 +9,7 @@ import { fadeAnimation } from './animations';
 })
 export class AppComponent {
   constructor(private userService: UserService) {
-    //this.userService.reloadUserData();
+    this.userService.reloadUserData();
   }
   ngOnInit(): void {}
 }
