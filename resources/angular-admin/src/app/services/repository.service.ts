@@ -148,4 +148,18 @@ export class Repository {
     let url = `${competitionsUrl}`;
     this.http.get<Competition[]>(url).subscribe((c) => (this.competitions = c));
   }
+
+  createCompetition(c: any) {
+    let data = {
+      name: c.name,
+      description: c.description,
+      fee: c.fee,
+      reward: c.reward,
+      deadline: c.deadline
+    };
+    this.http.post<number>(competitionsUrl, data).subscribe((id) => {
+      c.id = id;
+      this.competitions.push(c);
+    });
+  }
 }

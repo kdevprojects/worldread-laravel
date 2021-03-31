@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Competition;
 use App\Http\Requests\CompetitionPostRequest;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CompetitionController extends Controller
 {

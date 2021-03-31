@@ -24,11 +24,11 @@ class CompetitionPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:stories|max:30000',
+            'name' => 'required',
             'description' => 'required',
             'fee' => '',
             'reward' => '',
-            'deadline' =>  'reqired|date'
+            'deadline' =>  'required|date'
         ];
     }
 }

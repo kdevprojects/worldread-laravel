@@ -1,11 +1,11 @@
-import { ExternalLink, Heart, MessageSquare } from 'angular-feather/icons';
+import { Calendar, ExternalLink, Heart, MessageSquare } from 'angular-feather/icons';
 
 import { FeatherModule } from 'angular-feather';
 import { NgModule } from '@angular/core';
 
 const icons = {
   MessageSquare,
-  Heart, ExternalLink
+  Heart, ExternalLink, Calendar
 };
 
 @NgModule({

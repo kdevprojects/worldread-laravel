@@ -64,3 +64,11 @@ hr {
 .container {
   position: relative;
 }
+
+.input-group {
+  .input-group-append {
+    .btn {
+      padding: 0.5rem 1.5rem;
+    }
+  }
+}
