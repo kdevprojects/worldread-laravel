@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Competition } from 'src/app/models/competition.model';
+import { Repository } from 'src/app/services/repository.service';
+
 @Component({
   selector: 'app-competitions',
   templateUrl: './competitions.component.html',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompetitionsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private repo: Repository) { }
 
   ngOnInit(): void {
+    this.repo.getCompetitions();
+  }
+
+  get competitions(): Competition[] {
+    return this.repo.competitions;
   }
 
 }

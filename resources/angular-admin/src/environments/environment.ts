@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost/api',
-  oauth_client_id: 3,
-  oauth_client_secret: 'aJUkTrNVuVwH3L1xmEF2mtOpcuZcCAPWsAC0ZGEC',
+  oauth_client_id: 2,
+  oauth_client_secret: 'zCw4CIfBjE02g46rOFjbU4BPPp4wHQRTeY0PVO8P',
 };
 
 /*

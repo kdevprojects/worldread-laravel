@@ -156,8 +156,8 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     apiUrl: 'http://localhost/api',
-    oauth_client_id: 1,
-    oauth_client_secret: 'ufmJhw9CrgcuSq714w4ZgFuEFuOOqEprLge9NtvY',
+    oauth_client_id: 2,
+    oauth_client_secret: 'zCw4CIfBjE02g46rOFjbU4BPPp4wHQRTeY0PVO8P',
 };
 /*
  * For easier debugging in development mode, you can import the following file

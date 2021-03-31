@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoryPostRequest extends FormRequest
+class CompetitionPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,11 @@ class StoryPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:stories',
-            'summary' => 'required',
-            'body' => 'required|max:30000',
+            'name' => 'required|unique:stories|max:30000',
+            'description' => 'required',
+            'fee' => '',
+            'reward' => '',
+            'deadline' =>  'reqired|date'
         ];
     }
 }

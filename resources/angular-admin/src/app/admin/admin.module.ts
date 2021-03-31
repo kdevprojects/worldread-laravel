@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { AuthModule } from '../auth/authentication.module';
 import { AuthenticationGuard } from '../auth/authentication.guard';
+import { CompetitionsComponent } from './competitions/competitions.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { LoginGuard } from '../auth/login.guard';
 import { MembersComponent } from './members/members.component';
 import { NgModule } from '@angular/core';
 import { OverviewComponent } from './overview/overview.component';
 import { SharedModule } from '../shared/shared.module';
-import { CompetitionsComponent } from './competitions/competitions.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
@@ -18,6 +18,7 @@ const routes: Routes = [
     component: AdminComponent,
     canActivateChild: [AuthenticationGuard],
     children: [
+      { path: 'competitions', component: CompetitionsComponent },
       { path: 'members', component: MembersComponent },
       { path: 'overview', component: OverviewComponent },
       { path: '', component: OverviewComponent },

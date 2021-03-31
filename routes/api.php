@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompetitionController;
 use App\Models\User;
 
 /*
@@ -57,9 +58,19 @@ Route::group(['middleware' => 'auth:api'], function () {
 Route::get('profiles/{param}', [ProfileController::class, 'show']);
 Route::get('profiles/{param}/stories', [ProfileController::class, 'stories']);
 
+// Competitions
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::middleware(['scope:member'])->group(function () {
+        Route::post('competitions', [CompetitionController::class, 'join']);
+    });
+});
+Route::get('competitions', [CompetitionController::class, 'index']);
+Route::get('competitions/{param}', [CompetitionController::class, 'show']);
+
 // Admin
 Route::middleware(['auth:api', 'role'])->group(function () {
     Route::middleware(['scope:admin'])->group(function () {
         Route::get('users', [UserController::class, 'index']);
+        Route::post('competitions', [CompetitionController::class, 'store']);
     });
 });

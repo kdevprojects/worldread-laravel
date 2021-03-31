@@ -23,6 +23,16 @@
       <li class="nav-item">
         <a
           class="nav-link"
+          [routerLink]="'competitions'"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="isMenuCollapsed = true"
+          >Competitions</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
           [routerLink]="'members'"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"

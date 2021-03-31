@@ -9216,5 +9216,8 @@ hr {
   transition: width 0.5s;
   height: 100vh;
 }
+.container {
+  position: relative;
+}
 
 /*# sourceMappingURL=styles.css.map*/
