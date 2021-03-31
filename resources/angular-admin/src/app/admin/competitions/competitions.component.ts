@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Competition } from 'src/app/models/competition.model';
+import { NgForm } from '@angular/forms';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Repository } from 'src/app/services/repository.service';
 
 @Component({
@@ -16,7 +15,6 @@ export class CompetitionsComponent implements OnInit {
   model: any = {};
   constructor(
     private repo: Repository,
-    private fb: FormBuilder,
     private parserFormatter: NgbDateParserFormatter
   ) {}
 
@@ -24,8 +22,7 @@ export class CompetitionsComponent implements OnInit {
     this.repo.getCompetitions();
   }
 
-  onSubmit() {
-    console.log(this.model);
+  submit(form: NgForm) {
     const date = this.parserFormatter.format(this.model.deadline);
 
     const data = {
@@ -37,6 +34,7 @@ export class CompetitionsComponent implements OnInit {
     };
     this.repo.createCompetition(data);
     this.showList();
+    form.reset();
   }
 
   get competitions(): Competition[] {

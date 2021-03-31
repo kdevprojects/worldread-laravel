@@ -18,9 +18,9 @@
             <h5 class="card-title">{{ competition?.name }}</h5>
             <p class="card-text">{{ competition?.description }}</p>
             <p class="card-text">
-              <small class="text-muted">Ends {{
-                competition?.deadline | date: "medium"
-              }}</small>
+              <small class="text-muted"
+                >Ends {{ competition?.deadline | date: "medium" }}</small
+              >
             </p>
           </div>
         </div>
@@ -32,7 +32,7 @@
     <ng-template #addCompetitions>
       <form
         name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
+        (ngSubmit)="f.form.valid && submit(f)"
         #f="ngForm"
         novalidate
       >
@@ -75,67 +75,85 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
-          <label>Deadline</label>
+        <div class="form-row">
+          <div class="form-group col-lg-6">
+            <label>Deadline</label>
 
-          <div class="input-group">
-            <input
-              class="form-control"
-              placeholder="yyyy-mm-dd"
-              name="deadline"
-              [(ngModel)]="model.deadline"
-              #deadline="ngModel"
-              [ngClass]="{ 'is-invalid': f.submitted && deadline.invalid }"
-              required
-              ngbDatepicker
-              #deadlinePicker="ngbDatepicker"
-            />
-            <div class="input-group-append">
-              <button
-                class="btn btn-outline-secondary calendar"
-                (click)="deadlinePicker.toggle()"
-                type="button"
-              >
-                <i-feather name="calendar"></i-feather>
-              </button>
+            <div class="input-group">
+              <input
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="deadline"
+                [(ngModel)]="model.deadline"
+                #deadline="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && deadline.invalid }"
+                required
+                ngbDatepicker
+                #deadlinePicker="ngbDatepicker"
+              />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-outline-secondary calendar"
+                  (click)="deadlinePicker.toggle()"
+                  type="button"
+                >
+                  <i-feather name="calendar"></i-feather>
+                </button>
+              </div>
+            </div>
+            <div
+              *ngIf="f.submitted && deadline.invalid"
+              class="invalid-feedback"
+            >
+              <div *ngIf="deadline.errors.required">This field is required</div>
             </div>
           </div>
-          <div *ngIf="f.submitted && deadline.invalid" class="invalid-feedback">
-            <div *ngIf="deadline.errors.required">This field is required</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-lg-6">
+            <label>Fee</label>
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">&#163;</span>
+              </div>
+              <input
+                type="number"
+                class="form-control"
+                name="fee"
+                placeholder="Enter fee"
+                [(ngModel)]="model.fee"
+                #fee="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && fee.invalid }"
+                required
+              />
+            </div>
+            <div *ngIf="f.submitted && fee.invalid" class="invalid-feedback">
+              <div *ngIf="fee.errors.required">This field is required</div>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label>Fee</label>
-
-          <input
-            type="text"
-            class="form-control"
-            name="fee"
-            placeholder="Enter fee"
-            [(ngModel)]="model.fee"
-            #fee="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && fee.invalid }"
-            required
-          />
-          <div *ngIf="f.submitted && fee.invalid" class="invalid-feedback">
-            <div *ngIf="fee.errors.required">This field is required</div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Reward</label>
-
-          <input
-            type="text"
-            class="form-control"
-            name="reward"
-            placeholder="Enter reward"
-            [(ngModel)]="model.reward"
-            #reward="ngModel"
-            [ngClass]="{ 'is-invalid': f.submitted && reward.invalid }"
-            required
-          />
-          <div *ngIf="f.submitted && reward.invalid" class="invalid-feedback">
-            <div *ngIf="reward.errors.required">This field is required</div>
+        <div class="form-row">
+          <div class="form-group col-lg-6">
+            <label>Reward</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">&#163;</span>
+              </div>
+              <input
+                type="number"
+                class="form-control"
+                name="reward"
+                placeholder="Enter reward"
+                [(ngModel)]="model.reward"
+                #reward="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && reward.invalid }"
+                required
+              />
+            </div>
+            <div *ngIf="f.submitted && reward.invalid" class="invalid-feedback">
+              <div *ngIf="reward.errors.required">This field is required</div>
+            </div>
           </div>
         </div>
         <button class="btn btn-primary">Submit</button>
