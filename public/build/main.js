@@ -1087,21 +1087,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _animations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./animations */ "J1Ni");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/user.service */ "qfBg");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _shared_toast_toast_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shared/toast/toast.component */ "XMJk");
+/* harmony import */ var _services_error_handler_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/error-handler.service */ "zZuk");
+/* harmony import */ var _services_toast_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/toast.service */ "2g2N");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _shared_toast_toast_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shared/toast/toast.component */ "XMJk");
+
+
 
 
 
 
 
 class AppComponent {
-    constructor(userService) {
+    constructor(userService, errorService, toastService) {
         this.userService = userService;
+        this.errorService = errorService;
+        this.toastService = toastService;
         this.userService.reloadUserData();
+        this.errorService.errors.subscribe((error) => {
+            this.lastError = error;
+            this.lastError.forEach((e) => {
+                this.showDangerToast(e);
+            });
+        });
     }
     ngOnInit() { }
+    get error() {
+        return this.lastError;
+    }
+    clearError() {
+        this.lastError = null;
+    }
+    showDangerToast(message) {
+        this.toastService.show(message, {
+            classname: 'bg-danger text-light',
+            delay: 5000,
+        });
+    }
 }
-AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"])); };
+AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_error_handler_service__WEBPACK_IMPORTED_MODULE_3__["ErrorHandlerService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"])); };
 AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 7, vars: 2, consts: [[1, "progress-container"], ["id", "scrollBar", 1, "progress-bar"], ["hidden", "", 3, "src"], ["o", "outlet"], ["aria-live", "polite", "aria-atomic", "true"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "div", 1);
@@ -1117,7 +1141,7 @@ AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineCompo
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("@fadeAnimation", _r0.isActivated ? _r0.activatedRoute : "");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("src", "/assets/img/signup-bg.jpg", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsanitizeUrl"]);
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterOutlet"], _shared_toast_toast_component__WEBPACK_IMPORTED_MODULE_4__["ToastComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MifQ== */"], data: { animation: [_animations__WEBPACK_IMPORTED_MODULE_0__["fadeAnimation"]] } });
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterOutlet"], _shared_toast_toast_component__WEBPACK_IMPORTED_MODULE_6__["ToastComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MifQ== */"], data: { animation: [_animations__WEBPACK_IMPORTED_MODULE_0__["fadeAnimation"]] } });
 
 
 /***/ }),
@@ -2983,13 +3007,13 @@ class CompetitionCheckoutComponent {
     showSuccessToast(message) {
         this.toastService.show(message, {
             classname: 'bg-success text-light',
-            delay: 10000,
+            delay: 5000,
         });
     }
     showDangerToast(message) {
         this.toastService.show(message, {
             classname: 'bg-danger text-light',
-            delay: 15000,
+            delay: 5000,
         });
     }
 }
@@ -3455,8 +3479,8 @@ class ErrorHandlerService {
                 this.errSubject
                     .next([...Object.values(resp.error.errors)]);
             }
-            else if (resp.error.title) {
-                this.errSubject.next([resp.error.title]);
+            else if (resp.error.message) {
+                this.errSubject.next([resp.error.message]);
             }
             else {
                 this.errSubject.next(["An HTTP error occurred"]);

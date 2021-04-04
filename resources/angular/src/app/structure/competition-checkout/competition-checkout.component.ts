@@ -121,14 +121,14 @@ export class CompetitionCheckoutComponent implements OnInit {
   showSuccessToast(message: string) {
     this.toastService.show(message, {
       classname: 'bg-success text-light',
-      delay: 10000,
+      delay: 5000,
     });
   }
 
   showDangerToast(message: string) {
     this.toastService.show(message, {
       classname: 'bg-danger text-light',
-      delay: 15000,
+      delay: 5000,
     });
   }
 }
