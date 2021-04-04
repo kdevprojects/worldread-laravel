@@ -24,4 +24,15 @@ export class AuthenticationGuard {
       return false;
     }
   }
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
+    if (this.userService.isUserLoggedIn()) {
+      return true;
+    } else {
+      this.router.navigateByUrl('/members/login');
+      return false;
+    }
+  }
 }

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastService } from './toast.service';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -12,7 +13,11 @@ export class UserService {
   private loggedIn$ = new BehaviorSubject<any>(false);
   private currentUserSubject$ = new BehaviorSubject<User>(null);
   public currentUser: User;
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private toastService: ToastService
+  ) {}
 
   login(token: any): void {
     console.log('logging in...');
@@ -27,6 +32,8 @@ export class UserService {
     this.currentUserSubject$.next(null);
     this.loggedIn$.next(false);
     this.router.navigateByUrl('/');
+
+    this.showStandardToast('You have been logged out');
   }
 
   isUserLoggedIn(): boolean {
@@ -49,5 +56,9 @@ export class UserService {
       }
     );
     this.loggedIn$.next(true);
+  }
+
+  showStandardToast(message: string) {
+    this.toastService.show(message);
   }
 }

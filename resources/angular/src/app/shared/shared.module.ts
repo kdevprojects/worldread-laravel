@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { RouterModule } from '@angular/router';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   imports: [
@@ -14,13 +15,13 @@ import { RouterModule } from '@angular/router';
     NgbModule,
     RouterModule, NgxPayPalModule
   ],
-  declarations: [],
+  declarations: [ToastComponent],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    RouterModule, NgxPayPalModule
+    RouterModule, NgxPayPalModule, ToastComponent
   ]
 })
 export class SharedModule {}

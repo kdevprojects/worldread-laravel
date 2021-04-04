@@ -5,6 +5,7 @@ import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
 import { Competition } from 'src/app/models/competition.model';
 import { Repository } from 'src/app/services/repository.service';
 import { Observable } from 'rxjs';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-competition-checkout',
@@ -16,7 +17,8 @@ export class CompetitionCheckoutComponent implements OnInit {
   constructor(
     private repo: Repository,
     router: Router,
-    activeRoute: ActivatedRoute
+    activeRoute: ActivatedRoute,
+    private toastService: ToastService
   ) {
     let param = activeRoute.snapshot.params['param'];
     if (param) {
@@ -86,6 +88,7 @@ export class CompetitionCheckoutComponent implements OnInit {
             'onApprove - you can get full order details inside onApprove: ',
             details
           );
+          this.showStandardToast('Payment approved');
         });
       },
       onClientAuthorization: (data) => {
@@ -94,6 +97,7 @@ export class CompetitionCheckoutComponent implements OnInit {
           data
         );
         //this.showSuccess = true;
+        this.showSuccessToast('Payment authorized');
       },
       onCancel: (data, actions) => {
         console.log('OnCancel', data, actions);
@@ -108,5 +112,23 @@ export class CompetitionCheckoutComponent implements OnInit {
         //this.resetStatus();
       },
     };
+  }
+
+  showStandardToast(message: string) {
+    this.toastService.show(message);
+  }
+
+  showSuccessToast(message: string) {
+    this.toastService.show(message, {
+      classname: 'bg-success text-light',
+      delay: 10000,
+    });
+  }
+
+  showDangerToast(message: string) {
+    this.toastService.show(message, {
+      classname: 'bg-danger text-light',
+      delay: 15000,
+    });
   }
 }
