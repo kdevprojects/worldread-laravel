@@ -1428,6 +1428,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const _c0 = function (a1) { return ["/competitions/enter", a1]; };
 class CompetitionComponent {
     constructor(repo, router, activeRoute) {
         this.repo = repo;
@@ -1446,7 +1447,7 @@ class CompetitionComponent {
     }
 }
 CompetitionComponent.ɵfac = function CompetitionComponent_Factory(t) { return new (t || CompetitionComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_repository_service__WEBPACK_IMPORTED_MODULE_1__["Repository"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"])); };
-CompetitionComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CompetitionComponent, selectors: [["app-competition"]], decls: 34, vars: 13, consts: [[1, "container"], [1, "competition-section"], [1, "row"], [1, "col-lg-7"], [1, "col-12", "mb-3"], [1, "competition-name", "mb-3"], ["loading", "lazy", 1, "competition-image", "img-fluid", 3, "alt", "src"], [1, "competition-description"], [1, "col-lg-4", "ml-auto", "order-first", "order-lg-last"], [1, "card", "border-light", "shadow", "mb-5"], [1, "card-body", "py-5"], [1, "d-flex", "flex-column", "align-items-center"], [1, "text-center"], [1, "mb-3"], [1, "progress", "mb-3"], ["role", "progressbar", "aria-valuenow", "25", "aria-valuemin", "0", "aria-valuemax", "100", 1, "progress-bar", 2, "width", "25%"], [1, "text-muted", "mb-5"], [1, "btn", "btn-primary", "btn-block"], [1, "btn", "btn-outline-primary", "btn-block"]], template: function CompetitionComponent_Template(rf, ctx) { if (rf & 1) {
+CompetitionComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CompetitionComponent, selectors: [["app-competition"]], decls: 34, vars: 16, consts: [[1, "container"], [1, "competition-section"], [1, "row"], [1, "col-lg-7"], [1, "col-12", "mb-3"], [1, "competition-name", "mb-3"], ["loading", "lazy", 1, "competition-image", "img-fluid", 3, "alt", "src"], [1, "competition-description"], [1, "col-lg-4", "ml-auto", "order-first", "order-lg-last"], [1, "card", "border-light", "shadow", "mb-5"], [1, "card-body", "py-5"], [1, "d-flex", "flex-column", "align-items-center"], [1, "text-center"], [1, "mb-3"], [1, "progress", "mb-3"], ["role", "progressbar", "aria-valuenow", "25", "aria-valuemin", "0", "aria-valuemax", "100", 1, "progress-bar", 2, "width", "25%"], [1, "text-muted", "mb-5"], ["href", "#", 1, "btn", "btn-primary", "btn-block", 3, "routerLink"], [1, "btn", "btn-outline-primary", "btn-block"]], template: function CompetitionComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "app-navbar");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "section", 1);
@@ -1488,7 +1489,7 @@ CompetitionComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](28);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](29, "date");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "button", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "a", 17);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](31, "Join");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](32, "button", 18);
@@ -1514,10 +1515,12 @@ CompetitionComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.competition == null ? null : ctx.competition.name);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](24, 7, ctx.competition == null ? null : ctx.competition.reward, "GBP"), " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](24, 8, ctx.competition == null ? null : ctx.competition.reward, "GBP"), " ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](29, 10, ctx.competition == null ? null : ctx.competition.deadline, "MMM d, y, h:mm a"), " ");
-    } }, directives: [_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_3__["NavbarComponent"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["CurrencyPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"]], styles: [".competition-section[_ngcontent-%COMP%] {\n  padding: 6rem 0;\n}\n.competition-section[_ngcontent-%COMP%]   .article-meta[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n}\n.competition-section[_ngcontent-%COMP%]   .article-content[_ngcontent-%COMP%]   .article-image[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxjb21wZXRpdGlvbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGVBQUE7QUFDRjtBQUVFO0VBQ0UsbUJBQUE7QUFBSjtBQUlJO0VBQ0UsbUJBQUE7QUFGTiIsImZpbGUiOiJjb21wZXRpdGlvbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb21wZXRpdGlvbi1zZWN0aW9uIHtcclxuICBwYWRkaW5nOiA2cmVtIDA7XHJcbiAgLmFydGljbGUtdGl0bGUge1xyXG4gIH1cclxuICAuYXJ0aWNsZS1tZXRhIHtcclxuICAgIG1hcmdpbi1ib3R0b206IDFyZW07XHJcbiAgfVxyXG5cclxuICAuYXJ0aWNsZS1jb250ZW50IHtcclxuICAgIC5hcnRpY2xlLWltYWdlIHtcclxuICAgICAgbWFyZ2luLWJvdHRvbTogMXJlbTtcclxuICAgIH1cclxuICB9XHJcbiAgYXNpZGUge1xyXG4gICAgLmNhcmQge1xyXG4gICAgfVxyXG4gIH1cclxufVxyXG4iXX0= */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](29, 11, ctx.competition == null ? null : ctx.competition.deadline, "MMM d, y, h:mm a"), " ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](14, _c0, ctx.competition == null ? null : ctx.competition.slug));
+    } }, directives: [_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_3__["NavbarComponent"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLinkWithHref"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["CurrencyPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"]], styles: [".competition-section[_ngcontent-%COMP%] {\n  padding: 6rem 0;\n}\n.competition-section[_ngcontent-%COMP%]   .article-meta[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n}\n.competition-section[_ngcontent-%COMP%]   .article-content[_ngcontent-%COMP%]   .article-image[_ngcontent-%COMP%] {\n  margin-bottom: 1rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxjb21wZXRpdGlvbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGVBQUE7QUFDRjtBQUVFO0VBQ0UsbUJBQUE7QUFBSjtBQUlJO0VBQ0UsbUJBQUE7QUFGTiIsImZpbGUiOiJjb21wZXRpdGlvbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb21wZXRpdGlvbi1zZWN0aW9uIHtcclxuICBwYWRkaW5nOiA2cmVtIDA7XHJcbiAgLmFydGljbGUtdGl0bGUge1xyXG4gIH1cclxuICAuYXJ0aWNsZS1tZXRhIHtcclxuICAgIG1hcmdpbi1ib3R0b206IDFyZW07XHJcbiAgfVxyXG5cclxuICAuYXJ0aWNsZS1jb250ZW50IHtcclxuICAgIC5hcnRpY2xlLWltYWdlIHtcclxuICAgICAgbWFyZ2luLWJvdHRvbTogMXJlbTtcclxuICAgIH1cclxuICB9XHJcbiAgYXNpZGUge1xyXG4gICAgLmNhcmQge1xyXG4gICAgfVxyXG4gIH1cclxufVxyXG4iXX0= */"] });
 
 
 /***/ }),
@@ -1555,7 +1558,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _structure_stories_list_stories_list_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./structure/stories-list/stories-list.component */ "CiVU");
 /* harmony import */ var _structure_story_detail_story_detail_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./structure/story-detail/story-detail.component */ "ocTM");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "1kSV");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _structure_competition_checkout_competition_checkout_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./structure/competition-checkout/competition-checkout.component */ "pt/f");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
 
 
 
@@ -1583,8 +1588,8 @@ __webpack_require__.r(__webpack_exports__);
 class AppModule {
 }
 AppModule.ɵfac = function AppModule_Factory(t) { return new (t || AppModule)(); };
-AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]] });
-AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineInjector"]({ providers: [
+AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]] });
+AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵdefineInjector"]({ providers: [
         _services_error_handler_service__WEBPACK_IMPORTED_MODULE_11__["ErrorHandlerService"],
         {
             provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_12__["HTTP_INTERCEPTORS"],
@@ -1609,7 +1614,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineInjecto
             _shared_shared_module__WEBPACK_IMPORTED_MODULE_19__["SharedModule"],
             _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_22__["NgbModule"]
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_24__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
         _structure_stories_list_stories_list_component__WEBPACK_IMPORTED_MODULE_20__["StoriesListComponent"],
         _structure_story_detail_story_detail_component__WEBPACK_IMPORTED_MODULE_21__["StoryDetailComponent"],
         _structure_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_15__["NavbarComponent"],
@@ -1618,7 +1623,8 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_23__["ɵɵdefineInjecto
         _directives_scroll_progress_directive__WEBPACK_IMPORTED_MODULE_18__["ScrollProgressDirective"],
         _structure_profile_profile_component__WEBPACK_IMPORTED_MODULE_17__["ProfileComponent"],
         _structure_competition_competition_component__WEBPACK_IMPORTED_MODULE_8__["CompetitionComponent"],
-        _structure_competitions_list_competitions_list_component__WEBPACK_IMPORTED_MODULE_9__["CompetitionsListComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["BrowserModule"],
+        _structure_competitions_list_competitions_list_component__WEBPACK_IMPORTED_MODULE_9__["CompetitionsListComponent"],
+        _structure_competition_checkout_competition_checkout_component__WEBPACK_IMPORTED_MODULE_23__["CompetitionCheckoutComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["BrowserModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
         _models_model_module__WEBPACK_IMPORTED_MODULE_14__["ModelModule"],
         _icons_icons_module__WEBPACK_IMPORTED_MODULE_13__["IconsModule"],
@@ -2751,6 +2757,29 @@ StoryDetailComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
 
 /***/ }),
 
+/***/ "pt/f":
+/*!**********************************************************************************!*\
+  !*** ./src/app/structure/competition-checkout/competition-checkout.component.ts ***!
+  \**********************************************************************************/
+/*! exports provided: CompetitionCheckoutComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CompetitionCheckoutComponent", function() { return CompetitionCheckoutComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+class CompetitionCheckoutComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+}
+CompetitionCheckoutComponent.ɵfac = function CompetitionCheckoutComponent_Factory(t) { return new (t || CompetitionCheckoutComponent)(); };
+CompetitionCheckoutComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CompetitionCheckoutComponent, selectors: [["app-competition-checkout"]], decls: 0, vars: 0, template: function CompetitionCheckoutComponent_Template(rf, ctx) { }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjb21wZXRpdGlvbi1jaGVja291dC5jb21wb25lbnQuc2NzcyJ9 */"] });
+
+
+/***/ }),
+
 /***/ "qfBg":
 /*!******************************************!*\
   !*** ./src/app/services/user.service.ts ***!
@@ -2901,12 +2930,14 @@ IconsModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInject
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _structure_competition_competition_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./structure/competition/competition.component */ "YROR");
-/* harmony import */ var _structure_competitions_list_competitions_list_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./structure/competitions-list/competitions-list.component */ "h5/4");
-/* harmony import */ var _structure_profile_profile_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./structure/profile/profile.component */ "UxUv");
-/* harmony import */ var _structure_stories_list_stories_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./structure/stories-list/stories-list.component */ "CiVU");
-/* harmony import */ var _structure_story_detail_story_detail_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./structure/story-detail/story-detail.component */ "ocTM");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _structure_competition_checkout_competition_checkout_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./structure/competition-checkout/competition-checkout.component */ "pt/f");
+/* harmony import */ var _structure_competition_competition_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./structure/competition/competition.component */ "YROR");
+/* harmony import */ var _structure_competitions_list_competitions_list_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./structure/competitions-list/competitions-list.component */ "h5/4");
+/* harmony import */ var _structure_profile_profile_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./structure/profile/profile.component */ "UxUv");
+/* harmony import */ var _structure_stories_list_stories_list_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./structure/stories-list/stories-list.component */ "CiVU");
+/* harmony import */ var _structure_story_detail_story_detail_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./structure/story-detail/story-detail.component */ "ocTM");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
 
 
 
@@ -2920,21 +2951,22 @@ const routes = [
         path: 'members',
         loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./admin/admin.module */ "jkDv")).then((module) => module.AdminModule),
     },
-    { path: 'stories', component: _structure_stories_list_stories_list_component__WEBPACK_IMPORTED_MODULE_4__["StoriesListComponent"] },
-    { path: 'stories/:param', component: _structure_story_detail_story_detail_component__WEBPACK_IMPORTED_MODULE_5__["StoryDetailComponent"] },
-    { path: 'competitions', component: _structure_competitions_list_competitions_list_component__WEBPACK_IMPORTED_MODULE_2__["CompetitionsListComponent"] },
-    { path: 'competitions/:param', component: _structure_competition_competition_component__WEBPACK_IMPORTED_MODULE_1__["CompetitionComponent"] },
-    { path: 'profiles/:param', component: _structure_profile_profile_component__WEBPACK_IMPORTED_MODULE_3__["ProfileComponent"] },
+    { path: 'stories', component: _structure_stories_list_stories_list_component__WEBPACK_IMPORTED_MODULE_5__["StoriesListComponent"] },
+    { path: 'stories/:param', component: _structure_story_detail_story_detail_component__WEBPACK_IMPORTED_MODULE_6__["StoryDetailComponent"] },
+    { path: 'competitions', component: _structure_competitions_list_competitions_list_component__WEBPACK_IMPORTED_MODULE_3__["CompetitionsListComponent"] },
+    { path: 'competitions/:param', component: _structure_competition_competition_component__WEBPACK_IMPORTED_MODULE_2__["CompetitionComponent"] },
+    { path: 'competitions/enter/:param', component: _structure_competition_checkout_competition_checkout_component__WEBPACK_IMPORTED_MODULE_1__["CompetitionCheckoutComponent"] },
+    { path: 'profiles/:param', component: _structure_profile_profile_component__WEBPACK_IMPORTED_MODULE_4__["ProfileComponent"] },
     { path: '**', redirectTo: 'stories' },
 ];
 class AppRoutingModule {
 }
 AppRoutingModule.ɵfac = function AppRoutingModule_Factory(t) { return new (t || AppRoutingModule)(); };
-AppRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineNgModule"]({ type: AppRoutingModule });
-AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineInjector"]({ imports: [[
+AppRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineNgModule"]({ type: AppRoutingModule });
+AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineInjector"]({ imports: [[
             _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forRoot(routes, { scrollPositionRestoration: 'enabled' }),
         ], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵsetNgModuleScope"](AppRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵsetNgModuleScope"](AppRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
 
 
 /***/ }),

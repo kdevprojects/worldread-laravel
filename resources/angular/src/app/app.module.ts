@@ -23,6 +23,7 @@ import { SharedModule } from './shared/shared.module';
 import { StoriesListComponent } from './structure/stories-list/stories-list.component';
 import { StoryDetailComponent } from './structure/story-detail/story-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CompetitionCheckoutComponent } from './structure/competition-checkout/competition-checkout.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProfileComponent,
     CompetitionComponent,
     CompetitionsListComponent,
+    CompetitionCheckoutComponent,
   ],
   imports: [
     BrowserModule,

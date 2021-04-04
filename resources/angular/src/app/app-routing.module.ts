@@ -1,5 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
+import { CompetitionCheckoutComponent } from './structure/competition-checkout/competition-checkout.component';
 import { CompetitionComponent } from './structure/competition/competition.component';
 import { CompetitionsListComponent } from './structure/competitions-list/competitions-list.component';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'stories/:param', component: StoryDetailComponent },
   { path: 'competitions', component: CompetitionsListComponent },
   { path: 'competitions/:param', component: CompetitionComponent },
+  { path: 'competitions/enter/:param', component: CompetitionCheckoutComponent },
   { path: 'profiles/:param', component: ProfileComponent },
   { path: '**', redirectTo: 'stories' },
 ];

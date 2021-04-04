@@ -26,6 +26,7 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
     <app-root></app-root>
+    <script src="https://www.paypal.com/sdk/js?client-id=AawjmRbKugS-b2dgHHjA064BBwQmhpozkbZiMJUkm5ygM_47k0Xs1sYmSMP3Z7fEeIQ-rlWgp44le2Gz"></script>
 
     {{-- This'll load our hashed assets when in production --}}
     @env('production')
@@ -36,8 +37,6 @@
     @endif
     {{-- This'll load the development assets when in dev mode --}}
     @else
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/build/runtime.js" defer></script>
     <script src="/build/polyfills.js" defer></script>
     <script src="/build/styles.js" defer></script>
