@@ -33,7 +33,7 @@
                 <div class="text-center">
                   <h3 class="mb-3">{{ competition?.name }}</h3>
                   <h4 class="mb-3">
-                    {{ competition?.reward | currency: "GBP" }}
+                    {{ competition?.reward | currency :'GBP':'symbol':'1.2-2' }}
                   </h4>
                   <div class="progress mb-3">
                     <div

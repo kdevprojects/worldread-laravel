@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <section class="checkout-section">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <div class="card border-light shadow mb-5">
+          <div class="card-body py-5">
+            <div class="d-flex flex-column align-items-center">
+              <div class="text-center">
+                <h3 class="mb-3">{{ competition?.name }}</h3>
+                <h4 class="mb-3">
+                  {{ competition?.reward | currency :'GBP':'symbol':'1.2-2' }}
+                </h4>
+                <p class="text-muted mb-3">
+                  Submission deadline: {{ competition?.deadline | date: "MMM d, y, h:mm a" }}
+                </p>
+                <p class="mb-5">
+                  You'll be charged <b>{{ competition?.fee | currency :'GBP':'symbol':'1.2-2' }}</b> entry fee
+                </p>
+                <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

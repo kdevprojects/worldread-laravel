@@ -26,7 +26,7 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
     <app-root></app-root>
-    <script src="https://www.paypal.com/sdk/js?client-id=AawjmRbKugS-b2dgHHjA064BBwQmhpozkbZiMJUkm5ygM_47k0Xs1sYmSMP3Z7fEeIQ-rlWgp44le2Gz"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AawjmRbKugS-b2dgHHjA064BBwQmhpozkbZiMJUkm5ygM_47k0Xs1sYmSMP3Z7fEeIQ-rlWgp44le2Gz&currency=GBP"></script>
 
     {{-- This'll load our hashed assets when in production --}}
     @env('production')
