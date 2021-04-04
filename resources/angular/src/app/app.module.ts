@@ -7,7 +7,6 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommentEditorComponent } from './structure/comment-editor/comment-editor.component';
-import { CompetitionCheckoutComponent } from './structure/competition-checkout/competition-checkout.component';
 import { CompetitionComponent } from './structure/competition/competition.component';
 import { CompetitionsListComponent } from './structure/competitions-list/competitions-list.component';
 import { DebounceClickDirective } from './directives/debounce-click.directive';
@@ -36,8 +35,7 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
     ScrollProgressDirective,
     ProfileComponent,
     CompetitionComponent,
-    CompetitionsListComponent,
-    CompetitionCheckoutComponent,
+    CompetitionsListComponent
   ],
   imports: [
     BrowserModule,

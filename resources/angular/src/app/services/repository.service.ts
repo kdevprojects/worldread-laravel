@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Story } from '../models/story.model';
+import { ToastService } from './toast.service';
 import { User } from '../models/user.model';
 import { UserService } from './user.service';
 import { map } from 'rxjs/operators';
@@ -28,7 +29,8 @@ export class Repository {
   constructor(
     private http: HttpClient,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {
     this.getStories();
   }
@@ -111,6 +113,7 @@ export class Repository {
         });
       this.comments.push(c);
       this.story.comments_count++;
+      this.showStandardToast('Comment posted');
     });
   }
 
@@ -122,6 +125,7 @@ export class Repository {
       (data) => {
         if (data?.liked) {
           this.story.likes_count++;
+          this.showStandardToast('Story liked');
         }
       },
       (err) => console.error(err)
@@ -147,5 +151,9 @@ export class Repository {
     this.http.get<Competition>(`${competitionsUrl}/${param}`).subscribe((c) => {
       this.competition = c;
     });
+  }
+
+  showStandardToast(message: string) {
+    this.toastService.show(message);
   }
 }

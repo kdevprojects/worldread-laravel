@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ErrorHandlerService } from '../services/error-handler.service';
-import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
 import { fadeAnimation } from '../animations';
 
@@ -12,27 +10,14 @@ import { fadeAnimation } from '../animations';
   animations: [fadeAnimation], // register the animation
 })
 export class AdminComponent {
-  private lastError: string[];
   public isMenuCollapsed = true;
 
   constructor(
-    errorService: ErrorHandlerService,
     public userService: UserService
   ) {
-    errorService.errors.subscribe((error) => {
-      this.lastError = error;
-    });
   }
 
   ngOnInit(): void {
-  }
-
-  get error(): string[] {
-    return this.lastError;
-  }
-
-  clearError() {
-    this.lastError = null;
   }
 
   logout() {

@@ -102,6 +102,7 @@ export class CompetitionCheckoutComponent implements OnInit {
       onCancel: (data, actions) => {
         console.log('OnCancel', data, actions);
         //this.showCancel = true;
+        this.showDangerToast('Payment cancelled');
       },
       onError: (err) => {
         console.log('OnError', err);
