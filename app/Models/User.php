@@ -91,6 +91,7 @@ class User extends Authenticatable
             'competitions_users',
             'user_id',
             'competition_id'
-        );
+        )->as('subscription')
+            ->withTimestamps();
     }
 }

@@ -1,0 +1,64 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <section class="competition-section">
+    <div class="row">
+      <div class="col-lg-7">
+        <main>
+          <div class="row">
+            <div class="col-12 mb-3">
+              <h2 class="competition-name mb-3">
+                {{ competition?.name }}
+              </h2>
+              <img
+                loading="lazy"
+                class="competition-image img-fluid"
+                alt="{{ competition?.name }}"
+                src="https://picsum.photos/435/288?random={{ competition?.id }}"
+              />
+            </div>
+            <div class="col-12 mb-3">
+              <div class="competition-description">
+                {{ competition?.description }}
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+      <div class="col-lg-4 ml-auto order-first order-lg-last">
+        <aside>
+          <div class="card border-light shadow mb-5">
+            <div class="card-body py-5">
+              <div class="d-flex flex-column align-items-center">
+                <div class="text-center">
+                  <h3 class="mb-3">{{ competition?.name }}</h3>
+                  <h4 class="mb-3">
+                    {{ competition?.reward | currency: "GBP" }}
+                  </h4>
+                  <div class="progress mb-3">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: 25%"
+                      aria-valuenow="25"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                  <p class="text-muted mb-5">
+                    {{ competition?.deadline | date: "MMM d, y, h:mm a" }}
+                  </p>
+
+                  <button class="btn btn-primary btn-block">Join</button>
+                  <button class="btn btn-outline-primary btn-block">
+                    Watch
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</div>

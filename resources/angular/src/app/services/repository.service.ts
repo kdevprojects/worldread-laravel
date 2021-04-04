@@ -1,4 +1,5 @@
 import { Comment } from '../models/comment.model';
+import { Competition } from '../models/competition.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -12,6 +13,7 @@ const storiesUrl = '/api/stories';
 const commentsUrl = '/api/comments';
 const likesUrl = '/api/likes';
 const profilesUrl = '/api/profiles';
+const competitionsUrl = '/api/competitions';
 
 @Injectable()
 export class Repository {
@@ -20,6 +22,8 @@ export class Repository {
   profileStories: Story[];
   comments: Comment[];
   profile: User;
+  competitions: Competition[];
+  competition: Competition;
 
   constructor(
     private http: HttpClient,
@@ -131,6 +135,17 @@ export class Repository {
   getProfile(param: any) {
     this.http.get<User>(`${profilesUrl}/${param}`).subscribe((p) => {
       this.profile = p;
+    });
+  }
+
+  getCompetitions() {
+    let url = `${competitionsUrl}`;
+    this.http.get<Competition[]>(url).subscribe((c) => (this.competitions = c));
+  }
+
+  getCompetition(param: any) {
+    this.http.get<Competition>(`${competitionsUrl}/${param}`).subscribe((c) => {
+      this.competition = c;
     });
   }
 }
