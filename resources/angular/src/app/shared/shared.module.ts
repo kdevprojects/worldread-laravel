@@ -1,6 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
+import { IconsModule } from '../icons/icons.module';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPayPalModule } from 'ngx-paypal';
@@ -13,7 +14,7 @@ import { ToastComponent } from './toast/toast.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    RouterModule, NgxPayPalModule
+    RouterModule, NgxPayPalModule, IconsModule
   ],
   declarations: [ToastComponent],
   exports: [
@@ -21,7 +22,7 @@ import { ToastComponent } from './toast/toast.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    RouterModule, NgxPayPalModule, ToastComponent
+    RouterModule, NgxPayPalModule, ToastComponent, IconsModule
   ]
 })
 export class SharedModule {}

@@ -106,6 +106,7 @@ export class CompetitionCheckoutComponent implements OnInit {
         this.repo.enterCompetition(this.competition).subscribe(
           (data) => {
             this.showSuccessToast(data.message);
+            this.router.navigateByUrl('/members/overview');
           },
           (err) => console.error(err)
         );

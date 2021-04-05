@@ -1,6 +1,99 @@
 <div class="container my-5">
   <h1 class="page-title">Overview</h1>
+  <hr />
+  <h1 class="mb-5">My competitions</h1>
   <div class="row">
-    <div class="col-12"></div>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-lg-12">
+          <div
+            *ngIf="competitions?.length > 0; else noCompetitions"
+            class="card-columns"
+          >
+            <a
+              href="#"
+              [routerLink]="['/competitions', competition?.slug]"
+              *ngFor="let competition of competitions"
+              class="d-block"
+            >
+              <div class="card bg-primary text-light border-light shadow mb-3">
+                <img
+                  class="card-img-top"
+                  alt=""
+                  src="https://picsum.photos/368/160?random={{
+                    competition?.id
+                  }}"
+                  style="height: 160px; width: 100%; display: block"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">{{ competition?.name }}</h5>
+                  <p class="card-text">{{ competition?.description }}</p>
+                  <p class="card-text">
+                    <small class="text-muted"
+                      >Ends {{ competition?.deadline | date: "medium" }}</small
+                    >
+                  </p>
+                </div>
+                <i-feather name="check-square"></i-feather>
+              </div>
+            </a>
+          </div>
+          <ng-template #noCompetitions>
+            There are no competitions yet.
+          </ng-template>
+        </div>
+      </div>
+    </div>
   </div>
+  <hr />
+  <h1 class="mb-5">My stories</h1>
+  <div *ngIf="stories?.length > 0; else noStories">
+    <article *ngFor="let story of stories" class="clearfix pt-3 pb-5">
+      <header class="article-header">
+        <h2 class="article-title">
+          <a href="#" [routerLink]="['/stories', story?.slug]" rel="bookmark">{{
+            story?.title
+          }}</a>
+        </h2>
+        <div class="article-meta text-muted">
+          <div class="row">
+            <div class="col-12 col-md-8 small">
+              <span class="screen-reader-text">Published on </span>
+              <time class="article-date published">{{
+                story?.created_at | date: "mediumDate"
+              }}</time>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="text-body text-md-right mt-3 mt-md-0">
+                {{ story?.comments_count }}
+                <i-feather name="message-square" class="mr-3"></i-feather>
+                {{ story?.likes_count }}
+                <i-feather name="heart"></i-feather>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="article-content">
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <img
+              loading="lazy"
+              class="article-image img-fluid"
+              alt="{{ story?.title }}"
+              src="https://picsum.photos/435/288?random={{ story?.id }}"
+              width="435"
+              height="288"
+            />
+          </div>
+          <div class="col-12 col-md-8">
+            <div class="article-content-summary">
+              {{ story?.summary }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+  <ng-template #noStories> There are no stories yet. </ng-template>
 </div>

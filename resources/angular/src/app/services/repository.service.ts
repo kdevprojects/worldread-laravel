@@ -176,4 +176,28 @@ export class Repository {
       });
     });
   }
+
+  getProfileCompetitions$(user: User): Observable<Competition[]> {
+    let url = `${profilesUrl}/${user.id}/competitions`;
+    return this.http.get<Competition[]>(url).pipe(
+      map((c) => {
+        this.profileCompetitions = c;
+        this.profileCompetitionsIds = [];
+        this.profileCompetitions.forEach((c, index) => {
+          this.profileCompetitionsIds[index] = c.id;
+        });
+        return c;
+      })
+    );
+  }
+
+  getProfileStories$(user: User): Observable<Story[]> {
+    let url = `${profilesUrl}/${user.id}/stories`;
+    return this.http.get<Story[]>(url).pipe(
+      map((s) => {
+        this.profileStories = s;
+        return s;
+      })
+    );
+  }
 }

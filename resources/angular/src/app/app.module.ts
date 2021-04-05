@@ -12,7 +12,6 @@ import { CompetitionsListComponent } from './structure/competitions-list/competi
 import { DebounceClickDirective } from './directives/debounce-click.directive';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { IconsModule } from './icons/icons.module';
 import { ModelModule } from './models/model.module';
 import { NavbarComponent } from './structure/navbar/navbar.component';
 import { NgModule } from '@angular/core';
@@ -41,7 +40,6 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
     BrowserModule,
     AppRoutingModule,
     ModelModule,
-    IconsModule,
     AdminModule,
     PagesModule,
     BrowserAnimationsModule,

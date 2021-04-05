@@ -1,0 +1,22 @@
+.card {
+  i-feather {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+  &.bg-primary {
+    .card-body {
+      padding-bottom: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
+}
+.article-meta {
+  margin-bottom: 1rem;
+}
+
+.article-content {
+  .article-image {
+    margin-bottom: 1rem;
+  }
+}
