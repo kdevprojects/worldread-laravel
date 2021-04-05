@@ -38,4 +38,15 @@ class ProfileController extends Controller
         $user = User::where('id', $param)->orWhere('username', $param)->firstOrFail();
         return $user->stories()->with('author')->withCount('comments')->withCount('likes')->orderBy('created_at', 'DESC')->get()->toJson();
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function competitions($param)
+    {
+        $user = User::where('id', $param)->orWhere('username', $param)->firstOrFail();
+        return $user->competitions()->orderBy('created_at', 'DESC')->get()->toJson();
+    }
 }

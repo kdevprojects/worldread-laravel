@@ -17,7 +17,7 @@
             *ngFor="let competition of competitions"
             class="d-block"
           >
-            <div class="card mb-3">
+            <div class="card border-light shadow mb-3" *ngIf="!isCompetitionDisabled(competition?.id); else competitionDisabled">
               <img
                 class="card-img-top"
                 alt=""
@@ -34,6 +34,26 @@
                 </p>
               </div>
             </div>
+            <ng-template #competitionDisabled>
+              <div class="card bg-primary text-light border-light shadow mb-3">
+                <img
+                  class="card-img-top"
+                  alt=""
+                  src="https://picsum.photos/368/160?random={{ competition?.id }}"
+                  style="height: 160px; width: 100%; display: block"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">{{ competition?.name }}</h5>
+                  <p class="card-text">{{ competition?.description }}</p>
+                  <p class="card-text">
+                    <small class="text-muted"
+                      >Ends {{ competition?.deadline | date: "medium" }}</small
+                    >
+                  </p>
+                </div>
+                <i-feather name="check-square"></i-feather>
+              </div>
+            </ng-template>
           </a>
         </div>
         <ng-template #noCompetitions>

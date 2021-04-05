@@ -48,7 +48,9 @@ export class UserService {
     this.http.get('/api/user').subscribe(
       (result) => {
         this.currentUserSubject$.next(result);
-        this.currentUserSubject$.subscribe((u) => (this.currentUser = u));
+        this.currentUserSubject$.subscribe((u) => {
+          this.currentUser = u;
+        });
         this.loggedIn$.next(true);
       },
       (error) => {

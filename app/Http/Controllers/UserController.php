@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRegisterRequest;
+
 class UserController extends Controller
 {
     /**
@@ -15,11 +16,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::where('role','=','member')->orderBy('created_at', 'DESC')->get()->toJson();
+        return User::where('role', '=', 'member')->orderBy('created_at', 'DESC')->get()->toJson();
     }
     public function user(Request $request)
     {
-        return $request->user();
+        return $request->user()->with('competitions:id')->firstOrFail()->toJson();
     }
     public function register(UserRegisterRequest $request)
     {
@@ -31,7 +32,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password)
         ]);
         return response()->json([
-            'message' => 'success'
+            'message' => 'User successfully registered'
         ]);
     }
 }

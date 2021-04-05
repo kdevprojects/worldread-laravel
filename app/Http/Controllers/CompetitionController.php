@@ -57,4 +57,24 @@ class CompetitionController extends Controller
             'message' => 'success'
         ]);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Models\Competition  $competition
+     * @return \Illuminate\Http\Response
+     */
+    public function enter($id)
+    {
+        try {
+            $user = Auth::user();
+            $user->competitions()->attach($id);
+        } catch (\Exception $e) {
+            throw new HttpException(500, $e->getMessage());
+        }
+
+        return response()->json([
+            'message' => 'You have successfully entered a competition'
+        ]);
+    }
 }

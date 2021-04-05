@@ -24,6 +24,7 @@ class CreateCompetitionsUsersTable extends Migration
                 ->references('id')
                 ->on('competitions')->onDelete('cascade');
             $table->timestamps();
+            $table->unique(['user_id', 'competition_id']);
         });
     }
 

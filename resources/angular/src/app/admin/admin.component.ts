@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Repository } from '../services/repository.service';
 import { UserService } from '../services/user.service';
 import { fadeAnimation } from '../animations';
 
@@ -11,13 +12,10 @@ import { fadeAnimation } from '../animations';
 })
 export class AdminComponent {
   public isMenuCollapsed = true;
-
-  constructor(
-    public userService: UserService
-  ) {
-  }
+  constructor(public userService: UserService) {}
 
   ngOnInit(): void {
+
   }
 
   logout() {

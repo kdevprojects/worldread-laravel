@@ -1,4 +1,13 @@
 .card {
-  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
-  border: none;
+  i-feather {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+  &.bg-primary {
+    .card-body {
+      padding-bottom: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
 }

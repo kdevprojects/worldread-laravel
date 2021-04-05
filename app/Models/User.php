@@ -94,4 +94,9 @@ class User extends Authenticatable
         )->as('subscription')
             ->withTimestamps();
     }
+
+    public function getCompetitionsIdsAttribute()
+    {
+        return $this->competitions->pluck('competition_id');
+    }
 }

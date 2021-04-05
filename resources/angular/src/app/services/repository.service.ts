@@ -21,6 +21,8 @@ export class Repository {
   story: Story;
   stories: Story[];
   profileStories: Story[];
+  profileCompetitions: Competition[];
+  profileCompetitionsIds: number[];
   comments: Comment[];
   profile: User;
   competitions: Competition[];
@@ -153,7 +155,25 @@ export class Repository {
     });
   }
 
+  enterCompetition(c: Competition): Observable<any> {
+    let data = {
+      id: c.id,
+    };
+    return this.http.post<any>(`${competitionsUrl}/${c.id}/enter`, data);
+  }
+
   showStandardToast(message: string) {
     this.toastService.show(message);
+  }
+
+  getProfileCompetitions(user: User) {
+    let url = `${profilesUrl}/${user.id}/competitions`;
+    this.http.get<Competition[]>(url).subscribe((c) => {
+      this.profileCompetitions = c;
+      this.profileCompetitionsIds = [];
+      this.profileCompetitions.forEach((c, index) => {
+        this.profileCompetitionsIds[index] = c.id;
+      });
+    });
   }
 }

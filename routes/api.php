@@ -23,10 +23,9 @@ use App\Models\User;
 */
 
 // Authentication
-Route::middleware('auth:api')
-    ->get('user', function (Request $request) {
-        return $request->user();
-    });
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('user', [UserController::class, 'user']);
+});
 Route::post('user', [UserController::class, 'register']);
 Route::post('auth/login', [AuthController::class, 'login']);
 
@@ -57,11 +56,12 @@ Route::group(['middleware' => 'auth:api'], function () {
 // Profiles
 Route::get('profiles/{param}', [ProfileController::class, 'show']);
 Route::get('profiles/{param}/stories', [ProfileController::class, 'stories']);
+Route::get('profiles/{param}/competitions', [ProfileController::class, 'competitions']);
 
 // Competitions
 Route::group(['middleware' => 'auth:api'], function () {
     Route::middleware(['scope:member'])->group(function () {
-        Route::post('competitions', [CompetitionController::class, 'join']);
+        Route::post('competitions/{id}/enter', [CompetitionController::class, 'enter']);
     });
 });
 Route::get('competitions', [CompetitionController::class, 'index']);

@@ -1,11 +1,11 @@
-import { Heart, MessageSquare } from 'angular-feather/icons';
+import { CheckSquare, Heart, MessageSquare } from 'angular-feather/icons';
 
 import { FeatherModule } from 'angular-feather';
 import { NgModule } from '@angular/core';
 
 const icons = {
   MessageSquare,
-  Heart
+  Heart, CheckSquare
 };
 
 @NgModule({

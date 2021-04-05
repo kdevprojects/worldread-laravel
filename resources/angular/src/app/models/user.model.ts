@@ -1,3 +1,4 @@
+import { Competition } from "./competition.model";
 import { Story } from "./story.model";
 
 export class User {
@@ -8,5 +9,6 @@ export class User {
     public last_name?: string,
     public username?: string,
     public stories?: Story[],
+    public competitions?: Competition[]
   ) {}
 }

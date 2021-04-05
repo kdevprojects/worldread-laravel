@@ -98,6 +98,12 @@ export class CompetitionCheckoutComponent implements OnInit {
         );
         //this.showSuccess = true;
         this.showSuccessToast('Payment authorized');
+        this.repo.enterCompetition(this.competition).subscribe(
+          (data) => {
+            this.showSuccessToast(data.message);
+          },
+          (err) => console.error(err)
+        );
       },
       onCancel: (data, actions) => {
         console.log('OnCancel', data, actions);
