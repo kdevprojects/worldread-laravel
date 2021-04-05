@@ -53,8 +53,17 @@
                     href="#"
                     [routerLink]="['/members/competitions/enter', competition?.slug]"
                     class="btn btn-primary btn-block"
+                    *ngIf="!isCompetitionDisabled(competition?.id); else competitionDisabled"
                     >Enter now</a
                   >
+                  <ng-template #competitionDisabled>
+                    <a
+                    href="#"
+                    [routerLink]="['/members/overview']"
+                    class="btn btn-primary btn-block"
+                    >Submit a story</a
+                  >
+                  </ng-template>
                 </div>
               </div>
             </div>

@@ -16,7 +16,7 @@ export class CompetitionCheckoutComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   constructor(
     private repo: Repository,
-    router: Router,
+    public router: Router,
     activeRoute: ActivatedRoute,
     private toastService: ToastService
   ) {
@@ -26,6 +26,7 @@ export class CompetitionCheckoutComponent implements OnInit {
     } else {
       router.navigateByUrl('/');
     }
+
   }
 
   get competition(): Competition {
@@ -33,6 +34,10 @@ export class CompetitionCheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.isCompetitionDisabled(this.competition.id)) {
+      this.router.navigateByUrl('/members/overview');
+      this.showStandardToast("Your're already taking part in this competition");
+    }
     this.initConfig();
   }
 
@@ -137,5 +142,16 @@ export class CompetitionCheckoutComponent implements OnInit {
       classname: 'bg-danger text-light',
       delay: 5000,
     });
+  }
+
+  get currentUserCompetitions(): number[] {
+    return this.repo.profileCompetitionsIds;
+  }
+
+  isCompetitionDisabled(id: number): boolean {
+    if (this.currentUserCompetitions?.indexOf(id) != -1) {
+      return true;
+    }
+    return false;
   }
 }
