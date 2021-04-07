@@ -4,9 +4,11 @@
     bottom: 1.25rem;
     right: 1.25rem;
   }
+  .card-body {
+    padding-bottom: 2.5rem;
+  }
   &.bg-primary {
     .card-body {
-      padding-bottom: 2.5rem;
       padding-right: 2.5rem;
     }
   }

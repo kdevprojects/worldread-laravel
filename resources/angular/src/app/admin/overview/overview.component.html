@@ -3,46 +3,42 @@
   <hr />
   <h1 class="mb-5">My competitions</h1>
   <div class="row">
-    <div class="col-12">
-      <div class="row">
-        <div class="col-lg-12">
-          <div
-            *ngIf="competitions?.length > 0; else noCompetitions"
-            class="card-columns"
-          >
-            <a
-              href="#"
-              [routerLink]="['/competitions', competition?.slug]"
-              *ngFor="let competition of competitions"
-              class="d-block"
-            >
-              <div class="card bg-primary text-light border-light shadow mb-3">
-                <img
-                  class="card-img-top"
-                  alt=""
-                  src="https://picsum.photos/368/160?random={{
-                    competition?.id
-                  }}"
-                  style="height: 160px; width: 100%; display: block"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">{{ competition?.name }}</h5>
-                  <p class="card-text">{{ competition?.description }}</p>
-                  <p class="card-text">
-                    <small class="text-muted"
-                      >Ends {{ competition?.deadline | date: "medium" }}</small
-                    >
-                  </p>
-                </div>
-                <i-feather name="check-square"></i-feather>
-              </div>
-            </a>
+    <div class="col-lg-12">
+      <div
+        *ngIf="competitions?.length > 0; else noCompetitions"
+        class="card-columns"
+      >
+        <a
+          href="#"
+          [routerLink]="['/competitions', competition?.slug]"
+          *ngFor="let competition of competitions"
+          class="d-block"
+        >
+          <div class="card bg-primary text-light border-light shadow mb-3">
+            <img
+              class="card-img-top"
+              alt=""
+              src="https://picsum.photos/368/160?random={{ competition?.id }}"
+              style="height: 160px; width: 100%; display: block"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ competition?.name }}</h5>
+              <p class="card-text" style="height: 50px" ellipsis>
+                {{ competition?.description }}
+              </p>
+              <p class="card-text">
+                <small class="text-muted"
+                  >Ends {{ competition?.deadline | date: "medium" }}</small
+                >
+              </p>
+            </div>
+            <i-feather name="check-square"></i-feather>
           </div>
-          <ng-template #noCompetitions>
-            There are no competitions yet.
-          </ng-template>
-        </div>
+        </a>
       </div>
+      <ng-template #noCompetitions>
+        There are no competitions yet.
+      </ng-template>
     </div>
   </div>
   <hr />

@@ -26,7 +26,7 @@
               />
               <div class="card-body">
                 <h5 class="card-title">{{ competition?.name }}</h5>
-                <p class="card-text">{{ competition?.description }}</p>
+                <p class="card-text" style="height: 50px;" ellipsis>{{ competition?.description }}</p>
                 <p class="card-text">
                   <small class="text-muted"
                     >Ends {{ competition?.deadline | date: "medium" }}</small
@@ -44,7 +44,7 @@
                 />
                 <div class="card-body">
                   <h5 class="card-title">{{ competition?.name }}</h5>
-                  <p class="card-text">{{ competition?.description }}</p>
+                  <p class="card-text" style="height: 50px;" ellipsis>{{ competition?.description }}</p>
                   <p class="card-text">
                     <small class="text-muted"
                       >Ends {{ competition?.deadline | date: "medium" }}</small
