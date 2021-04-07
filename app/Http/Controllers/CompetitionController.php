@@ -77,4 +77,26 @@ class CompetitionController extends Controller
             'message' => 'You have successfully entered a competition'
         ]);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Models\Competition  $competition
+     * @return \Illuminate\Http\Response
+     */
+    public function submit(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            $user->competitions()->updateExistingPivot($request->competition_id, [
+                'story_id' => $request->story_id,
+            ]);
+        } catch (\Exception $e) {
+            throw new HttpException(500, $e->getMessage());
+        }
+
+        return response()->json([
+            'message' => 'You have successfully submitted a story'
+        ]);
+    }
 }

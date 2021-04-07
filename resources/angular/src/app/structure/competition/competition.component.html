@@ -33,7 +33,7 @@
                 <div class="text-center">
                   <h3 class="mb-3">{{ competition?.name }}</h3>
                   <h4 class="mb-3">
-                    {{ competition?.reward | currency :'GBP':'symbol':'1.2-2' }}
+                    {{ competition?.reward | currency: "GBP":"symbol":"1.2-2" }}
                   </h4>
                   <div class="progress mb-3">
                     <div
@@ -51,18 +51,24 @@
 
                   <a
                     href="#"
-                    [routerLink]="['/members/competitions/enter', competition?.slug]"
+                    [routerLink]="[
+                      '/members/competitions/enter',
+                      competition?.slug
+                    ]"
                     class="btn btn-primary btn-block"
-                    *ngIf="!isCompetitionDisabled(competition?.id); else competitionDisabled"
+                    *ngIf="
+                      !isCompetitionDisabled(competition?.id);
+                      else competitionDisabled
+                    "
                     >Enter now</a
                   >
                   <ng-template #competitionDisabled>
-                    <a
-                    href="#"
-                    [routerLink]="['/members/overview']"
-                    class="btn btn-primary btn-block"
-                    >Submit a story</a
-                  >
+                    <button
+                      class="btn btn-primary btn-block"
+                      (click)="open(content)"
+                    >
+                      Submit a story
+                    </button>
                   </ng-template>
                 </div>
               </div>
@@ -73,3 +79,51 @@
     </div>
   </section>
 </div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Submit a story</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <ng-template #st let-r="result" let-t="term">
+          <img
+            [src]="'https://picsum.photos/435/288?random=' + r['id']"
+            class="mr-1"
+            style="width: 16px"
+          />
+          <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
+        </ng-template>
+        <label for="story">Select one of your stories</label>
+        <input
+          id="story"
+          class="form-control"
+          placeholder="Start typing..."
+          name="story"
+          [(ngModel)]="story"
+          [ngbTypeahead]="search"
+          [resultTemplate]="st"
+          [inputFormatter]="formatter"
+        />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="submitStory()">
+      Submit
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="modal.close()"
+    >Close</button>
+  </div>
+</ng-template>

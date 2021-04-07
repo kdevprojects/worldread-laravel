@@ -200,4 +200,12 @@ export class Repository {
       })
     );
   }
+
+  submitCompetionStory(c: Competition, s: Story): Observable<any> {
+    let data = {
+      competition_id: c.id,
+      story_id: s.id
+    };
+    return this.http.post<any>(`${competitionsUrl}/${c.id}/submit`, data);
+  }
 }

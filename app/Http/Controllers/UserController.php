@@ -20,7 +20,7 @@ class UserController extends Controller
     }
     public function user(Request $request)
     {
-        return $request->user()->with('competitions:id')->firstOrFail()->toJson();
+        return $request->user();
     }
     public function register(UserRegisterRequest $request)
     {

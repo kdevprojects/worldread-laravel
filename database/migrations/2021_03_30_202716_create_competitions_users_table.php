@@ -23,6 +23,10 @@ class CreateCompetitionsUsersTable extends Migration
             $table->foreign('competition_id')
                 ->references('id')
                 ->on('competitions')->onDelete('cascade');
+            $table->unsignedBigInteger('story_id')->nullable();
+            $table->foreign('story_id')
+                ->references('id')
+                ->on('stories');
             $table->timestamps();
             $table->unique(['user_id', 'competition_id']);
         });

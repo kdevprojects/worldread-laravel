@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost/api',
   oauth_client_id: 2,
-  oauth_client_secret: 'zCw4CIfBjE02g46rOFjbU4BPPp4wHQRTeY0PVO8P',
+  oauth_client_secret: 'KK9VhFEsQgnf56K9eZ05HFD9fEkaKQ1Y1o2FIiwP',
 };
 
 /*

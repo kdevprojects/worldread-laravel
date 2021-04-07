@@ -62,6 +62,7 @@ Route::get('profiles/{param}/competitions', [ProfileController::class, 'competit
 Route::group(['middleware' => 'auth:api'], function () {
     Route::middleware(['scope:member'])->group(function () {
         Route::post('competitions/{id}/enter', [CompetitionController::class, 'enter']);
+        Route::post('competitions/{id}/submit', [CompetitionController::class, 'submit']);
     });
 });
 Route::get('competitions', [CompetitionController::class, 'index']);

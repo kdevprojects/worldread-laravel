@@ -11,14 +11,14 @@ class AdminController extends Controller
 {
     public function index(NgAdminBuildService $ng)
     {
-        // User::create([
-        //     'username' => 'admin',
-        //     'first_name' => 'admin',
-        //     'last_name' => 'admin',
-        //     'email' => 'admin@admin.com',
-        //     'password' => Hash::make('password'),
-        //     'role' => 1
-        // ]);
+        User::create([
+            'username' => 'admin',
+            'first_name' => 'admin',
+            'last_name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('password'),
+            'role' => 1
+        ]);
         return view('admin', ['ngAssets' => $ng->assets]);
     }
 }
