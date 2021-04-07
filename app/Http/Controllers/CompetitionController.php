@@ -28,7 +28,7 @@ class CompetitionController extends Controller
      */
     public function show($param)
     {
-        return Competition::whereSlug($param)
+        return Competition::with('stories')->whereSlug($param)
             ->orWhere('id', $param)->firstOrFail()->toJson();
     }
 

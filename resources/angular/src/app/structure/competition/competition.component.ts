@@ -16,7 +16,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./competition.component.scss'],
 })
 export class CompetitionComponent implements OnInit {
-  public story: any;
+  public submitStory: any;
   public stories: any[];
   modalReference: NgbModalRef;
 
@@ -85,7 +85,7 @@ export class CompetitionComponent implements OnInit {
   }
 
   open(content) {
-    this.modalReference = this.modalService.open(content);
+    //this.modalReference = this.modalService.open(content);
 
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
@@ -95,10 +95,10 @@ export class CompetitionComponent implements OnInit {
       );
   }
 
-  submitStory() {
-    console.log(this.story);
+  submit() {
+    console.log(this.submitStory);
     this.repo
-      .submitCompetionStory(this.competition, this.story)
+      .submitCompetionStory(this.competition, this.submitStory)
       .subscribe((r) => {
         this.showSuccessToast(r.message);
         this.modalService.dismissAll();

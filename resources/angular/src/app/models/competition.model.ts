@@ -1,3 +1,4 @@
+import { Story } from "./story.model";
 import { User } from "./user.model";
 
 export class Competition {
@@ -10,6 +11,7 @@ export class Competition {
     public competitors_count?: number,
     public slug?: string,
     public deadline?: Date,
+    public stories?: Story[],
     public created_at?: Date,
     public updated_at?: Date
   ) {
