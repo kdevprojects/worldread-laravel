@@ -139,12 +139,14 @@
     <form>
       <div class="form-group">
         <ng-template #st let-r="result" let-t="term">
-          <img
-            [src]="'https://picsum.photos/435/288?random=' + r['id']"
-            class="mr-1"
-            style="width: 16px"
-          />
-          <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
+          <div class="p-3">
+            <img
+              [src]="'https://picsum.photos/435/288?random=' + r['id']"
+              class="mr-1"
+              style="width: 16px"
+            />
+            <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
+          </div>
         </ng-template>
         <label for="submitStory">Select one of your stories</label>
         <input
@@ -156,6 +158,9 @@
           [ngbTypeahead]="search"
           [resultTemplate]="st"
           [inputFormatter]="formatter"
+          (focus)="focus$.next($any($event).target.value)"
+          (click)="click$.next($any($event).target.value)"
+          #instance="ngbTypeahead"
         />
       </div>
     </form>

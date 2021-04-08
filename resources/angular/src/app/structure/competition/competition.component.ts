@@ -1,8 +1,17 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, OperatorFunction } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  NgbModal,
+  NgbModalRef,
+  NgbTypeahead,
+} from '@ng-bootstrap/ng-bootstrap';
+import { Observable, OperatorFunction, Subject, merge } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+} from 'rxjs/operators';
 
 import { Competition } from 'src/app/models/competition.model';
 import { Repository } from 'src/app/services/repository.service';
@@ -20,14 +29,26 @@ export class CompetitionComponent implements OnInit {
   public stories: any[];
   modalReference: NgbModalRef;
 
+  @ViewChild('instance', { static: true }) instance: NgbTypeahead;
+  focus$ = new Subject<string>();
+  click$ = new Subject<string>();
+
   search: OperatorFunction<string, readonly { title; id }[]> = (
     text$: Observable<string>
-  ) =>
-    text$.pipe(
+  ) => {
+    const debouncedText$ = text$.pipe(
       debounceTime(200),
+      distinctUntilChanged()
+    );
+    const clicksWithClosedPopup$ = this.click$.pipe(
+      filter(() => !this.instance?.isPopupOpen())
+    );
+    const inputFocus$ = this.focus$;
+
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map((term) =>
         term === ''
-          ? [this.stories]
+          ? this.stories
           : this.stories
               .filter(
                 (v) => v.title?.toLowerCase().indexOf(term.toLowerCase()) > -1
@@ -35,6 +56,7 @@ export class CompetitionComponent implements OnInit {
               .slice(0, 10)
       )
     );
+  };
 
   formatter = (x: { title: string }) => x.title;
 
