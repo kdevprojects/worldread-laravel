@@ -2,14 +2,24 @@
   <h1 class="page-title">Submit a Story</h1>
   <div class="row no-gutters">
     <div class="col-lg-10 mb-5">
-      <form>
+      <form name="form"
+      (ngSubmit)="f.form.valid && submit(f)"
+      #f="ngForm"
+      novalidate>
         <div class="form-group">
           <label>Title</label>
           <input
             class="form-control"
             name="title"
-            [(ngModel)]="newStory.title"
+            placeholder="Enter a title"
+            [(ngModel)]="model.title"
+            #title="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && title.invalid }"
+            required
           />
+          <div *ngIf="f.submitted && title.invalid" class="invalid-feedback">
+            <div *ngIf="title.errors.required">This field is required</div>
+          </div>
         </div>
         <div class="form-group">
           <label>Summary</label>
@@ -17,8 +27,15 @@
             class="form-control"
             name="summary"
             rows="5"
-            [(ngModel)]="newStory.summary"
+            placeholder="Enter a summary"
+            [(ngModel)]="model.summary"
+            #summary="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && summary.invalid }"
+            required
           ></textarea>
+          <div *ngIf="f.submitted && summary.invalid" class="invalid-feedback">
+            <div *ngIf="summary.errors.required">This field is required</div>
+          </div>
         </div>
         <div class="form-group">
           <label>Story</label>
@@ -26,10 +43,17 @@
             class="form-control"
             name="body"
             rows="15"
-            [(ngModel)]="newStory.body"
+            placeholder="Enter a story"
+            [(ngModel)]="model.body"
+            #body="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && body.invalid }"
+            required
           ></textarea>
+          <div *ngIf="f.submitted && body.invalid" class="invalid-feedback">
+            <div *ngIf="body.errors.required">This field is required</div>
+          </div>
         </div>
-        <button class="btn btn-primary" (click)="saveStory()">Submit</button>
+        <button class="btn btn-primary">Submit</button>
       </form>
     </div>
   </div>

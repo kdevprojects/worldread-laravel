@@ -79,21 +79,20 @@ export class Repository {
     this.http.post('/api/account/logout', null).subscribe((response) => {});
   }
 
-  createStory(s: Story) {
+  createStory(s: Story): Observable<any> {
     let data = {
       title: s.title,
       summary: s.summary,
       body: s.body,
     };
-    this.http.post<number>(storiesUrl, data).subscribe((id) => {
+    return this.http.post<number>(storiesUrl, data).pipe(map((id) => {
       s.id = id;
       s.author = {
         id: this.userService.currentUser.id,
         username: this.userService.currentUser.username,
       };
       this.stories.push(s);
-      this.router.navigateByUrl('/members/overview');
-    });
+    }));
   }
 
   getComments(s: Story) {

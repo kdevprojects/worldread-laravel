@@ -17,7 +17,7 @@
             *ngFor="let competition of competitions"
             class="d-block"
           >
-            <div class="card border-light shadow mb-3" *ngIf="!isCompetitionDisabled(competition?.id); else competitionDisabled">
+            <div class="card border-0 shadow mb-3" *ngIf="!isCompetitionDisabled(competition?.id); else competitionDisabled">
               <img
                 class="card-img-top"
                 alt=""
@@ -35,7 +35,7 @@
               </div>
             </div>
             <ng-template #competitionDisabled>
-              <div class="card bg-primary text-light border-light shadow mb-3">
+              <div class="card bg-primary text-light border-0 shadow mb-3">
                 <img
                   class="card-img-top"
                   alt=""
