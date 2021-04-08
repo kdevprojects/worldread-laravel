@@ -20,7 +20,7 @@ class CreateCompetitionsTable extends Migration
             $table->string('slug')->unique();
             $table->decimal('fee')->default(0);
             $table->decimal('reward')->default(0);
-            $table->date('deadline');
+            $table->datetime('deadline');
             $table->timestamps();
         });
     }

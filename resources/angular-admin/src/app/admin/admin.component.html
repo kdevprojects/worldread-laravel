@@ -33,6 +33,16 @@
       <li class="nav-item">
         <a
           class="nav-link"
+          [routerLink]="'results'"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="isMenuCollapsed = true"
+          >Results</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
           [routerLink]="'members'"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"

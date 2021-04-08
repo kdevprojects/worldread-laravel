@@ -20,11 +20,7 @@ class AdminController extends Controller
         //     'password' => Hash::make('password'),
         //     'role' => 1
         // ]);
-        $competitions = Competition::with(['stories' => function ($q) {
-            $top = $q->withCount('likes')->orderBy('likes_count', 'desc')->first();
-            dd($top->title);
-        }])->get()->toJson();
-        dd($competitions);
+
         return view('admin', ['ngAssets' => $ng->assets]);
     }
 }

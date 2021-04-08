@@ -9,6 +9,7 @@ import { LoginGuard } from '../auth/login.guard';
 import { MembersComponent } from './members/members.component';
 import { NgModule } from '@angular/core';
 import { OverviewComponent } from './overview/overview.component';
+import { ResultsComponent } from './results/results.component';
 import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
     component: AdminComponent,
     canActivateChild: [AuthenticationGuard],
     children: [
+      { path: 'results', component: ResultsComponent },
       { path: 'competitions', component: CompetitionsComponent },
       { path: 'members', component: MembersComponent },
       { path: 'overview', component: OverviewComponent },
@@ -27,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AdminComponent, OverviewComponent, MembersComponent, CompetitionsComponent],
+  declarations: [AdminComponent, OverviewComponent, MembersComponent, CompetitionsComponent, ResultsComponent],
   imports: [SharedModule, RouterModule.forChild(routes), AuthModule],
 })
 export class AdminModule {}

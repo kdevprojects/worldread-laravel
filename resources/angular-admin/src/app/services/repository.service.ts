@@ -25,6 +25,7 @@ export class Repository {
   profile: User;
   members: User[];
   competitions: Competition[];
+  results: Competition[];
 
   constructor(
     private http: HttpClient,
@@ -161,5 +162,10 @@ export class Repository {
       c.id = id;
       this.competitions.push(c);
     });
+  }
+
+  getResults() {
+    let url = `${competitionsUrl}/results`;
+    this.http.get<Competition[]>(url).subscribe((r) => (this.results = r));
   }
 }

@@ -99,4 +99,23 @@ class CompetitionController extends Controller
             'message' => 'You have successfully submitted a story'
         ]);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function results()
+    {
+        $competitions = Competition::with(['stories' => function ($q) {
+            $q->select(array('title', 'slug', 'author_id'))
+            ->with('author:id,username')
+            ->withCount('comments')
+            ->withCount('likes')
+            ->limit(3)
+            ->orderBy('likes_count', 'desc')
+            ->get();
+        }])->get()->toJson();
+        return $competitions;
+    }
 }

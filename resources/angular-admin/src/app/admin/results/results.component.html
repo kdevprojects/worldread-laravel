@@ -1,0 +1,54 @@
+<h1 class="page-title">Results</h1>
+<div class="row">
+  <div class="col-12">
+    <div *ngIf="results?.length > 0; else noResults" class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Competition</th>
+            <th scope="col">Ends</th>
+            <th scope="col">Competitors</th>
+            <th scope="col">Results</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let result of results">
+            <th scope="row">{{ result?.id }}</th>
+            <td>
+              <a href="#" [routerLink]="['/competitions', result?.slug]" target="_blank">{{
+                result?.name
+              }}</a>
+            </td>
+            <td>{{ result?.deadline | date: "medium" }}</td>
+            <td class="text-center">{{ result?.stories?.length }}</td>
+            <td>
+              <ul
+                *ngIf="result?.stories?.length > 0; else noCompetitors"
+                class="list-unstyled"
+              >
+                <li
+                  *ngFor="let story of result?.stories; index as i"
+                  class="d-flex justify-content-between align-items-center"
+                >
+                  <span
+                    >{{ i + 1 }}.
+                    <a href="#" [routerLink]="['/stories', story?.slug]" target="_blank">{{
+                      story.title
+                    }}</a></span
+                  ><span class="badge badge-primary badge-pill ml-1">{{
+                    story.likes_count
+                  }}</span>
+                </li>
+              </ul>
+              <ng-template #noCompetitors>
+                There are no competitors yet.
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noResults> There are no results available yet. </ng-template>
+  </div>
+</div>

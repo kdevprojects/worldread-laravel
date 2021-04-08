@@ -1,4 +1,4 @@
-import { User } from "./user.model";
+import { Story } from "./story.model";
 
 export class Competition {
   constructor(
@@ -11,7 +11,8 @@ export class Competition {
     public slug?: string,
     public deadline?: Date,
     public created_at?: Date,
-    public updated_at?: Date
+    public updated_at?: Date,
+    public stories?: Story[]
   ) {
 
   }

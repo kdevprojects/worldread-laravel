@@ -22,6 +22,15 @@ use App\Models\User;
 |
 */
 
+// Admin (should have prefix)
+Route::middleware(['auth:api', 'role'])->group(function () {
+    Route::middleware(['scope:admin'])->group(function () {
+        Route::get('users', [UserController::class, 'index']);
+        Route::post('competitions', [CompetitionController::class, 'store']);
+        Route::get('competitions/results', [CompetitionController::class, 'results']);
+    });
+});
+
 // Authentication
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('user', [UserController::class, 'user']);
@@ -67,11 +76,3 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 Route::get('competitions', [CompetitionController::class, 'index']);
 Route::get('competitions/{param}', [CompetitionController::class, 'show']);
-
-// Admin
-Route::middleware(['auth:api', 'role'])->group(function () {
-    Route::middleware(['scope:admin'])->group(function () {
-        Route::get('users', [UserController::class, 'index']);
-        Route::post('competitions', [CompetitionController::class, 'store']);
-    });
-});
