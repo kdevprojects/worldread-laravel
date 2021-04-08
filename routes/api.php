@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 Route::post('user', [UserController::class, 'register']);
 Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('auth/admin', [AuthController::class, 'admin']);
 
 // Stories
 Route::group(['middleware' => 'auth:api'], function () {

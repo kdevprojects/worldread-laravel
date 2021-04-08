@@ -39,11 +39,11 @@ export class LoginComponent implements OnInit {
       scope: 'admin',
     };
 
-    this.http.post('/api/auth/login', data).subscribe(
+    this.http.post('/api/auth/admin', data).subscribe(
       (result: any) => {
         console.log('success');
         console.log(result);
-        this.authService.login(result.access_token);
+        this.authService.login(result.admin_access_token);
         this.loginForm.reset();
         this.router.navigate(['/admin/overview']);
       },

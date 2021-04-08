@@ -21,6 +21,7 @@ class CreateCompetitionsTable extends Migration
             $table->decimal('fee')->default(0);
             $table->decimal('reward')->default(0);
             $table->datetime('deadline');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

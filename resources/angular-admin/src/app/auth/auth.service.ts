@@ -16,14 +16,14 @@ export class AuthService {
 
   login(token: any): void {
     console.log('logging in...');
-    localStorage.setItem('token', token);
+    localStorage.setItem('admin_token', token);
     this.reloadUserData();
     this.router.navigateByUrl('/admin/overview');
   }
 
   logout(): void {
     console.log('logging out...');
-    localStorage.removeItem('token');
+    localStorage.removeItem('admin_token');
     this.currentUserSubject$.next(null);
     this.loggedIn$.next(false);
   }
