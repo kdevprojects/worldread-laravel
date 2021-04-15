@@ -24,6 +24,7 @@ class StoryPostRequest extends FormRequest
     public function rules()
     {
         return [
+            'picture' => 'required',
             'title' => 'required|unique:stories',
             'summary' => 'required',
             'body' => 'required|max:30000',

@@ -26,7 +26,8 @@ class StoryFactory extends Factory
             'author_id' => User::factory(),
             'title' => $this->faker->sentence(5),
             'summary' => $this->faker->paragraph(3),
-            'body' => $this->faker->paragraph(10),
+            'body' => $this->faker->paragraph(25),
+            'picture' => $this->faker->image,
         ];
     }
 }

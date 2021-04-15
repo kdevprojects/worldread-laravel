@@ -19,6 +19,7 @@ class CreateStoriesTable extends Migration
             $table->foreign('author_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
+            $table->text('picture');
             $table->string('title');
             $table->text('summary');
             $table->text('body');

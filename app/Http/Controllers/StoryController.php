@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoryPostRequest;
 use Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class StoryController extends Controller
 {
@@ -27,7 +29,6 @@ class StoryController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -39,11 +40,28 @@ class StoryController extends Controller
     public function store(StoryPostRequest $request)
     {
         try {
+            if ($request->picture) {
+                $picture_64 = $request->picture; //your base64 encoded data
+                $extension = explode('/', explode(':', substr($picture_64, 0, strpos($picture_64, ';')))[1])[1];   // .jpg .png .pdf
+
+                $replace = substr($picture_64, 0, strpos($picture_64, ',') + 1);
+
+                // find substring fro replace here eg: data:image/png;base64,
+
+                $picture = str_replace($replace, '', $picture_64);
+
+                $picture = str_replace(' ', '+', $picture);
+
+                $picture_name = Str::random(10) . '.' . $extension;
+                $path_to_picture = 'img/stories/' . $picture_name;
+                Storage::disk('public')->put($path_to_picture, base64_decode($picture));
+            }
             $story = new Story([
                 'title' => $request->title,
                 'summary' => $request->summary,
                 'body' => $request->body,
-                'author_id' => Auth::user()->id
+                'author_id' => Auth::user()->id,
+                'picture' => $path_to_picture
             ]);
             $story->save();
         } catch (\Exception $e) {

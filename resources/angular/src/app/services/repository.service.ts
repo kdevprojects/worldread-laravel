@@ -79,8 +79,10 @@ export class Repository {
     this.http.post('/api/account/logout', null).subscribe((response) => {});
   }
 
-  createStory(s: Story): Observable<any> {
+  createStory(s: any): Observable<any> {
+    console.log(s);
     let data = {
+      picture: s.picture,
       title: s.title,
       summary: s.summary,
       body: s.body,

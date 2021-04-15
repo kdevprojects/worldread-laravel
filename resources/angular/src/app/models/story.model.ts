@@ -3,6 +3,7 @@ import { User } from "./user.model";
 export class Story {
   constructor(
     public id?: number,
+    public picture?: string,
     public title?: string,
     public summary?: string,
     public body?: string,
