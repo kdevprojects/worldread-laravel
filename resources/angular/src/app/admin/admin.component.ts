@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Repository } from '../services/repository.service';
 import { UserService } from '../services/user.service';
 import { fadeAnimation } from '../animations';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -12,7 +13,8 @@ import { fadeAnimation } from '../animations';
 })
 export class AdminComponent {
   public isMenuCollapsed = true;
-  constructor(public userService: UserService) {}
+  active = 1;
+  constructor(public userService: UserService, public route: ActivatedRoute) {}
 
   ngOnInit(): void {
 

@@ -64,6 +64,11 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 
 // Profiles
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::middleware(['scope:member'])->group(function () {
+        Route::put('profiles/{id}', [ProfileController::class, 'update']);
+    });
+});
 Route::get('profiles/{param}', [ProfileController::class, 'show']);
 Route::get('profiles/{param}/stories', [ProfileController::class, 'stories']);
 Route::get('profiles/{param}/competitions', [ProfileController::class, 'competitions']);

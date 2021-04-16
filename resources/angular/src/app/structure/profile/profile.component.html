@@ -10,7 +10,7 @@
             <div class="card-body py-5">
               <div class="d-flex flex-column align-items-center text-center">
                 <img
-                  src="https://picsum.photos/150/150"
+                  src="/_assets/{{ profile?.picture }}"
                   alt=""
                   class="rounded-circle"
                   width="150"
@@ -25,10 +25,7 @@
                     {{ profile?.email }}
                   </p>
                   <p class="mb-5"><em>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.</em>
+                    {{ profile?.description }}</em>
                   </p>
                   <button class="btn btn-primary mx-1">Follow</button>
                   <button class="btn btn-outline-primary mx-1">Message</button>

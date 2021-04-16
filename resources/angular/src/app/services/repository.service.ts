@@ -80,21 +80,38 @@ export class Repository {
   }
 
   createStory(s: any): Observable<any> {
-    console.log(s);
     let data = {
       picture: s.picture,
       title: s.title,
       summary: s.summary,
       body: s.body,
     };
-    return this.http.post<number>(storiesUrl, data).pipe(map((id) => {
-      s.id = id;
-      s.author = {
-        id: this.userService.currentUser.id,
-        username: this.userService.currentUser.username,
-      };
-      this.stories.push(s);
-    }));
+    return this.http.post<number>(storiesUrl, data).pipe(
+      map((id) => {
+        s.id = id;
+        s.author = {
+          id: this.userService.currentUser.id,
+          username: this.userService.currentUser.username,
+        };
+        this.stories.push(s);
+      })
+    );
+  }
+
+  updateProfile(p: any): Observable<any> {
+    let data = {
+      picture: p.picture,
+      description: p.description,
+    };
+    return this.http
+      .put<any>(`${profilesUrl}/${this.userService.currentUser.id}`, data)
+      .pipe(
+        map((u) => {
+          this.getProfile(u?.id);
+          this.userService.currentUser.picture = u?.picture;
+          this.userService.currentUser.description = u?.description;
+        })
+      );
   }
 
   getComments(s: Story) {
@@ -205,7 +222,7 @@ export class Repository {
   submitCompetionStory(c: Competition, s: Story): Observable<any> {
     let data = {
       competition_id: c.id,
-      story_id: s.id
+      story_id: s.id,
     };
     return this.http.post<any>(`${competitionsUrl}/${c.id}/submit`, data);
   }

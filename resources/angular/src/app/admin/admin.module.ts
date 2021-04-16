@@ -12,6 +12,7 @@ import { RegisterComponent } from '../auth/register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import { StoryEditorComponent } from './story-editor/story-editor.component';
 import { QuillModule } from 'ngx-quill';
+import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
 
 const routes: Routes = [
   { path: 'join', component: RegisterComponent },
@@ -24,13 +25,14 @@ const routes: Routes = [
       { path: 'competitions/enter/:param', component: CompetitionCheckoutComponent },
       { path: 'overview', component: OverviewComponent },
       { path: 'create', component: StoryEditorComponent },
+      { path: 'profile', component: ProfileEditorComponent },
       { path: '', component: OverviewComponent },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [AdminComponent, OverviewComponent, StoryEditorComponent, CompetitionCheckoutComponent],
+  declarations: [AdminComponent, OverviewComponent, StoryEditorComponent, CompetitionCheckoutComponent, ProfileEditorComponent],
   imports: [
     RouterModule.forChild(routes),
     AuthModule, SharedModule,

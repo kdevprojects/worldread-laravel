@@ -53,7 +53,6 @@ export class StoryEditorComponent implements OnInit, AfterViewInit {
     return this.repo.story;
   }
   submit(form: FormGroup) {
-console.log(this.f);
     this.submitted = true;
     if (!this.storyForm.invalid) {
       const data = {
