@@ -11,6 +11,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { RegisterComponent } from '../auth/register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import { StoryEditorComponent } from './story-editor/story-editor.component';
+import { QuillModule } from 'ngx-quill';
 
 const routes: Routes = [
   { path: 'join', component: RegisterComponent },
@@ -32,7 +33,8 @@ const routes: Routes = [
   declarations: [AdminComponent, OverviewComponent, StoryEditorComponent, CompetitionCheckoutComponent],
   imports: [
     RouterModule.forChild(routes),
-    AuthModule, SharedModule
+    AuthModule, SharedModule,
+    QuillModule.forRoot()
   ],
 })
 export class AdminModule {}

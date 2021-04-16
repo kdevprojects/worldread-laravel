@@ -7,16 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 
-import EditorJS from '@editorjs/editorjs';
-import Embed from '@editorjs/embed';
-import Header from '@editorjs/header';
-// import ImageTool from '@editorjs/image';
-import List from '@editorjs/list';
 import { NgForm } from '@angular/forms';
-import { Quote } from '@editorjs/quote';
 import { Repository } from '../../services/repository.service';
 import { Router } from '@angular/router';
-import SimpleImage from '@editorjs/simple-image';
 import { Story } from '../../models/story.model';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -29,7 +22,18 @@ export class StoryEditorComponent implements OnInit, AfterViewInit {
   submitted = false;
   imageSrc: string;
   storyForm: FormGroup;
-  @ViewChild('editorJs') el: ElementRef;
+  quillConfiguration = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      ['blockquote', 'code-block'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      ['link', 'image', 'video'],
+      ['clean'],
+    ],
+  };
+
+  @ViewChild('quillJs') el: ElementRef;
   constructor(
     private repo: Repository,
     private router: Router,
@@ -49,6 +53,7 @@ export class StoryEditorComponent implements OnInit, AfterViewInit {
     return this.repo.story;
   }
   submit(form: FormGroup) {
+console.log(this.f);
     this.submitted = true;
     if (!this.storyForm.invalid) {
       const data = {
@@ -67,25 +72,7 @@ export class StoryEditorComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const editor = new EditorJS({
-      holder: this.el.nativeElement,
-      tools: {
-        header: Header,
-        list: List,
-        image: SimpleImage,
-        // quote: Quote,
-        embed: {
-          class: Embed,
-          config: {
-            services: {
-              youtube: true,
-              imgur: true,
-              coub: true,
-            },
-          },
-        },
-      },
-    });
+
   }
 
   showSuccessToast(message: string) {
@@ -108,7 +95,7 @@ export class StoryEditorComponent implements OnInit, AfterViewInit {
   }
 
   get body() {
-    return this.storyForm.get('body');
+    return this.storyForm.get('body') as FormControl;
   }
 
   get picture() {

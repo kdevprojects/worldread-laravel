@@ -50,15 +50,15 @@
             <div class="col-12">
               <img
                 loading="lazy"
-                class="article-image img-fluid"
+                class="article-image img-fluid mb-5"
                 alt="{{ story?.title }}"
-                src="https://picsum.photos/435/288?random={{ story?.id }}"
-                width="435"
-                height="288"
+                src="/_assets/{{ story?.picture }}"
               />
             </div>
             <div class="col-12">
-              <div class="article-content-body">{{ story?.body }}</div>
+              <div class="article-content-body">
+                <div [innerHtml]="story?.body"></div>
+              </div>
             </div>
           </div>
         </div>

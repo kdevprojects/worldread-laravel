@@ -33,7 +33,7 @@ export class CompetitionComponent implements OnInit {
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
 
-  search: OperatorFunction<string, readonly { title; id }[]> = (
+  search: OperatorFunction<string, readonly { title; id; picture }[]> = (
     text$: Observable<string>
   ) => {
     const debouncedText$ = text$.pipe(

@@ -24,7 +24,7 @@ class CreateStoriesTable extends Migration
             $table->text('summary');
             $table->text('body');
             $table->string('slug')->unique();
-            $table->boolean('active')->default(true);
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }

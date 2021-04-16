@@ -15,5 +15,25 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/{any}', [AppController::class, 'index'])->where('any', '^(?!admin).*$');
+Route::get('/{any}', [AppController::class, 'index'])->where('any', '^(?!admin|_assets[\w\s\-_\/]+).*$');
 Route::get('/admin', [AdminController::class, 'index']);
+
+Route::prefix('_assets')->group(function () {
+    Route::prefix('img')->group(function () {
+        Route::get('/stories/{filename}', function ($filename) {
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            $file = \Illuminate\Support\Facades\Storage::get('public/img/stories/' . $filename);
+            return response($file, 200)->header('Content-Type', 'image/' . $ext);
+        });
+        Route::get('/competitions/{filename}', function ($filename) {
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            $file = \Illuminate\Support\Facades\Storage::get('public/img/competitions/' . $filename);
+            return response($file, 200)->header('Content-Type', 'image/' . $ext);
+        });
+        Route::get('/profiles/{filename}', function ($filename) {
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            $file = \Illuminate\Support\Facades\Storage::get('public/img/profiles/' . $filename);
+            return response($file, 200)->header('Content-Type', 'image/' . $ext);
+        });
+    });
+});

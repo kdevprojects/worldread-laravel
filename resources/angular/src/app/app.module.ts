@@ -34,7 +34,7 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
     ScrollProgressDirective,
     ProfileComponent,
     CompetitionComponent,
-    CompetitionsListComponent
+    CompetitionsListComponent,
   ],
   imports: [
     BrowserModule,
