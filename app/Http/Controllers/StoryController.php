@@ -9,6 +9,7 @@ use Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class StoryController extends Controller
 {
@@ -70,6 +71,32 @@ class StoryController extends Controller
 
         return response()->json([
             'message' => 'success'
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function upload(Request $request)
+    {
+        try {
+            if ($request->hasFile('file')) {
+                if ($request->file->isValid()) {
+                    $file = $request->file;
+                    $fileContent = File::get($file);
+                    $fileName = 'img/stories/file-' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+                    Storage::disk('public')->put($fileName, $fileContent);
+                }
+            }
+        } catch (\Exception $e) {
+            throw new HttpException(500, $e->getMessage());
+        }
+
+        return response()->json([
+            'message' => ['url' => '_assets/' . $fileName]
         ]);
     }
 

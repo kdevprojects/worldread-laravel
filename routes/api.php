@@ -42,6 +42,7 @@ Route::post('auth/admin', [AuthController::class, 'admin']);
 // Stories
 Route::group(['middleware' => 'auth:api'], function () {
     Route::middleware(['scope:member'])->group(function () {
+        Route::post('stories/upload', [StoryController::class, 'upload']);
         Route::post('stories', [StoryController::class, 'store']);
     });
 });
