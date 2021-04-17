@@ -27,7 +27,7 @@ class StoryFactory extends Factory
             'title' => $this->faker->sentence(5),
             'summary' => $this->faker->paragraph(3),
             'body' => $this->faker->paragraph(25),
-            'picture' => $this->faker->image,
+            'picture' => 'img/stories/default.png'
         ];
     }
 }

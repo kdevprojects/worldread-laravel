@@ -43,9 +43,9 @@ class ProfileController extends Controller
         if ($user->id == $id) {
 
             try {
-
                 $path_to_picture = '';
                 if ($request->picture) {
+
                     $picture_64 = $request->picture; //your base64 encoded data
                     $extension = explode('/', explode(':', substr($picture_64, 0, strpos($picture_64, ';')))[1])[1];   // .jpg .png .pdf
 
@@ -60,8 +60,9 @@ class ProfileController extends Controller
                     $picture_name = Str::random(10) . '.' . $extension;
                     $path_to_picture = 'img/profiles/' . $picture_name;
                     Storage::disk('public')->put($path_to_picture, base64_decode($picture));
+                    $user->picture = $path_to_picture;
                 }
-                $user->picture = $path_to_picture;
+
                 $user->description = $request->description;
                 $user->save();
             } catch (\Exception $e) {

@@ -22,7 +22,7 @@ class CreateStoriesTable extends Migration
             $table->text('picture');
             $table->string('title');
             $table->text('summary');
-            $table->text('body');
+            $table->longText('body');
             $table->string('slug')->unique();
             $table->boolean('active')->default(false);
             $table->timestamps();

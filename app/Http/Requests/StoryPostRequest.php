@@ -27,7 +27,7 @@ class StoryPostRequest extends FormRequest
             'picture' => 'required',
             'title' => 'required|unique:stories',
             'summary' => 'required',
-            'body' => 'required|max:30000',
+            'body' => 'required',
         ];
     }
 }
