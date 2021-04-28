@@ -25,6 +25,11 @@ Route::prefix('_assets')->group(function () {
             $file = \Illuminate\Support\Facades\Storage::get('public/img/stories/' . $filename);
             return response($file, 200)->header('Content-Type', 'image/' . $ext);
         });
+        Route::get('/posts/{filename}', function ($filename) {
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            $file = \Illuminate\Support\Facades\Storage::get('public/img/posts/' . $filename);
+            return response($file, 200)->header('Content-Type', 'image/' . $ext);
+        });
         Route::get('/competitions/{filename}', function ($filename) {
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
             $file = \Illuminate\Support\Facades\Storage::get('public/img/competitions/' . $filename);

@@ -4,12 +4,14 @@ import { Competition } from '../models/competition.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Post } from '../models/post.model';
 import { Router } from '@angular/router';
 import { Story } from '../models/story.model';
 import { User } from '../models/user.model';
 import { map } from 'rxjs/operators';
 
 const storiesUrl = '/api/stories';
+const postsUrl = '/api/posts';
 const commentsUrl = '/api/comments';
 const likesUrl = '/api/likes';
 const profilesUrl = '/api/profiles';
@@ -20,6 +22,8 @@ const competitionsUrl = '/api/competitions';
 export class Repository {
   story: Story;
   stories: Story[];
+  post: Post;
+  posts: Post[];
   profileStories: Story[];
   comments: Comment[];
   profile: User;
@@ -45,6 +49,17 @@ export class Repository {
   getStories() {
     let url = `${storiesUrl}`;
     this.http.get<Story[]>(url).subscribe((s) => (this.stories = s));
+  }
+
+  getPost(param: any) {
+    this.http.get<Post>(`${postsUrl}/${param}`).subscribe((p) => {
+      this.post = p;
+    });
+  }
+
+  getPosts() {
+    let url = `${postsUrl}`;
+    this.http.get<Post[]>(url).subscribe((p) => (this.posts = p));
   }
 
   getProfileStories(param: any) {
@@ -156,11 +171,24 @@ export class Repository {
       description: c.description,
       fee: c.fee,
       reward: c.reward,
-      deadline: c.deadline
+      deadline: c.deadline,
     };
     this.http.post<number>(competitionsUrl, data).subscribe((id) => {
       c.id = id;
       this.competitions.push(c);
+    });
+  }
+
+  createPost(p: any) {
+    let data = {
+      body: p.body,
+      summary: p.summary,
+      title: p.title,
+      picture: p.picture,
+    };
+    this.http.post<number>(postsUrl, data).subscribe((id) => {
+      p.id = id;
+      this.posts.push(p);
     });
   }
 

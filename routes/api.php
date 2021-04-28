@@ -9,6 +9,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompetitionController;
+use App\Http\Controllers\PostController;
 use App\Models\User;
 
 /*
@@ -49,6 +50,17 @@ Route::group(['middleware' => 'auth:api'], function () {
 Route::get('stories', [StoryController::class, 'index']);
 Route::get('stories/{param}', [StoryController::class, 'show']);
 Route::get('stories/{id}/comments', [StoryController::class, 'comments']);
+
+// Posts
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::middleware(['scope:admin'])->group(function () {
+        Route::post('posts/upload', [PostController::class, 'upload']);
+        Route::post('posts', [PostController::class, 'store']);
+    });
+});
+Route::get('posts', [PostController::class, 'index']);
+Route::get('posts/{param}', [PostController::class, 'show']);
+Route::get('posts/{id}/comments', [PostController::class, 'comments']);
 
 // Comments
 Route::group(['middleware' => 'auth:api'], function () {

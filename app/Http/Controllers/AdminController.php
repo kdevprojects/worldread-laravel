@@ -18,7 +18,9 @@ class AdminController extends Controller
         //     'last_name' => 'admin',
         //     'email' => 'admin@admin.com',
         //     'password' => Hash::make('password'),
-        //     'role' => 'admin'
+        //     'role' => 'admin',
+        //     'description' => '',
+        //     'picture' => 'img/profiles/default.png'
         // ]);
 
         return view('admin', ['ngAssets' => $ng->assets]);

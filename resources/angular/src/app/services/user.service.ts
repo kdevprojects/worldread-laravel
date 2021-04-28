@@ -33,7 +33,7 @@ export class UserService {
     this.loggedIn$.next(false);
     this.router.navigateByUrl('/');
 
-    this.showStandardToast('You have been logged out');
+    //this.showStandardToast('You have been logged out');
   }
 
   isUserLoggedIn(): boolean {

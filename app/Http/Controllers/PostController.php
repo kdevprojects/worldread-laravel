@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Story;
+use App\Models\Post;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoryPostRequest;
+use App\Http\Requests\PostPostRequest;
 use Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
-class StoryController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class StoryController extends Controller
      */
     public function index()
     {
-        return Story::with('author:id,username')->withCount('comments')->withCount('likes')->orderBy('created_at', 'DESC')->get()->toJson();
+        return Post::with('author:id,username')->withCount('comments')->orderBy('created_at', 'DESC')->get()->toJson();
     }
 
     /**
@@ -38,7 +38,7 @@ class StoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoryPostRequest $request)
+    public function store(PostPostRequest $request)
     {
         try {
             $path_to_picture = '';
@@ -55,17 +55,17 @@ class StoryController extends Controller
                 $picture = str_replace(' ', '+', $picture);
 
                 $picture_name = Str::random(10) . '.' . $extension;
-                $path_to_picture = 'img/stories/' . $picture_name;
+                $path_to_picture = 'img/posts/' . $picture_name;
                 Storage::disk('public')->put($path_to_picture, base64_decode($picture));
             }
-            $story = new Story([
+            $post = new Post([
                 'title' => $request->title,
                 'summary' => $request->summary,
                 'body' => $request->body,
                 'author_id' => Auth::user()->id,
                 'picture' => $path_to_picture
             ]);
-            $story->save();
+            $post->save();
         } catch (\Exception $e) {
             throw new HttpException(500, $e->getMessage());
         }
@@ -88,7 +88,7 @@ class StoryController extends Controller
                 if ($request->file->isValid()) {
                     $file = $request->file;
                     $fileContent = File::get($file);
-                    $fileName = 'img/stories/file-' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+                    $fileName = 'img/posts/file-' . Str::random(10) . '.' . $file->getClientOriginalExtension();
                     Storage::disk('public')->put($fileName, $fileContent);
                 }
             }
@@ -104,22 +104,22 @@ class StoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Story  $story
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function show($param)
     {
-        return Story::whereSlug($param)
-            ->orWhere('id', $param)->with('author:id,username')->withCount('comments')->withCount('likes')->firstOrFail()->toJson();
+        return Post::whereSlug($param)
+            ->orWhere('id', $param)->with('author:id,username')->withCount('comments')->firstOrFail()->toJson();
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Story  $story
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Story $story)
+    public function edit(Post $post)
     {
         //
     }
@@ -128,10 +128,10 @@ class StoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Story  $story
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Story $story)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -139,22 +139,22 @@ class StoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Story  $story
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Story $story)
+    public function destroy(Post $post)
     {
         //
     }
 
     /**
-     * Display the specified story's comments.
+     * Display the specified post's comments.
      *
-     * @param  \App\Models\Story  $story
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function comments($id)
     {
-        return Story::find($id)->comments()->with('author')->orderBy('created_at', 'ASC')->get()->toJson();
+        return Post::find($id)->comments()->with('author')->orderBy('created_at', 'ASC')->get()->toJson();
     }
 }

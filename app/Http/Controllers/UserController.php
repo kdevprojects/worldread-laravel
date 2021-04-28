@@ -29,7 +29,9 @@ class UserController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->first_name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'description' => '',
+            'picture' => 'img/profiles/default.png'
         ]);
         return response()->json([
             'message' => 'User successfully registered'

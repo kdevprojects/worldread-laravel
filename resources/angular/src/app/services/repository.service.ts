@@ -3,6 +3,7 @@ import { Competition } from '../models/competition.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Post } from '../models/post.model';
 import { Router } from '@angular/router';
 import { Story } from '../models/story.model';
 import { ToastService } from './toast.service';
@@ -11,6 +12,7 @@ import { UserService } from './user.service';
 import { map } from 'rxjs/operators';
 
 const storiesUrl = '/api/stories';
+const postsUrl = '/api/posts';
 const commentsUrl = '/api/comments';
 const likesUrl = '/api/likes';
 const profilesUrl = '/api/profiles';
@@ -20,6 +22,8 @@ const competitionsUrl = '/api/competitions';
 export class Repository {
   story: Story;
   stories: Story[];
+  post: Post;
+  posts: Post[];
   profileStories: Story[];
   profileCompetitions: Competition[];
   profileCompetitionsIds: number[];
@@ -47,6 +51,18 @@ export class Repository {
   getStories() {
     let url = `${storiesUrl}`;
     this.http.get<Story[]>(url).subscribe((s) => (this.stories = s));
+  }
+
+  getPost(param: any) {
+    this.http.get<Post>(`${postsUrl}/${param}`).subscribe((p) => {
+      this.post = p;
+      this.getPostComments(p);
+    });
+  }
+
+  getPosts() {
+    let url = `${postsUrl}`;
+    this.http.get<Post[]>(url).subscribe((p) => (this.posts = p));
   }
 
   getProfileStories(param: any) {
@@ -116,7 +132,12 @@ export class Repository {
 
   getComments(s: Story) {
     let url = `${storiesUrl}/${s.id}/comments`;
-    this.http.get<Comment[]>(url).subscribe((s) => (this.comments = s));
+    this.http.get<Comment[]>(url).subscribe((c) => (this.comments = c));
+  }
+
+  getPostComments(p: Post) {
+    let url = `${postsUrl}/${p.id}/comments`;
+    this.http.get<Comment[]>(url).subscribe((c) => (this.comments = c));
   }
 
   createComment(c: any) {

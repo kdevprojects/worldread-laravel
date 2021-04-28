@@ -32,7 +32,8 @@ export class AppComponent {
     this.errorService.errors.subscribe((error) => {
       this.lastError = error;
       this.lastError.forEach((e) => {
-        this.showDangerToast(e);
+        //this.showDangerToast(e);
+        console.log(e);
       });
     });
   }

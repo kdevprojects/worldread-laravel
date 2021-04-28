@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <section class="page-section">
+    <main>
+      <article class="clearfix pt-3" appScrollProgress>
+        <header class="article-header">
+          <h2 class="article-title">
+            <a
+              href="#"
+              [routerLink]="['/posts', post?.slug]"
+              rel="bookmark"
+              >{{ post?.title }}</a
+            >
+          </h2>
+          <div class="article-meta text-muted">
+            <div class="row">
+              <div class="col-12 col-md-12">
+                <span class="screen-reader-text">Published on </span>
+                <time class="article-date published">{{
+                  post?.created_at | date: "mediumDate"
+                }}</time>
+                <span class="screen-reader-text">, by </span>
+                <a href="#" [routerLink]="['/profiles', post?.author?.username]">{{ post?.author?.username }}</a>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="article-content">
+          <div class="row">
+            <div class="col-12">
+              <img
+                loading="lazy"
+                class="article-image img-fluid mb-5"
+                alt="{{ post?.title }}"
+                src="/_assets/{{ post?.picture }}"
+              />
+            </div>
+            <div class="col-12">
+              <div class="article-content-body">
+                <div [innerHtml]="post?.body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+  </section>
+</div>

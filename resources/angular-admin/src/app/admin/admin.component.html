@@ -51,6 +51,16 @@
         >
       </li>
       <li class="nav-item">
+        <a
+          class="nav-link"
+          [routerLink]="'posts'"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="isMenuCollapsed = true"
+          >Posts</a
+        >
+      </li>
+      <li class="nav-item">
         <a class="nav-link text-danger" href="#" (click)="logout()">Log Out</a>
       </li>
     </ul>

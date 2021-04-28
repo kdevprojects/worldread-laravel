@@ -1,0 +1,85 @@
+<h1 class="page-title">Posts</h1>
+<div class="row">
+  <div class="col-12">
+    <div *ngIf="listView; else addPosts">
+      <button class="btn btn-primary mb-5" (click)="showForm()">Add</button>
+      <table *ngIf="posts?.length > 0; else noPosts" class="table">
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Summary</th>
+        </tr>
+        <tr *ngFor="let post of posts">
+          <td>{{ post?.id }}</td>
+          <td>{{ post?.title }}</td>
+          <td>{{ post?.summary }}</td>
+        </tr>
+      </table>
+      <ng-template #noPosts> There are no posts yet. </ng-template>
+    </div>
+    <ng-template #addPosts>
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && submit(f)"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group">
+          <label>Title</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            placeholder="Enter title"
+            [(ngModel)]="model.title"
+            #title="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && title.invalid }"
+            required
+          />
+          <div *ngIf="f.submitted && title.invalid" class="invalid-feedback">
+            <div *ngIf="title.errors.required">This field is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Summary</label>
+
+          <textarea
+            class="form-control"
+            name="summary"
+            rows="5"
+            placeholder="Enter summary"
+            [(ngModel)]="model.summary"
+            #summary="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && summary.invalid }"
+            required
+          ></textarea>
+          <div *ngIf="f.submitted && summary.invalid" class="invalid-feedback">
+            <div *ngIf="summary.errors.required">This field is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Content</label>
+
+          <textarea
+            class="form-control"
+            name="body"
+            rows="5"
+            placeholder="Enter post's content"
+            [(ngModel)]="model.body"
+            #body="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && body.invalid }"
+            required
+          ></textarea>
+          <div *ngIf="f.submitted && body.invalid" class="invalid-feedback">
+            <div *ngIf="body.errors.required">This field is required</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+        <button class="btn btn-outline-primary ml-1" (click)="showList()">
+          Cancel
+        </button>
+      </form>
+    </ng-template>
+  </div>
+</div>

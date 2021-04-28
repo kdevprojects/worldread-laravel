@@ -13,10 +13,11 @@ import { DebounceClickDirective } from './directives/debounce-click.directive';
 import { ErrorHandlerService } from './services/error-handler.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModelModule } from './models/model.module';
-import { NavbarComponent } from './structure/navbar/navbar.component';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PagesModule } from './pages/pages.module';
+import { PostDetailComponent } from './structure/post-detail/post-detail.component';
+import { PostsListComponent } from './structure/posts-list/posts-list.component';
 import { ProfileComponent } from './structure/profile/profile.component';
 import { ScrollProgressDirective } from './directives/scroll-progress.directive';
 import { SharedModule } from './shared/shared.module';
@@ -28,13 +29,14 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
     AppComponent,
     StoriesListComponent,
     StoryDetailComponent,
-    NavbarComponent,
     CommentEditorComponent,
     DebounceClickDirective,
     ScrollProgressDirective,
     ProfileComponent,
     CompetitionComponent,
     CompetitionsListComponent,
+    PostDetailComponent,
+    PostsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import { StoryDetailComponent } from './structure/story-detail/story-detail.comp
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [
     ErrorHandlerService,
