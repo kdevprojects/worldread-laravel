@@ -2,7 +2,9 @@
 <div class="row">
   <div class="col-12">
     <div *ngIf="listView; else addPosts">
-      <button class="btn btn-primary mb-5" (click)="showForm()">Add</button>
+      <div class="mb-5">
+        <button class="btn btn-primary" (click)="showForm()">Add</button>
+      </div>
       <table *ngIf="posts?.length > 0; else noPosts" class="table">
         <tr>
           <th>ID</th>

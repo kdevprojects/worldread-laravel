@@ -6,14 +6,24 @@ import { Competition } from 'src/app/models/competition.model';
 import { Repository } from 'src/app/services/repository.service';
 import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/services/toast.service';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-competition-checkout',
   templateUrl: './competition-checkout.component.html',
   styleUrls: ['./competition-checkout.component.scss'],
+  animations: [
+    trigger('fade', [
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate('0.3s', style({ opacity: 1 })),
+      ]),
+    ]),
+  ],
 })
 export class CompetitionCheckoutComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
+  showStatusScreen = false;
   constructor(
     private repo: Repository,
     public router: Router,
@@ -26,7 +36,6 @@ export class CompetitionCheckoutComponent implements OnInit {
     } else {
       router.navigateByUrl('/');
     }
-
   }
 
   get competition(): Competition {
@@ -106,7 +115,8 @@ export class CompetitionCheckoutComponent implements OnInit {
         this.repo.enterCompetition(this.competition).subscribe(
           (data) => {
             this.showSuccessToast(data.message);
-            this.router.navigateByUrl('/members/overview');
+            this.showStatusScreen = true;
+            //this.router.navigateByUrl('/members/overview');
           },
           (err) => console.error(err)
         );

@@ -28,7 +28,7 @@ export class CompetitionComponent implements OnInit {
   public submitStory: any;
   public stories: any[];
   modalReference: NgbModalRef;
-
+  showStatusScreen = false;
   @ViewChild('instance', { static: true }) instance: NgbTypeahead;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
@@ -123,6 +123,7 @@ export class CompetitionComponent implements OnInit {
       .submitCompetionStory(this.competition, this.submitStory)
       .subscribe((r) => {
         this.showSuccessToast(r.message);
+        this.showStatusScreen = true;
         this.modalService.dismissAll();
       });
   }

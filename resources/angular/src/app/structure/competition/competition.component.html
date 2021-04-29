@@ -55,9 +55,8 @@
                     loading="lazy"
                     class="article-image img-fluid"
                     alt="{{ story?.title }}"
-                    src="https://picsum.photos/435/288?random={{ story?.id }}"
+                    src="/_assets/{{ story?.picture }}"
                     width="435"
-                    height="288"
                   />
                 </div>
                 <div class="col-12 col-md-8">
@@ -80,7 +79,7 @@
                 <h4 class="mb-3">
                   {{ competition?.reward | currency: "GBP":"symbol":"1.2-2" }}
                 </h4>
-                <div class="progress mb-3">
+                <!-- <div class="progress mb-3">
                   <div
                     class="progress-bar"
                     role="progressbar"
@@ -89,7 +88,7 @@
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
-                </div>
+                </div> -->
                 <p class="text-muted mb-5">
                   {{ competition?.deadline | date: "MMM d, y, h:mm a" }}
                 </p>
@@ -178,3 +177,17 @@
     </button>
   </div>
 </ng-template>
+<div
+  class="d-flex align-items-center flex-column justify-content-center h-100 status-screen"
+  *ngIf="showStatusScreen"
+  @fade
+>
+  <h2>Congratulations!</h2>
+  <p class="lead">You have successfuly submitted your story. Good luck!</p>
+  <a
+    href="#"
+    class="btn btn-outline-primary my-3"
+    routerLink="/members/overview"
+    >Continue</a
+  >
+</div>
