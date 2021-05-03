@@ -12,7 +12,7 @@ class Competition extends Model
     use HasFactory, HasSlug;
 
     protected $fillable = [
-        'name', 'description', 'fee', 'reward', 'deadline'
+        'name', 'description', 'picture', 'fee', 'reward', 'deadline', 'active'
     ];
 
     public function users()

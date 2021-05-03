@@ -165,18 +165,21 @@ export class Repository {
     this.http.get<Competition[]>(url).subscribe((c) => (this.competitions = c));
   }
 
-  createCompetition(c: any) {
+  createCompetition(c: any): Observable<any> {
     let data = {
       name: c.name,
       description: c.description,
       fee: c.fee,
       reward: c.reward,
       deadline: c.deadline,
+      picture: c.picture,
     };
-    this.http.post<number>(competitionsUrl, data).subscribe((id) => {
-      c.id = id;
-      this.competitions.push(c);
-    });
+    return this.http.post<number>(competitionsUrl, data).pipe(
+      map((id) => {
+        c.id = id;
+        this.competitions.push(c);
+      })
+    );
   }
 
   createPost(p: any) {

@@ -17,6 +17,7 @@ class CreateCompetitionsTable extends Migration
             $table->id();
             $table->text('name');
             $table->text('description');
+            $table->text('picture');
             $table->string('slug')->unique();
             $table->decimal('fee')->default(0);
             $table->decimal('reward')->default(0);

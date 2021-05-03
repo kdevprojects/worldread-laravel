@@ -7,7 +7,9 @@ use Auth;
 use App\Models\Competition;
 use App\Http\Requests\CompetitionPostRequest;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 class CompetitionController extends Controller
 {
     /**
@@ -41,12 +43,30 @@ class CompetitionController extends Controller
     public function store(CompetitionPostRequest $request)
     {
         try {
+            $path_to_picture = '';
+            if ($request->picture) {
+                $picture_64 = $request->picture; //your base64 encoded data
+                $extension = explode('/', explode(':', substr($picture_64, 0, strpos($picture_64, ';')))[1])[1];   // .jpg .png .pdf
+
+                $replace = substr($picture_64, 0, strpos($picture_64, ',') + 1);
+
+                // find substring fro replace here eg: data:image/png;base64,
+
+                $picture = str_replace($replace, '', $picture_64);
+
+                $picture = str_replace(' ', '+', $picture);
+
+                $picture_name = Str::random(10) . '.' . $extension;
+                $path_to_picture = 'img/competitions/' . $picture_name;
+                Storage::disk('public')->put($path_to_picture, base64_decode($picture));
+            }
             $competition = new Competition([
                 'name' => $request->name,
                 'description' => $request->description,
                 'fee' => $request->fee,
                 'reward' => $request->reward,
-                'deadline' => $request->deadline
+                'deadline' => $request->deadline, 
+                'picture' => $path_to_picture
             ]);
             $competition->save();
         } catch (\Exception $e) {
@@ -55,6 +75,26 @@ class CompetitionController extends Controller
 
         return response()->json([
             'message' => 'success'
+        ]);
+    }
+
+    public function upload(Request $request)
+    {
+        try {
+            if ($request->hasFile('file')) {
+                if ($request->file->isValid()) {
+                    $file = $request->file;
+                    $fileContent = File::get($file);
+                    $fileName = 'img/competitions/file-' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+                    Storage::disk('public')->put($fileName, $fileContent);
+                }
+            }
+        } catch (\Exception $e) {
+            throw new HttpException(500, $e->getMessage());
+        }
+
+        return response()->json([
+            'message' => ['url' => '_assets/' . $fileName]
         ]);
     }
 

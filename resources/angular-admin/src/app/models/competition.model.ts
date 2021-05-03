@@ -10,6 +10,7 @@ export class Competition {
     public competitors_count?: number,
     public slug?: string,
     public deadline?: Date,
+    public active?: boolean,
     public created_at?: Date,
     public updated_at?: Date,
     public stories?: Story[]

@@ -10,6 +10,7 @@ import { MembersComponent } from './members/members.component';
 import { NgModule } from '@angular/core';
 import { OverviewComponent } from './overview/overview.component';
 import { PostsComponent } from './posts/posts.component';
+import { QuillModule } from 'ngx-quill';
 import { ResultsComponent } from './results/results.component';
 import { SharedModule } from '../shared/shared.module';
 
@@ -32,6 +33,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AdminComponent, OverviewComponent, MembersComponent, CompetitionsComponent, ResultsComponent, PostsComponent],
-  imports: [SharedModule, RouterModule.forChild(routes), AuthModule],
+  imports: [SharedModule, RouterModule.forChild(routes), AuthModule, QuillModule.forRoot()],
 })
 export class AdminModule {}

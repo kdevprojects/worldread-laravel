@@ -92,6 +92,9 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('competitions/{id}/enter', [CompetitionController::class, 'enter']);
         Route::post('competitions/{id}/submit', [CompetitionController::class, 'submit']);
     });
+    Route::middleware(['scope:admin'])->group(function () {
+        Route::post('competitions/upload', [CompetitionController::class, 'upload']);
+    });
 });
 Route::get('competitions', [CompetitionController::class, 'index']);
 Route::get('competitions/{param}', [CompetitionController::class, 'show']);

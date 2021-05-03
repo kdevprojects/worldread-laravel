@@ -13,12 +13,12 @@
               loading="lazy"
               class="competition-image img-fluid"
               alt="{{ competition?.name }}"
-              src="https://picsum.photos/435/288?random={{ competition?.id }}"
+              src="/_assets/{{ competition?.picture }}"
             />
           </div>
           <div class="col-12 mb-3">
             <div class="competition-description">
-              {{ competition?.description }}
+              <div [innerHtml]="competition?.description"></div>
             </div>
           </div>
         </div>
@@ -139,11 +139,7 @@
       <div class="form-group">
         <ng-template #st let-r="result" let-t="term">
           <div class="p-3">
-            <img
-              [src]="r['picture']"
-              class="mr-1"
-              style="width: 16px"
-            />
+            <img [src]="r['picture']" class="mr-1" style="width: 16px" />
             <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
           </div>
         </ng-template>
