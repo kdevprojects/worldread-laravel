@@ -1,6 +1,7 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { Comment } from '../models/comment.model';
 import { Competition } from '../models/competition.model';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from '../models/post.model';
@@ -68,6 +69,14 @@ export class Repository {
   getProfileStories(param: any) {
     let url = `${profilesUrl}/${param}/stories`;
     this.http.get<Story[]>(url).subscribe((s) => (this.profileStories = s));
+  }
+
+  getFeaturedPosts(): Observable<Post[]> {
+    let url = `${postsUrl}`;
+    let params = new HttpParams().set('featured', 'true');
+    return this.http
+      .get<Post[]>(url, { params: params })
+      .pipe(map((p) => (this.posts = p)));
   }
 
   register(

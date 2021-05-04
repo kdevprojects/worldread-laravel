@@ -176,23 +176,23 @@ export class Repository {
     };
     return this.http.post<number>(competitionsUrl, data).pipe(
       map((id) => {
-        c.id = id;
         this.competitions.push(c);
       })
     );
   }
 
-  createPost(p: any) {
+  createPost(p: any): Observable<any> {
     let data = {
       body: p.body,
       summary: p.summary,
       title: p.title,
       picture: p.picture,
     };
-    this.http.post<number>(postsUrl, data).subscribe((id) => {
-      p.id = id;
-      this.posts.push(p);
-    });
+    return this.http.post<number>(postsUrl, data).pipe(
+      map((id) => {
+        this.posts.push(p);
+      })
+    );
   }
 
   getResults() {

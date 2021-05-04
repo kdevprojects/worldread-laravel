@@ -29,6 +29,9 @@ Route::middleware(['auth:api', 'role'])->group(function () {
         Route::get('users', [UserController::class, 'index']);
         Route::post('competitions', [CompetitionController::class, 'store']);
         Route::get('competitions/results', [CompetitionController::class, 'results']);
+        Route::post('competitions/upload', [CompetitionController::class, 'upload']);
+        Route::post('posts/upload', [PostController::class, 'upload']);
+        Route::post('posts', [PostController::class, 'store']);
     });
 });
 
@@ -54,8 +57,7 @@ Route::get('stories/{id}/comments', [StoryController::class, 'comments']);
 // Posts
 Route::group(['middleware' => 'auth:api'], function () {
     Route::middleware(['scope:admin'])->group(function () {
-        Route::post('posts/upload', [PostController::class, 'upload']);
-        Route::post('posts', [PostController::class, 'store']);
+
     });
 });
 Route::get('posts', [PostController::class, 'index']);
@@ -93,7 +95,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('competitions/{id}/submit', [CompetitionController::class, 'submit']);
     });
     Route::middleware(['scope:admin'])->group(function () {
-        Route::post('competitions/upload', [CompetitionController::class, 'upload']);
+
     });
 });
 Route::get('competitions', [CompetitionController::class, 'index']);

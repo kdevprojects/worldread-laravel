@@ -18,9 +18,12 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Post::with('author:id,username')->withCount('comments')->orderBy('created_at', 'DESC')->get()->toJson();
+        if ($request->query('featured')) {
+            return Post::where('active', true)->where('featured', true)->orderBy('created_at', 'DESC')->get()->toJson();
+        }
+        return Post::with('author:id,username')->withCount('comments')->where('active', true)->orderBy('created_at', 'DESC')->get()->toJson();
     }
 
     /**
