@@ -18,9 +18,13 @@ class StoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Story::with('author:id,username')->withCount('comments')->withCount('likes')->orderBy('created_at', 'DESC')->get()->toJson();
+        if ($request->query('limit')) {
+            $limit = $request->query('limit');
+            return Story::where('active', true)->orderBy('created_at', 'DESC')->limit($limit)->get()->toJson();
+        }
+        return Story::where('active', true)->with('author:id,username')->withCount('comments')->withCount('likes')->orderBy('created_at', 'DESC')->get()->toJson();
     }
 
     /**

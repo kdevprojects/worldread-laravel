@@ -79,6 +79,12 @@ export class Repository {
       .pipe(map((p) => (this.posts = p)));
   }
 
+  getLimitedStories(limit: number): Observable<Post[]> {
+    let url = `${storiesUrl}`;
+    let params = new HttpParams().set('limit', limit.toString());
+    return this.http.get<Story[]>(url, { params: params }).pipe(map((s) => (this.stories = s)));
+  }
+
   register(
     name: string,
     email: string,
