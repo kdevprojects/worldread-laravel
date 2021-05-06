@@ -39,7 +39,7 @@ export class Repository {
     private router: Router,
     private toastService: ToastService
   ) {
-    this.getStories();
+    //this.getStories();
   }
 
   getStory(param: any) {
@@ -79,10 +79,11 @@ export class Repository {
       .pipe(map((p) => (this.posts = p)));
   }
 
-  getLimitedStories(limit: number): Observable<Post[]> {
+  getLimitedStories(limit: number): void {
+    console.log('wtf');
     let url = `${storiesUrl}`;
     let params = new HttpParams().set('limit', limit.toString());
-    return this.http.get<Story[]>(url, { params: params }).pipe(map((s) => (this.stories = s)));
+    this.http.get<Story[]>(url, { params: params }).subscribe((s) => (this.stories = s));
   }
 
   register(

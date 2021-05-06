@@ -4682,7 +4682,7 @@ class Repository {
         this.userService = userService;
         this.router = router;
         this.toastService = toastService;
-        this.getStories();
+        //this.getStories();
     }
     getStory(param) {
         this.http.get(`${storiesUrl}/${param}`).subscribe((s) => {
@@ -4716,9 +4716,10 @@ class Repository {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])((p) => (this.posts = p)));
     }
     getLimitedStories(limit) {
+        console.log('wtf');
         let url = `${storiesUrl}`;
         let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set('limit', limit.toString());
-        return this.http.get(url, { params: params }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])((s) => (this.stories = s)));
+        this.http.get(url, { params: params }).subscribe((s) => (this.stories = s));
     }
     register(name, email, password, confirmPassword) {
         return this.http.post('/api/account/register', {
