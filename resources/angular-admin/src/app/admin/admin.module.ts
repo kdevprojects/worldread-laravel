@@ -10,6 +10,7 @@ import { MembersComponent } from './members/members.component';
 import { NgModule } from '@angular/core';
 import { OverviewComponent } from './overview/overview.component';
 import { PostsComponent } from './posts/posts.component';
+import { PostsEditComponent } from './posts-edit/posts-edit.component';
 import { QuillModule } from 'ngx-quill';
 import { ResultsComponent } from './results/results.component';
 import { SharedModule } from '../shared/shared.module';
@@ -21,6 +22,7 @@ const routes: Routes = [
     component: AdminComponent,
     canActivateChild: [AuthenticationGuard],
     children: [
+      { path: 'posts/edit/:param', component: PostsEditComponent },
       { path: 'posts', component: PostsComponent },
       { path: 'results', component: ResultsComponent },
       { path: 'competitions', component: CompetitionsComponent },
@@ -32,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AdminComponent, OverviewComponent, MembersComponent, CompetitionsComponent, ResultsComponent, PostsComponent],
+  declarations: [AdminComponent, OverviewComponent, MembersComponent, CompetitionsComponent, ResultsComponent, PostsComponent, PostsEditComponent],
   imports: [SharedModule, RouterModule.forChild(routes), AuthModule, QuillModule.forRoot()],
 })
 export class AdminModule {}

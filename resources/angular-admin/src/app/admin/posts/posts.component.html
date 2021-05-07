@@ -5,14 +5,18 @@
       <div class="mb-5">
         <button class="btn btn-primary" (click)="showForm()">Add</button>
       </div>
-      <table *ngIf="posts?.length > 0; else noPosts" class="table">
+      <table *ngIf="posts?.length > 0; else noPosts" class="table table-hover">
         <tr>
-          <th>Title</th>
-          <th>Summary</th>
+          <th scope="col">Title</th>
+          <th scope="col">Summary</th>
+          <th scope="col">Featured</th>
+          <th scope="col">Active</th>
         </tr>
         <tr *ngFor="let post of posts">
-          <td>{{ post?.title }}</td>
+          <td><a href="#" [routerLink]="['/admin/posts/edit', post?.id]">{{ post?.title }}</a></td>
           <td>{{ post?.summary }}</td>
+          <td>{{ post?.featured ? 'Yes' : 'No' }}</td>
+          <td>{{ post?.active ? 'Yes' : 'No' }}</td>
         </tr>
       </table>
       <ng-template #noPosts> There are no posts yet. </ng-template>

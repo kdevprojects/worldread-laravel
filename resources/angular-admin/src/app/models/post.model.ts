@@ -11,6 +11,8 @@ export class Post {
     public comments?: Comment[],
     public comments_count?: number,
     public slug?: string,
+    public active?: string,
+    public featured?: string,
     public created_at?: Date,
     public updated_at?: Date
   ) {

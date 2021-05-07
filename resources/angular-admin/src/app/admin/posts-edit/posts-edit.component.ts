@@ -1,10 +1,12 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   AfterViewInit,
   Component,
   ElementRef,
   Input,
+  OnDestroy,
   OnInit,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import {
   FormBuilder,
@@ -25,12 +27,12 @@ import { Repository } from 'src/app/services/repository.service';
 Quill.register('modules/imageHandler', ImageHandler);
 
 @Component({
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.scss'],
+  selector: 'app-posts-edit',
+  templateUrl: './posts-edit.component.html',
+  styleUrls: ['./posts-edit.component.scss'],
 })
-export class PostsComponent implements OnInit {
-  listView: boolean = true;
+export class PostsEditComponent implements OnInit, OnDestroy {
+  param: string;
   model: any = {};
   submitted = false;
   imageSrc: string;
@@ -93,32 +95,56 @@ export class PostsComponent implements OnInit {
     private repo: Repository,
     private parserFormatter: NgbDateParserFormatter,
     private fb: FormBuilder,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    public router: Router,
+    public activeRoute: ActivatedRoute
+  ) {
+
+  }
 
   ngOnInit(): void {
-    this.repo.getAllPosts();
-    this.postForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3)]],
-      summary: ['', [Validators.required]],
-      body: ['', [Validators.required, Validators.minLength(3)]],
-      picture: ['', [Validators.required]],
-      fileSource: ['', [Validators.required]],
-    });
+    this.param = this.activeRoute.snapshot.params['param'];
+    if (this.param) {
+      this.repo.clearPost();
+      this.repo.getPostAsync(this.param).subscribe((p) => {
+        this.imageSrc = '_assets/' + this.post?.picture;
+        this.postForm = this.fb.group({
+          title: [this.post?.title, [Validators.required, Validators.minLength(3)]],
+          summary: [this.post?.summary, [Validators.required]],
+          body: [this.post?.body, [Validators.required, Validators.minLength(3)]],
+          picture: [''],
+          fileSource: [''],
+          active: [this.post?.active],
+          featured: [this.post?.featured]
+        });
+      });
+    } else {
+      this.router.navigateByUrl('/');
+    }
+
+
+  }
+
+  ngOnDestroy(): void {
+
   }
 
   submit(form: FormGroup) {
+    console.log('asd');
     this.submitted = true;
     if (!this.postForm.invalid) {
       const data = {
+        id: this.param,
         title: this.f.title.value,
         body: this.f.body.value,
         summary: this.f.summary.value,
         picture: this.f.fileSource.value,
+        active: this.f.active.value,
+        featured: this.f.featured.value
       };
 
-      this.repo.createPost(data).subscribe(() => {
-        this.showList();
+      this.repo.updatePost(data).subscribe(() => {
+        this.router.navigateByUrl('/admin/posts');
         form.reset();
       });
     }
@@ -128,12 +154,8 @@ export class PostsComponent implements OnInit {
     return this.repo.posts;
   }
 
-  showList() {
-    this.listView = true;
-  }
-
-  showForm() {
-    this.listView = false;
+  get post(): Post {
+    return this.repo.post;
   }
 
   get f() {
@@ -150,6 +172,14 @@ export class PostsComponent implements OnInit {
 
   get body() {
     return this.postForm.get('body');
+  }
+
+  get active() {
+    return this.postForm.get('active');
+  }
+
+  get featured() {
+    return this.postForm.get('featured');
   }
 
   get picture() {

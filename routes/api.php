@@ -32,6 +32,8 @@ Route::middleware(['auth:api', 'role'])->group(function () {
         Route::post('competitions/upload', [CompetitionController::class, 'upload']);
         Route::post('posts/upload', [PostController::class, 'upload']);
         Route::post('posts', [PostController::class, 'store']);
+        Route::put('posts/{id}', [PostController::class, 'update']);
+        Route::get('posts/all', [PostController::class, 'indexAdmin']);
     });
 });
 

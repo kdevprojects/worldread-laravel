@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Repository } from 'src/app/services/repository.service';
+import { Router } from '@angular/router';
 import { ToastService } from 'src/app/services/toast.service';
+import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

@@ -4716,7 +4716,6 @@ class Repository {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])((p) => (this.posts = p)));
     }
     getLimitedStories(limit) {
-        console.log('wtf');
         let url = `${storiesUrl}`;
         let params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpParams"]().set('limit', limit.toString());
         this.http.get(url, { params: params }).subscribe((s) => (this.stories = s));

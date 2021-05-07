@@ -62,6 +62,11 @@ export class Repository {
     this.http.get<Post[]>(url).subscribe((p) => (this.posts = p));
   }
 
+  getAllPosts() {
+    let url = `${postsUrl}/all`;
+    this.http.get<Post[]>(url).subscribe((p) => (this.posts = p));
+  }
+
   getProfileStories(param: any) {
     let url = `${profilesUrl}/${param}/stories`;
     this.http.get<Story[]>(url).subscribe((s) => (this.profileStories = s));
@@ -195,8 +200,37 @@ export class Repository {
     );
   }
 
+  updatePost(p: any): Observable<any> {
+    let data = {
+      body: p.body,
+      summary: p.summary,
+      title: p.title,
+      active: p.active,
+      featured: p.featured,
+      picture: p.picture,
+    };
+    return this.http
+      .put<any>(`${postsUrl}/${p.id}`, data)
+      .pipe(
+        map((u) => {
+          this.getPost(u?.id);
+        })
+      );
+  }
+
   getResults() {
     let url = `${competitionsUrl}/results`;
     this.http.get<Competition[]>(url).subscribe((r) => (this.results = r));
+  }
+
+getPostAsync(param: any): Observable<Post> {
+    return this.http.get<Post>(`${postsUrl}/${param}`).pipe(map((p) => {
+      this.post = p;
+      return p;
+    }));
+  }
+
+  clearPost() {
+    this.post = null;
   }
 }

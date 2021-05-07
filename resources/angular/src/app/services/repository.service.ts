@@ -79,8 +79,7 @@ export class Repository {
       .pipe(map((p) => (this.posts = p)));
   }
 
-  getLimitedStories(limit: number): void {
-    console.log('wtf');
+  getLimitedStories(limit: number) {
     let url = `${storiesUrl}`;
     let params = new HttpParams().set('limit', limit.toString());
     this.http.get<Story[]>(url, { params: params }).subscribe((s) => (this.stories = s));

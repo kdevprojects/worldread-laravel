@@ -1,0 +1,106 @@
+<h1 class="page-title">Posts</h1>
+<div class="row">
+  <div class="col-12">
+    <form
+      name="form"
+      [formGroup]="postForm"
+      (ngSubmit)="submit(postForm)"
+      *ngIf="postForm"
+    >
+      <div class="form-group">
+        <label>Picture</label>
+        <input
+          type="file"
+          name="picture"
+          class="form-control-file"
+          formControlName="picture"
+          [ngClass]="{ 'is-invalid': f.submitted && picture.invalid }"
+          (change)="onFileChange($event, postForm)"
+        />
+        <small class="form-text text-muted"
+          >Choose the main picture for your post (JPG, PNG, GIF, SVG)</small
+        >
+
+        <div *ngIf="f.submitted && picture.invalid" class="invalid-feedback">
+          <div *ngIf="picture.errors.required">Picture is required</div>
+        </div>
+      </div>
+      <img
+        [src]="imageSrc"
+        *ngIf="imageSrc"
+        class="mb-3"
+        style="height: 100px"
+      />
+      <div class="form-group">
+        <label>Title</label>
+        <input
+          class="form-control"
+          name="title"
+          placeholder="Enter a title"
+          formControlName="title"
+          [ngClass]="{ 'is-invalid': submitted && title.invalid }"
+          required
+        />
+        <div *ngIf="submitted && title.invalid" class="invalid-feedback">
+          <div *ngIf="title.errors.required">Title is required</div>
+          <div *ngIf="title.errors.minlength">
+            Title should be at least 3 characters long
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Summary</label>
+        <textarea
+          class="form-control"
+          name="summary"
+          placeholder="Enter a summary"
+          formControlName="summary"
+          [ngClass]="{ 'is-invalid': submitted && summary.invalid }"
+          required
+        ></textarea>
+        <div *ngIf="submitted && summary.invalid" class="invalid-feedback">
+          <div *ngIf="summary.errors.required">Summary is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Post</label>
+        <quill-editor
+          class="content-editor"
+          [ngClass]="{ 'is-invalid': submitted && body.invalid }"
+          [formControl]="body"
+          [sanitize]="true"
+          [required]="true"
+          [placeholder]="'Enter post content...'"
+          [modules]="quillConfiguration"
+          [styles]="{ 'min-height': '350px' }"
+        ></quill-editor>
+        <div *ngIf="submitted && body.invalid" class="invalid-feedback">
+          <div *ngIf="body.errors.required">Post content is required</div>
+          <div *ngIf="body.errors.minlength">
+            Post content should be at least 3 characters long
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="activeSwitchCheck" formControlName="active">
+          <label class="form-check-label" for="activeSwitchCheck">Active</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="featuredSwitchCheck" formControlName="featured">
+          <label class="form-check-label" for="featuredSwitchCheck">Featured</label>
+        </div>
+      </div>
+      <button class="btn btn-primary">Submit</button>
+      <a
+        href="#"
+        [routerLink]="['/admin/posts']"
+        class="btn btn-outline-primary ml-1"
+      >
+        Cancel
+      </a>
+    </form>
+  </div>
+</div>
